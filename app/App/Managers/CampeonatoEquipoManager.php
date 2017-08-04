@@ -5,7 +5,7 @@ namespace App\App\Managers;
 use App\App\Entities\CampeonatoEquipo;
 use App\App\Entities\CampeonatoEquipoPersona;
 use App\App\Repositories\CampeonatoEquipoRepo;
-use App\App\Repositories\CampeonatoEquipoPersonaRepo;
+use App\App\Repositories\PlantillaRepo;
 
 class CampeonatoEquipoManager extends BaseManager
 {
@@ -49,7 +49,7 @@ class CampeonatoEquipoManager extends BaseManager
 
 	public function eliminarEquipos()
 	{
-		$campeonatoEquipoPersonaRepo = new CampeonatoEquipoPersonaRepo();
+		$plantillaRepo = new PlantillaRepo();
 		try{
 			\DB::beginTransaction();
 
@@ -60,7 +60,7 @@ class CampeonatoEquipoManager extends BaseManager
 		        	{
 		        		$ec = CampeonatoEquipo::find($equipo['id']);
 		        		$ec->delete();
-		        		$personas = $campeonatoEquipoPersonaRepo->getByCampeonatoByEquipo($ec->campeonato_id, $ec->equipo_id);
+		        		$personas = $plantillaRepo->getByCampeonatoByEquipo($ec->campeonato_id, $ec->equipo_id);
 						foreach($personas as $persona){
 							$persona->delete();
 						}
@@ -81,7 +81,7 @@ class CampeonatoEquipoManager extends BaseManager
 			\DB::beginTransaction();
 
 				$campeonatoEquipoRepo = new CampeonatoEquipoRepo();
-				$campeonatoEquipoPersonaRepo = new CampeonatoEquipoPersonaRepo();
+				$plantillaRepo = new PlantillaRepo();
 
 				$equipos = $this->data['equipos'];
 		        foreach($equipos as $equipo)
@@ -101,11 +101,11 @@ class CampeonatoEquipoManager extends BaseManager
 
 			        	if(isset($this->data['incluir_personas'])){
 			        		
-							$personas = $campeonatoEquipoPersonaRepo->getPersonas($campeonatoNuevo, $equipo['id']);
+							$personas = $plantillaRepo->getPersonas($campeonatoNuevo, $equipo['id']);
 							foreach($personas as $persona){
 								$persona->delete();
 							}
-							$personas = $campeonatoEquipoPersonaRepo->getPersonas($campeonatoAntiguo, $equipo['id']);
+							$personas = $plantillaRepo->getPersonas($campeonatoAntiguo, $equipo['id']);
 							foreach($personas as $persona){
 								$p = new CampeonatoEquipoPersona();
 				        		$p->campeonato_id = $campeonatoNuevo;

@@ -82,6 +82,8 @@ Route::group(['prefix' => 'eventos'], function () {
 	Route::post('eventos-partido/editar-falta/{id}', ['as' => 'editar_evento_falta', 'uses' => 'EventoPartidoController@editar']);
 
 	Route::post('eventos-partido/eliminar/{id}', ['as' => 'eliminar_evento_partido', 'uses' => 'EventoPartidoController@eliminar']);
+	Route::get('eventos-partido/editar-resultado-partido/{partido}', ['as' => 'editar_resultado_partido', 'uses' => 'EventoPartidoController@mostrarEditarResultadoPartido']);
+	Route::post('eventos-partido/editar-resultado-partido/{partido}', ['as' => 'editar_resultado_partido', 'uses' => 'EventoPartidoController@editarResultadoPartido']);
 
 Route::group(['prefix' => 'jornadas'], function () {
 	Route::get('listado','JornadaController@listado')->name('jornadas');
@@ -121,8 +123,8 @@ Route::group(['prefix' => 'partidos'], function () {
 	Route::post('editar-jornada/{campeonato}/{jornada}','PartidoController@editarJornada')->name('editar_partido_jornada');
 
 	Route::get('monitorear/{liga}/{campeonato}/{jornada}/{partido}/{equipo}','PartidoController@mostrarMonitorear')->name('monitorear_partido');
-	Route::get('editar-monitoreo/{partido}','PartidoController@mostrarEditar')->name('editar_partido_monitoreo');
-	Route::post('editar-monitoreo/{partido}','PartidoController@editar')->name('editar_partido_monitoreo');
+	Route::get('editar-monitoreo/{partido}','PartidoController@mostrarEditarMonitoreo')->name('editar_partido_monitoreo');
+	Route::post('editar-monitoreo/{partido}','PartidoController@editarMonitoreo')->name('editar_partido_monitoreo');
 });
 Route::group(['prefix' => 'personas'], function () {
 	Route::get('listado','PersonaController@listado')->name('personas');

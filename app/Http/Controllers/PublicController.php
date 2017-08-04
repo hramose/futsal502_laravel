@@ -121,7 +121,7 @@ class PublicController extends BaseController {
 			$jornadas[$partido->jornada_id]['partidos'][] = $partido;	
 		}
 
-		return View::make('publico/calendario', compact('jornadas','campeonato','campeonatos'));
+		return View::make('publico/calendario', compact('jornadas','campeonato','campeonatos','ligaId'));
 	}
 
 	public function ficha($partidoId)

@@ -152,5 +152,26 @@ class PartidoController extends BaseController {
 		return view('administracion/partidos/monitorear', compact('partido','eventos','jornadas','ligas','campeonatos','partidos','ligaId','campeonatoId','jornadaId','equipoId'));
 	}
 
+	public function mostrarEditarMonitoreo(Partido $partido)
+	{
+		return view('administracion/partidos/editar_monitoreo', compact('partido'));
+	}
+
+	public function editarMonitoreo(Partido $partido)
+	{
+		$data = Input::all();
+		$data['campeonato_id'] = $partido->campeonato_id;
+		$data['estado'] = $partido->estado;
+		$data['equipo_local_id'] = $partido->equipo_local_id;
+		$data['equipo_visita_id'] = $partido->equipo_visita_id;
+		$data['fecha'] = $partido->fecha;
+		$data['jornada_id'] = $partido->jornada_id;
+		$data['arbitro_central_id'] = $partido->arbitro_central_id;
+		$manager = new PartidoManager($partido, $data);
+		$manager->save();
+		Session::flash('success', 'Se editó el partido con éxito.');
+		return redirect()->route('monitorear_partido',[$partido->campeonato->liga_id, $partido->campeonato_id, $partido->jornada_id, $partido->id, $partido->equipo_local_id]);
+	}
+
 
 }

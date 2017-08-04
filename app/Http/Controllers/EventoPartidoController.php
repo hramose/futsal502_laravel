@@ -13,6 +13,8 @@ use App\App\Repositories\PlantillaRepo;
 use App\App\Repositories\NotificacionEquipoRepo;
 use App\App\Repositories\AlineacionRepo;
 
+use App\App\Entities\Partido;
+
 class EventoPartidoController extends BaseController {
 
 	protected $eventoPartidoRepo;
@@ -268,6 +270,5 @@ class EventoPartidoController extends BaseController {
 		Session::flash('success', 'Se editó el evento con éxito.');
 		return redirect(route('eventos_partido', $evento->partido_id));
 	}
-
 
 }

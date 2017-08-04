@@ -23,7 +23,7 @@
   	<body class="login-page">
     	<div class="login-box">
       		<div class="login-logo">
-      			<img src="{{asset('assets/imagenes/logos/logo.png')}}" width="100px"><br/>
+      			<img src="{{asset('assets/imagenes/logos/logo.png')}}" width="200px"><br/>
         		<b>Admininstración</b>
       		</div><!-- /.login-logo -->
       		<div class="login-box-body">

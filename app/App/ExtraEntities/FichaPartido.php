@@ -42,7 +42,7 @@ class FichaPartido
 
 		$eventos = $this->eventoPartidoRepo->getByEventos($partido->id, array(6,7,8,9,10,11));
 		//getDT
-		$this->alineacionLocal = $this->alineacionRepo->getJugadoresParticipantes($partido->id, $partido->equipo_local_id); //dd($this->alineacionLocal);
+		$this->alineacionLocal = $this->alineacionRepo->getByPartidoByEquipo($partido->id, $partido->equipo_local_id); //dd($this->alineacionLocal);
 		//$this->alineacionLocal = $this->alineacionRepo->getAlineacionByEstado($partido->id, $partido->equipo_local_id, true);
 		$this->dtLocal = $this->alineacionRepo->getTecnico($partido->id,$partido->equipo_local_id);
 
@@ -68,7 +68,7 @@ class FichaPartido
 			}
 		}
 		//getDT
-		$this->alineacionVisita = $this->alineacionRepo->getJugadoresParticipantes($partido->id, $partido->equipo_visita_id);
+		$this->alineacionVisita = $this->alineacionRepo->getByPartidoByEquipo($partido->id, $partido->equipo_visita_id);
 		//$this->alineacionVisita = $this->alineacionRepo->getAlineacionByEstado($partido->id, $partido->equipo_visita_id, true);
 		$this->dtVisita = $this->alineacionRepo->getTecnico($partido->id,$partido->equipo_visita_id);
 
