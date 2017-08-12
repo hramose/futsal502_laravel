@@ -76,7 +76,7 @@
 										</td>
 										<td class="text-center" style="color: white !important; background-color: #063e71" width="20%">
 											<a href="{{route('ficha',$partido->id)}}" class="text-white" style="text-decoration: none; font-weight: bold" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver Ficha">
-												@if($partido->estado == 'J')
+												@if($partido->estado != 'P')
 													{{$partido->goles_local}} - {{$partido->goles_visita}}
 												@else
 													<span style="font-size: 10px">

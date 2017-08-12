@@ -111,7 +111,7 @@ box-sizing: border-box;
 h2{ font-size: 26px; text-transform: uppercase; font-weight: bold;}
 h3{ font-size: 20px; margin: 0 0 30px; font-weight: bold; overflow: hidden;}
 h3 span{ padding: 0 10px 0 0; position: relative;}
-h3 span::before{ content: ""; position: absolute; left: 100%; background: url(images/heading-pettren.png) repeat-x center center;
+h3 span::before{ content: ""; position: absolute; left: 100%; background: url(../images/heading-pettren.png) repeat-x center center;
 height: 100%; width: 999px; top: 0;}
 h4{ font-size: 16px; font-weight: bold; margin: 0; text-transform: uppercase; text-align: center; padding: 15px 0;
 background: #063e71; color: #fff;}
@@ -466,8 +466,8 @@ top: 50%; margin: -25px 0 0; opacity: 0; visibility: hidden;}
 .slider-holder:hover .slider-nav.prev{ left: 50px;}
 .slider-holder:hover .slider-nav.next{ right: 50px;}
 
-.main-slides .carousel-indicators{ position: absolute; bottom: 100px;}
-.main-slides .carousel-indicators li{ background: #bcdbbb; margin: 0 0 0 7px;}
+.main-slides .carousel-indicators{ position: absolute; /*bottom: 100px;*/ }
+.main-slides .carousel-indicators li{ background: #337ab7; margin: 0 0 0 7px;}
 .main-slides .carousel-indicators li:first-child{ margin: 0;}
 
 /* Video banner */
@@ -594,7 +594,7 @@ border-radius: 100%; font-family: fontawesome; text-align: center; line-height: 
 .latest-news-thumb{ overflow: hidden;}
 .latest-news-thumb li{ width: 100%; margin: 0!important;}  
 .latest-news-thumb .slick-list{ margin: 0!important;}
-.latest-news-holder{ margin: 24px 0 0;}
+.latest-news-holder{ margin: 0 0 24px 0; }
 .latest-news-holder > h3{ text-transform: uppercase;}
 .new-content{ border: 1px solid #dfdfdf; border-right: 0; border-top: 0;}
 .latest-news-thumb li{ padding: 18.5px 20px; background: #202020; border-bottom: 1px solid rgba(255,255,255,0.1);

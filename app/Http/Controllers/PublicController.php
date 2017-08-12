@@ -11,6 +11,7 @@ use App\App\Repositories\GoleadorRepo;
 use App\App\Repositories\PorteroRepo;
 use App\App\Repositories\EventoPartidoRepo;
 use App\App\Repositories\DomoRepo;
+use App\App\Repositories\ArticuloRepo;
 
 use App\App\ExtraEntities\FichaPartido;
 
@@ -26,10 +27,10 @@ class PublicController extends BaseController {
 	protected $goleadorRepo;
 	protected $eventoPartidoRepo;
 	protected $domoRepo;
+	protected $articuloRepo;
 
 	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo, 
-		PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo,
-		DomoRepo $domoRepo)
+		PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo, DomoRepo $domoRepo, ArticuloRepo $articuloRepo)
 	{
 		$this->posicionesRepo = $posicionesRepo;
 		$this->campeonatoRepo = $campeonatoRepo;
@@ -39,13 +40,36 @@ class PublicController extends BaseController {
 		$this->configuracionRepo = $configuracionRepo;
 		$this->eventoPartidoRepo = $eventoPartidoRepo;
 		$this->domoRepo = $domoRepo;
+		$this->articuloRepo = $articuloRepo;
 
 		View::composer('layouts.default', 'App\Http\Controllers\PublicMenuController');
 	}
 
 	public function mostrarInicio()
 	{
-		return Redirect::route('posiciones',[1,0]);
+		$ligaId = 1;
+		$campeonatoId = 0;
+		//$articulosRecientes = $this->articuloRepo->getBetweenFechasByEstado($fechaInicio, $fechaFin, ['S']);
+		$campeonatos = $this->campeonatoRepo->getByLigaByEstado($ligaId,['A'])->pluck('descripcion','id')->toArray();
+		if($campeonatoId == 0)
+		{
+			$campeonato = $this->campeonatoRepo->getActual($ligaId);
+		}
+		else
+		{
+			$campeonato = $this->campeonatoRepo->find($campeonatoId);
+		}
+		$campeonatoId = $campeonato->id;
+
+		/*POSICIONES*/
+		$partidos = $this->partidoRepo->getByCampeonatoByFaseByEstado($campeonato->id, ['R'], ['J','F']);
+		$equipos = $this->campeonatoEquipoRepo->getEquiposWithPosiciones($campeonato->id);
+		$posiciones = $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
+
+		//* Partidos Siguientes *//
+		$proximosPartidos = $this->partidoRepo->getFromFechaByCampeonatoByEstado(date('Y-m-d'), $campeonatoId, ['P'], 5);
+		$articulosRecientes = $this->articuloRepo->all('id');
+		return View::make('publico/inicio', compact('articulosRecientes','posiciones','proximosPartidos','ligaId','campeonatoId'));
 	}
 
 	public function posiciones($ligaId, $campeonatoId)

@@ -74,6 +74,10 @@ class EventoPartidoManager extends BaseManager
 					$partido->estado = 'J';
 					$partido->save();
 				}
+				if($this->entity->evento_id == 5){
+					$partido->estado = 'F';
+					$partido->save();
+				}
 				$this->entity->comentario = $this->getComentario($partido, $this->entity->evento_id,null, null);
 				$this->entity->save();
 			\DB::commit();

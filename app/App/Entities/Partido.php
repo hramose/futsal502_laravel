@@ -44,4 +44,18 @@ class Partido extends \Eloquent {
 		return $this->belongsTo(Persona::class,'arbitro_central_id');
 	}
 
+	public function getGolesLocalAttribute($goles_local)
+	{
+		if(!is_null($goles_local))
+			return $goles_local;
+		return '-';
+	}
+
+	public function getGolesVisitaAttribute($goles_visita)
+	{
+		if(!is_null($goles_visita))
+			return $goles_visita;
+		return '-';
+	}
+
 }

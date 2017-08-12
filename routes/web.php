@@ -4,11 +4,31 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('dashboard','AuthController@mostrarDashboard')->name('dashboard');
 
+
+/* CATEGORIAS */
+Route::group(['prefix' => 'categorias'], function () {
+	Route::get('listado','CategoriaController@listado')->name('categorias');
+	Route::get('agregar','CategoriaController@mostrarAgregar')->name('agregar_categoria');
+	Route::post('agregar','CategoriaController@agregar')->name('agregar_categoria');
+	Route::get('editar/{categoria}','CategoriaController@mostrarEditar')->name('editar_categoria');
+	Route::put('editar/{categoria}','CategoriaController@editar')->name('editar_categoria');
+});
+
+/* ARTICULOS */
+Route::group(['prefix' => 'articulos'], function () {
+	Route::get('listado','ArticuloController@listado')->name('articulos');
+	Route::get('agregar','ArticuloController@mostrarAgregar')->name('agregar_articulo');
+	Route::post('agregar','ArticuloController@agregar')->name('agregar_articulo');
+	Route::get('editar/{articulo}','ArticuloController@mostrarEditar')->name('editar_articulo');
+	Route::put('editar/{articulo}','ArticuloController@editar')->name('editar_articulo');
+});
+
 /* ALINEACIONES */
 Route::group(['prefix' => 'alineaciones'], function () {
 	Route::get('editar/{partido}/{evento}/{jornada}','AlineacionController@mostrarEditar')->name('editar_alineacion');
 	Route::post('editar/{partido}/{evento}/{jornada}','AlineacionController@editar')->name('editar_alineacion');
 });
+
 
 /* CAMPEONATOS */
 Route::group(['prefix' => 'campeonatos'], function () {

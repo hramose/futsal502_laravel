@@ -83,7 +83,7 @@ a:hover,
 .top-categories ul li a:hover,
 .main-footer.style-2 .back-to-top:hover,
 .play-icon:hover
-{ /*background: #063e71;*/ }
+{ background: #063e71; }
 
 /* Theme Border Color */
 .team-detail,
@@ -105,7 +105,6 @@ a:hover,
 .next-matches,
 .last-matches,
 .slider-nav:hover,
-.main-slides .carousel-indicators li.active,
 .play-icon:hover,
 .product-column:hover .product-img::before,
 .product-column:hover .product-img::after,
@@ -122,3 +121,6 @@ a:hover,
 .previous-videos::before,
 .play-lable
 { background: rgba( 204,0,0,0.5);}
+.main-slides .carousel-indicators li.active{
+	/*border: 5px solid #cc0000;*/
+}

@@ -30,7 +30,7 @@
 			<span class="tanteo-local">{{$partido->goles_local}}</span>
 			<div class="cont-tiempo-transcurrido">
 				<div class="content-piechart partido-finalizado">
-					<span class="s-pa in-circle">FIN</span>
+					<span class="s-pa in-circle">{{$partido->estado}}</span>
 					<div class="piechart-quart1">
 						<div class="int-piechart-quart1" style="transform: rotate(180deg); -ms-transform: rotate(180deg); -webkit-transform: rotate(180deg);"></div>
 						</div>
@@ -55,30 +55,34 @@
 	</div>
 </div>
 <nav class="nav-aux">
-<div class="container">
-<ul class="item-3 nav-items-4">
-<li><a href="https://resultados.as.com/resultados/futbol/colombia_ii/2017/directo/regular_a_5_209965/previa/">						<span class="cont-icon-dir">
-<span class="as-icon-campo"></span>
-</span>
-<p>Previa</p>
-</a></li>
-<li><a href="https://resultados.as.com/resultados/futbol/colombia_ii/2017/directo/regular_a_5_209965/narracion/">						<span class="cont-icon-dir">
-<span class="as-icon-microfono"></span>
-</span>
-<p>Narración</p>
-</a></li>
-<li><a href="https://resultados.as.com/resultados/futbol/colombia_ii/2017/directo/regular_a_5_209965/estadisticas/">						<span class="cont-icon-dir">
-<span class="as-icon-estadisticas"></span>
-</span>
-<p>Estadísticas</p>
-</a></li>
-<li class="active"><a href="https://resultados.as.com/resultados/futbol/colombia_ii/2017/directo/regular_a_5_209965/afondo/">						<span class="cont-icon-dir">
-<span class="as-icon-pizarra"></span>
-</span>
-<p>A Fondo</p>
-</a></li>
-</ul>
-</div>
+	<div class="container">
+		<ul class="item-3 nav-items-4">
+			<li>
+				<a href="https://resultados.as.com/resultados/futbol/colombia_ii/2017/directo/regular_a_5_209965/previa/">
+					<span class="cont-icon-dir">
+						<span class="fa fa-futbol-o"></span>
+					</span>
+					<p>Previa</p>
+				</a>
+			</li>
+			<li class="active">
+				<a href="{{route('ficha',$partido->id)}}">
+					<span class="cont-icon-dir">
+						<span class="fa fa-list"></span>
+					</span>
+					<p>Ficha</p>
+				</a>
+			</li>
+			<li>
+				<a href="https://resultados.as.com/resultados/futbol/colombia_ii/2017/directo/regular_a_5_209965/estadisticas/">
+					<span class="cont-icon-dir">
+						<span class="fa fa-microphone"></span>
+					</span>
+					<p>En Vivo</p>
+				</a>
+			</li>
+		</ul>
+	</div>
 </nav>
 @endsection
 @section('content')

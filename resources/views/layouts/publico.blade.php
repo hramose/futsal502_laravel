@@ -20,6 +20,7 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800|Open+Sans:400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 <!-- JavaScripts -->
 <script src="{{ asset('assets/publico/js/vendor/modernizr.js')}}"></script>
+<link rel="shortcut icon" href="{{ asset('assets/imagenes/logos/ico.png') }}">
 @yield('css')
 </head>
 <body>
