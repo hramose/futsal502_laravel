@@ -39,6 +39,7 @@ class PersonaController extends BaseController {
 	public function agregar()
 	{
 		$data = Input::all();
+		$data['genero'] = 'M';
 		$manager = new PersonaManager(new Persona(), $data);
 		$manager->save();
 		Session::flash('success', 'Se agregó la persona con éxito.');
