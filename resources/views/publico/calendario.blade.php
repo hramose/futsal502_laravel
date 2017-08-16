@@ -63,6 +63,9 @@
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 r-full-width">
+				<div class="aside-widget">
+					<img src="{{asset('assets/imagenes/anuncios/segurosmyc.png')}}" alt="">
+				</div>
 					<div class="aside-widget">
 						<h3><span>Top Categorías</span></h3>
 						<div class="top-categories">

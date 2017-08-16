@@ -171,6 +171,7 @@ Route::get('/','PublicController@mostrarInicio')->name('inicio');
 Route::get('posiciones/{liga}/{campeonato}','PublicController@posiciones')->name('posiciones');
 Route::get('goleadores/{liga}/{campeonato}','PublicController@goleadores')->name('goleadores');
 Route::get('calendario/{liga}/{campeonato}','PublicController@calendario')->name('calendario');
+Route::get('previa/{partido}','PublicController@previa')->name('previa');
 Route::get('ficha/{partido}','PublicController@ficha')->name('ficha');
 Route::get('en-vivo/{partido}','PublicController@enVivo')->name('en_vivo');
 Route::get('lugares','PublicController@domos')->name('lugares');

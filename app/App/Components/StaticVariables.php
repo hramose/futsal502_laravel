@@ -113,24 +113,56 @@ class StaticVariables {
 
 	public function getTwitterFollowers()
 	{
-		$followers = Twitter::getCredentials();
-		return $followers->followers_count;
+		try{
+			$followers = Twitter::getCredentials();
+			return $followers->followers_count;
+		}
+		catch(\Exception $ex)
+		{
+			return 0;
+		}
 	}
 
 	public function getFacebookLikes()
 	{
-		$fanpage_id = env('FB_FANPAGE_ID');
-		$app_id = env('FB_API_KEY');
-		$app_secret = env('FB_API_SECRET');
+		try{
+			$fanpage_id = env('FB_FANPAGE_ID');
+			$app_id = env('FB_API_KEY');
+			$app_secret = env('FB_API_SECRET');
 
-		$urls = 'https://graph.facebook.com/v2.7/'. $fanpage_id . '?fields=fan_count&access_token='. $app_id . '|' . $app_secret;
-		$string = @file_get_contents( $urls );
-		if($string) {
-			$fan_count = json_decode( $string );
-			$get_fan_count = $fan_count->fan_count;
-			return $get_fan_count;
+			$urls = 'https://graph.facebook.com/v2.7/'. $fanpage_id . '?fields=fan_count&access_token='. $app_id . '|' . $app_secret;
+			$string = @file_get_contents( $urls );
+			if($string) {
+				$fan_count = json_decode( $string );
+				$get_fan_count = $fan_count->fan_count;
+				return $get_fan_count;
+			}
+			return 0;
 		}
-		return 0;
+		catch(\Exception $ex)
+		{
+			return 0;
+		}
+	}
+
+	public function getInstagramFollowers()
+	{
+		try{
+			$instagram_access_token = env('INSTAGRAM_ACCESS_TOKEN');
+
+			$urls = 'https://api.instagram.com/v1/users/self?access_token='. $instagram_access_token;
+			$string = @file_get_contents( $urls );
+			if($string) {
+				$followers_count = json_decode( $string );
+				$get_followers_count = $followers_count->data->counts->followed_by;
+				return $get_followers_count;
+			}
+			return 0;
+		}
+		catch(\Exception $ex)
+		{
+			return 0;
+		}
 	}
 
 }

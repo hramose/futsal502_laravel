@@ -63,8 +63,7 @@
 					<div id="share"></div>
 					<div class="tags-holder">						
 						<ul class="social-icons pull-right">
-							<li>Comparte este articulo</li>
-							
+							<li>Comparte este articulo</li>							
 						</ul>
 					</div>							
 				</div>

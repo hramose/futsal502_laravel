@@ -82,6 +82,7 @@ class PublicController extends BaseController {
 		
 		$followers['twitter'] = Variable::getTwitterFollowers();
 		$followers['facebook'] = Variable::getFacebookLikes();
+		$followers['instagram'] = Variable::getInstagramFollowers();
 
 		return View::make('publico/inicio', compact('articulosRecientes','posiciones','proximosPartidos','ligaId','campeonatoId','ultimasNoticias','followers'));
 	}

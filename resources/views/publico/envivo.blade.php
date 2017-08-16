@@ -1,15 +1,16 @@
 @extends('layouts.publico')
-@section('title') Ficha - {{$partido->equipo_local->descripcion}} vs {{$partido->equipo_visita->descripcion}} @stop
+@section('title') Narración en Vivo - {{$partido->equipo_local->descripcion}} vs {{$partido->equipo_visita->descripcion}} @stop
 @section('css')
+<link href="{{ asset('assets/publico/css/plugins/datatables/datatables.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/publico/css/directo.css') }}" rel="stylesheet" type="text/css" />
 @stop
 @section('header')
 <div class="page-heading-breadcrumbs">
 	<div class="container">
-		<h2>Ficha de Partido</h2>
+		<h2>Narración En Vivo</h2>
 		<ul class="breadcrumbs">
 			<li><a href="#">Inicio</a></li>
-			<li>Ficha de Partido</li>
+			<li>Narración En Vivo</li>
 		</ul>
 	</div>
 </div>
@@ -64,7 +65,7 @@
 					<p>Previa</p>
 				</a>
 			</li>-->
-			<li class="active">
+			<li>
 				<a href="{{route('ficha',$partido->id)}}">
 					<span class="cont-icon-dir">
 						<span class="fa fa-list"></span>
@@ -72,7 +73,7 @@
 					<p>Ficha</p>
 				</a>
 			</li>
-			<li>
+			<li class="active">
 				<a href="{{route('en_vivo',$partido->id)}}">
 					<span class="cont-icon-dir">
 						<span class="fa fa-microphone"></span>
@@ -94,7 +95,7 @@
 			</div>
 			<div class="col-lg-3">
 				<div class="aside-widget">
-					<img src="{{asset('assets/imagenes/anuncios/segurosmyc.png')}}" alt="">
+					<img src="{{asset('assets/imagenes/anuncios/epss.gif')}}" alt="">
 				</div>
 			</div>
 		</div>
@@ -104,11 +105,22 @@
 @stop
 
 @section('js')
+
+<script src="{{ asset('assets/public/js/plugins/datatables/jquery.dataTables.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/public/js/plugins/datatables/datatables-bs3.js') }}" type="text/javascript"></script>
 <script>
 
 	var segundos = 0;
 
-	$(function(){
+	$(function(){		
+
+		$('.table').dataTable({
+			"bSort" : false,
+			"bPaginate": false,
+			"bFilter": false, 
+			"bInfo": false,
+   			"iDisplayLength" : 25,
+		});
 
 	});
 

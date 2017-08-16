@@ -112,12 +112,12 @@ body{
                 <div class="row">
                     
                     <!-- Footer Column -->
-                    <div class="col-sm-4 col-xs-6 r-full-width-2 r-full-width">
+                    <div class="col-sm-4 col-xs-6 r-full-width-2 r-full-width text-center" >
                         <div class="column-widget h-white">
                             <div class="logo-column p-white">
                                 <img class="footer-logo" src="{{asset('assets/imagenes/logos/logo.png')}}" height="150px">
                                 <span class="follow-us">Síguenos en redes </span>
-                                <ul class="social-icons">
+                                <ul class="social-icons text-center">
                                     <li><a class="facebook" href="http://facebook.com/futsal502" target="_blank"><i class="fa fa-facebook"></i></a></li>
                                     <li><a class="twitter" href="http://twitter.com/futsal502" target="_blank"><i class="fa fa-twitter"></i></a></li>
                                     <li><a class="youtube" href="http://youtube.com/futsal502" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
@@ -132,7 +132,7 @@ body{
                     <div class="col-sm-4 col-xs-6 r-full-width-2 r-full-width">
                         <div class="column-widget h-white">
                             <h5>Publicidad</h5>
-                            <a href="#"><img src="{{asset('assets/publico/images/footer-add.jpg')}}" alt=""></a>
+                            <a href="#"><img src="{{asset('assets/imagenes/anuncios/segurosmyc.png')}}" width="250px"></a>
                         </div>
                     </div>
                     <!-- Footer Column -->
@@ -143,20 +143,44 @@ body{
                             <h5>Patrocinadores</h5>
                             <ul id="brand-icons-slider-2" class="brand-icons-slider-2">
                                 <li>
-                                    <a href="http://saludasualcance.net" target="_blank"><img src="{{asset('assets/imagenes/patrocinadores/epss.png')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-2.png')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-3.png')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-4.png')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-5.png')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-6.png')}}" alt=""></a>
+                                    <a href="http://www.saludasualcance.net" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/epss.png')}}" alt="EPSS">
+                                    </a>
+                                    <a href="http://www.medyrad.net" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/medyrad.png')}}" width="80px" style="border-radius: 10px" alt="MEDYRAD">
+                                    </a>
+                                    <a href="http://www.guatefutbol.com" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/guatefutbol.png')}}" width="80px" style="border-radius: 10px" alt="GUATEFUTBOL.COM">
+                                    </a>
+                                    <a href="http://www.segurosmyc.net" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/segurosmyc.png')}}" width="80px" style="border-radius: 10px" alt="SEGUROS M&C">
+                                    </a>
+                                    <a href="https://www.facebook.com/wanderleyfutsal10/" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/wanderley.png')}}" width="80px" alt="10 WANDERLEY" style="border-radius: 10px">
+                                    </a>
+                                    <a href="#" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/futsal502.png')}}" width="80px" alt="FUTSAL 502" style="border-radius: 10px">
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-1.png')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-2.png')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-3.png')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-4.png')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-5.png')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-6.png')}}" alt=""></a>
+                                    <a href="http://www.saludasualcance.net" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/epss.png')}}" alt="EPSS">
+                                    </a>
+                                    <a href="http://www.medyrad.net" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/medyrad.png')}}" width="80px" style="border-radius: 10px" alt="MEDYRAD">
+                                    </a>
+                                    <a href="http://www.guatefutbol.com" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/guatefutbol.png')}}" width="80px" style="border-radius: 10px" alt="GUATEFUTBOL.COM">
+                                    </a>
+                                    <a href="http://www.segurosmyc.net" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/segurosmyc.png')}}" width="80px" style="border-radius: 10px" alt="SEGUROS M&C">
+                                    </a>
+                                    <a href="https://www.facebook.com/wanderleyfutsal10/" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/wanderley.png')}}" width="80px" alt="10 WANDERLEY" style="border-radius: 10px">
+                                    </a>
+                                    <a href="#" target="_blank">
+                                        <img src="{{asset('assets/imagenes/patrocinadores/futsal502.png')}}" width="80px" alt="FUTSAL 502" style="border-radius: 10px">
+                                    </a>
                                 </li>
                             </ul>
                         </div>

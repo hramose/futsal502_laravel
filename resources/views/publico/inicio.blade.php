@@ -49,7 +49,7 @@
 									<img src="{{asset('assets/imagenes/anuncios/epss-h.gif')}}">
 								</div>
 								@if(count($proximosPartidos) > 0)
-								<div class="col-xs-12">
+								<div class="col-xs-12" style="margin-bottom: 30px">
 									<h3><span><i class="red-color">PROXIMOS </i>PARTIDOS</span><a class="view-all pull-right" href="{{route('calendario',[$ligaId,$campeonatoId])}}">Ver todos<i class="fa fa-angle-double-right"></i></a></h3>
 									<div class="upcoming-fixture">
 										<div class="table-responsive">
@@ -58,7 +58,7 @@
 											    	@foreach($proximosPartidos as $partido)
 												    <tr>
 												        <td>
-												        	<div class="logo-width-name"><img src="{{$partido->equipo_local->logo}}" height="36px">{{$partido->equipo_local->descripcion_corta}}</div>
+												        	<div class="logo-width-name"><img src="{{$partido->equipo_local->logo}}" width="36px">{{$partido->equipo_local->descripcion_corta}}</div>
 												        </td>
 												        <td class="upcoming-fixture-date text-center">
 												        	<a href="{{route('ficha',$partido->id)}}" style="color:red">
@@ -67,7 +67,7 @@
 												        </td>
 												        <td>
 												        	<div class="logo-width-name text-right">{{$partido->equipo_visita->descripcion_corta}}
-												        		<img src="{{$partido->equipo_visita->logo}}" height="36px">
+												        		<img src="{{$partido->equipo_visita->logo}}" width="36px">
 												        	</div>
 												        </td>
 												    </tr>
@@ -105,9 +105,9 @@
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 							<div class="aside-widget social-counter skin-2 hidden-xs">
-								<a class="item facebook" data-icon="fa fa-facebook" data-text="Likes" href="https://facebook.com/futsal502"><i class="fa fa-facebook"></i><span class="count">{{$followers['facebook']}}</span><em>Me Gusta</em></a>
-								<a class="item twitter" data-icon="fa fa-twitter" data-text="Likes" href="https://twitter.com/futsal502"><i class="fa fa-twitter"></i><span class="count">{{$followers['twitter']}}</span><em>Seguidores</em></a>
-								<a class="item instagram" data-icon="fa fa-instagram" data-text="Likes" href="https://twitter.com/futsal502"><i class="fa fa-instagram"></i><span class="count">{{$followers['twitter']}}</span><em>Seguidores</em></a>
+								<a class="item facebook" data-icon="fa fa-facebook" data-text="Likes" href="https://facebook.com/futsal502" target="_blank"><i class="fa fa-facebook"></i><span class="count">{{$followers['facebook']}}</span><em>Me Gusta</em></a>
+								<a class="item twitter" data-icon="fa fa-twitter" data-text="Likes" href="https://twitter.com/futsal502"  target="_blank"><i class="fa fa-twitter"></i><span class="count">{{$followers['twitter']}}</span><em>Seguidores</em></a>
+								<a class="item instagram" data-icon="fa fa-instagram" data-text="Likes" href="https://instagram.com/futsal502"  target="_blank"><i class="fa fa-instagram"></i><span class="count">{{$followers['instagram']}}</span><em>Seguidores</em></a>
 							</div>
 							<div class="aside-widget">
 								<img src="{{asset('assets/imagenes/anuncios/segurosmyc.png')}}" alt="">
