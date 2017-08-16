@@ -5,6 +5,8 @@ use Variable;
 
 class Categoria extends \Eloquent {
 
+	use UserStamps;
+
 	protected $fillable = ['descripcion','estado'];
 
 	protected $table = 'categoria';

@@ -5,6 +5,8 @@ use Variable;
 
 class MediaArticulo extends \Eloquent {
 
+	use UserStamps;
+
 	protected $fillable = ['ruta','articulo_id','tipo'];
 
 	protected $table = 'media_articulo';

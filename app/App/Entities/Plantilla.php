@@ -3,6 +3,8 @@
 namespace App\App\Entities;
 
 class Plantilla extends \Eloquent {
+
+	use UserStamps;
 	
 	protected $fillable = ['equipo_id','campeonato_id','persona_id','dorsal','estado'];
 

@@ -3,6 +3,8 @@
 namespace App\App\Entities;
 
 class Alineacion extends \Eloquent {
+
+	use UserStamps;
 	
 	protected $fillable = ['partido_id','equipo_id','persona_id'];
 

@@ -4,6 +4,8 @@ namespace App\App\Entities;
 use Variable;
 
 class Pais extends \Eloquent {
+
+	use UserStamps;
 	
 	protected $fillable = ['descripcion','estado'];
 

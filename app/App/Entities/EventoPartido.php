@@ -3,6 +3,9 @@
 namespace App\App\Entities;
 
 class EventoPartido extends \Eloquent {
+
+	use UserStamps;
+	
 	protected $fillable = ['partido_id','evento_id','minuto','segundo','doble_amarilla','persona_id','equipo_id','comentario'];
 
 	protected $table = 'evento_partido';

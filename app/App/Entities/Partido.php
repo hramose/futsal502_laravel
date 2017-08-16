@@ -5,6 +5,9 @@ namespace App\App\Entities;
 use Variable;
 
 class Partido extends \Eloquent {
+
+	use UserStamps;
+	
 	protected $fillable = ['equipo_local_id','equipo_visita_id','goles_local','goles_visita','fecha','arbitro_central_id','jornada_id','campeonato_id','domo_id','estado','descripcion_penales'];
 
 	protected $table = 'partido';

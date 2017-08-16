@@ -5,6 +5,8 @@ use Variable;
 
 class Jornada extends \Eloquent {
 
+	use UserStamps;
+
 	protected $fillable = ['descripcion','fase','numero','estado'];
 
 	protected $table = 'jornada';

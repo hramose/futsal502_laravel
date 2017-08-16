@@ -5,6 +5,8 @@ use Variable;
 
 class Articulo extends \Eloquent {
 
+    use UserStamps;
+
 	protected $fillable = ['titulo','descripcion_corta','descripcion','imagen_portada','autor_id','categoria_id','estado','fecha_publicacion','vistas'];
 
 	protected $table = 'articulo';

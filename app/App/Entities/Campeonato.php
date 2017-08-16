@@ -5,6 +5,8 @@ use Variable;
 
 class Campeonato extends \Eloquent {
 
+	use UserStamps;
+
 	protected $fillable = ['descripcion','liga_id','fecha_inicio','fecha_fin','hashtag','actual','grupos','mostrar_app','estado'];
 
 	protected $table = 'campeonato';

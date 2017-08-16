@@ -3,6 +3,8 @@
 namespace App\App\Entities;
 
 class NotificacionEquipo extends \Eloquent {
+
+	use UserStamps;
 	
 	protected $fillable = ['user_id','equipo_id'];
 

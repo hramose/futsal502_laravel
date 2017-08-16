@@ -5,6 +5,8 @@ use Variable;
 
 class Domo extends \Eloquent {
 
+	use UserStamps;
+
 	protected $fillable = ['descripcion','direccion','imagen','longitud','latitud','estado'];
 
 	protected $table = 'domo';

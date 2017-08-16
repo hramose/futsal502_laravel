@@ -4,6 +4,8 @@ namespace App\App\Entities;
 use Variable;
 
 class Equipo extends \Eloquent {
+
+	use UserStamps;
 	
 	protected $fillable = ['descripcion','descripcion_corta','siglas','logo','estado'];
 
