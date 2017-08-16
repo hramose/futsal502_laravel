@@ -1,7 +1,6 @@
 @extends('layouts.publico')
 @section('title') Calendario - {{$campeonato->descripcion}} @stop
 @section('css')
-<link href="{{ asset('assets/public/css/plugins/datatables/datatables.css') }}" rel="stylesheet" type="text/css" />
 @stop
 @section('header')
 <div class="page-heading-breadcrumbs">
@@ -14,46 +13,10 @@
 	</div>
 </div>
 @stop
-@section('slider')
-<div class="overlay-dark theme-padding parallax-window" data-appear-top-offset="600" data-parallax="scroll" data-image-src="{{asset('assets/imagenes/domoz13.png')}}"></div>
-@endsection
-@section('content')
-	
-<div class="theme-padding white-bg">
+@section('content')	
+<div class="theme-padding20 white-bg">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3 col-sm-4">
-				<div class="aside-widget">
-					<a href="#"><img src="images/adds-02.jpg" alt=""></a>
-				</div>
-				<div class="aside-widget">
-					<h3><span>Popular News</span></h3>
-					<div class="Popular-news">
-						<ul>
-							<li>
-								<img src="images/popular-news/img-01.jpg" alt="">
-								<h5><a href="#">Two touch penalties, imaginary cards</a></h5>
-								<span class="red-color"><i class="fa fa-clock-o"></i>22 Feb, 2016</span>
-							</li>
-							<li>
-								<img src="images/popular-news/img-02.jpg" alt="">
-								<h5><a href="#">Two touch penalties, imaginary cards</a></h5>
-								<span class="red-color"><i class="fa fa-clock-o"></i>22 Feb, 2016</span>
-							</li>
-							<li>
-								<img src="images/popular-news/img-03.jpg" alt="">
-								<h5><a href="#">Two touch penalties, imaginary cards</a></h5>
-								<span class="red-color"><i class="fa fa-clock-o"></i>22 Feb, 2016</span>
-							</li>
-							<li>
-								<img src="images/popular-news/img-04.jpg" alt="">
-								<h5><a href="#">Two touch penalties, imaginary cards</a></h5>
-								<span class="red-color"><i class="fa fa-clock-o"></i>22 Feb, 2016</span>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
 			<div class="col-lg-9 col-sm-8">
 				<div class="macth-fixture">
 					<h5>{{$campeonato->descripcion}}</h5>
@@ -99,6 +62,34 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 r-full-width">
+					<div class="aside-widget">
+						<h3><span>Top Categorías</span></h3>
+						<div class="top-categories">
+							<ul>
+								@foreach($categorias as $categoria)
+								<li><a href="{{route('ver_articulos',[0,$categoria->id])}}">{{$categoria->descripcion}}</a></li>
+								@endforeach
+							</ul>
+						</div>
+					</div>
+					<div class="aside-widget">
+						<h3><span>Populares</span></h3>
+						<div class="Popular-news">
+							<ul>
+								@foreach($articulosPopulares as $ap)
+								<li>
+									<img src="{{$ap->imagen_portada}}" width="56px" height="56px">
+									<h5><a href="{{route('ver_articulo',$ap->id)}}">{{$ap->titulo}}</a></h5>
+									<span class="red-color"><i class="fa fa-clock-o"></i>
+										{{date('d-m-Y', strtotime($ap->fecha_publicacion))}}
+									</span>
+								</li>
+								@endforeach
+							</ul>
+						</div>
+					</div>
+				</div>
 		</div>
 	</div>
 </div>
@@ -106,22 +97,11 @@
 @stop
 
 @section('js')
-
-<script src="{{ asset('assets/public/js/plugins/datatables/jquery.dataTables.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/public/js/plugins/datatables/datatables-bs3.js') }}" type="text/javascript"></script>
 <script>
 
 	var segundos = 0;
 
-	$(function(){		
-
-		$('.table').dataTable({
-			"bSort" : false,
-			"bPaginate": false,
-			"bFilter": false, 
-			"bInfo": false,
-   			"iDisplayLength" : 25,
-		});
+	$(function(){
 
 		$('select').on('change', function () {
           var url = '{{route("inicio")}}/calendario/{{$ligaId}}/'+ $(this).val();

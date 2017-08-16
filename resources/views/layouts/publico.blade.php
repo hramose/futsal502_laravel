@@ -21,6 +21,20 @@
 <!-- JavaScripts -->
 <script src="{{ asset('assets/publico/js/vendor/modernizr.js')}}"></script>
 <link rel="shortcut icon" href="{{ asset('assets/imagenes/logos/ico.png') }}">
+<style>
+    html { 
+  /*background: url({{asset('assets/imagenes/fondo.png')}}) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;*/
+  background-color: #1c1c1c;
+
+}
+body{
+    background: initial;
+  }
+</style>
 @yield('css')
 </head>
 <body>
@@ -101,12 +115,7 @@
                     <div class="col-sm-4 col-xs-6 r-full-width-2 r-full-width">
                         <div class="column-widget h-white">
                             <div class="logo-column p-white">
-                                <img class="footer-logo" src="../../assets/publico/images/footer-logo.png" alt="">
-                                <ul class="address-list style-2">
-                                    <li><span>Address:</span>1782 Harrison Street  Sun Prairie</li>
-                                    <li><span>Phone Number:</span>49 30 47373795</li>
-                                    <li><span>Email Address:</span>moin@blindtextgenerator.de</li>
-                                </ul>
+                                <img class="footer-logo" src="{{asset('assets/imagenes/logos/logo.png')}}" height="150px">
                                 <span class="follow-us">Síguenos en redes </span>
                                 <ul class="social-icons">
                                     <li><a class="facebook" href="http://facebook.com/futsal502" target="_blank"><i class="fa fa-facebook"></i></a></li>
@@ -122,8 +131,8 @@
                     <!-- Footer Column -->
                     <div class="col-sm-4 col-xs-6 r-full-width-2 r-full-width">
                         <div class="column-widget h-white">
-                            <h5>Advertisment</h5>
-                            <a href="#"><img src="../../assets/publico/images/footer-add.jpg" alt=""></a>
+                            <h5>Publicidad</h5>
+                            <a href="#"><img src="{{asset('assets/publico/images/footer-add.jpg')}}" alt=""></a>
                         </div>
                     </div>
                     <!-- Footer Column -->
@@ -135,19 +144,19 @@
                             <ul id="brand-icons-slider-2" class="brand-icons-slider-2">
                                 <li>
                                     <a href="http://saludasualcance.net" target="_blank"><img src="{{asset('assets/imagenes/patrocinadores/epss.png')}}" alt=""></a>
-                                    <a href="#"><img src="../../assets/publico/images/brand-icons/img-1-2.png" alt=""></a>
-                                    <a href="#"><img src="../../assets/publico/images/brand-icons/img-1-3.png" alt=""></a>
-                                    <a href="#"><img src="../../assets/publico/images/brand-icons/img-1-4.png" alt=""></a>
-                                    <a href="#"><img src="../../assets/publico/images/brand-icons/img-1-5.png" alt=""></a>
-                                    <a href="#"><img src="../../assets/publico/images/brand-icons/img-1-6.png" alt=""></a>
+                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-2.png')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-3.png')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-4.png')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-5.png')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-6.png')}}" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="#"><img src="../../assets/publico/images/brand-icons/img-1-1.png" alt=""></a>
-                                    <a href="#"><img src="../../assets/publico/images/brand-icons/img-1-2.png" alt=""></a>
-                                    <a href="#"><img src="../../assets/publico/images/brand-icons/img-1-3.png" alt=""></a>
-                                    <a href="#"><img src="../../assets/publico/images/brand-icons/img-1-4.png" alt=""></a>
-                                    <a href="#"><img src="../../assets/publico/images/brand-icons/img-1-5.png" alt=""></a>
-                                    <a href="#"><img src="../../assets/publico/images/brand-icons/img-1-6.png" alt=""></a>
+                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-1.png')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-2.png')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-3.png')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-4.png')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-5.png')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('assets/publico/images/brand-icons/img-1-6.png')}}" alt=""></a>
                                 </li>
                             </ul>
                         </div>
@@ -209,5 +218,6 @@
 <script src="{{ asset('assets/publico/js/prettyPhoto.js')}}"></script>
 <script src="{{ asset('assets/publico/js/wow-min.js')}}"></script>
 <script src="{{ asset('assets/publico/js/main.js')}}"></script>
+@yield('js')
 </body>
 </html>

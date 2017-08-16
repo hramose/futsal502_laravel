@@ -30,6 +30,7 @@
 						<td>{!! $articulo->descripcion_publicado !!}</td>
 						<td>
 							<a href="{{route('editar_articulo',$articulo->id)}}" class="btn btn-warning btn-sm btn-flat fa fa-edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"></a>
+							<a href="{{route('medias_articulos',$articulo->id)}}" class="btn btn-primary btn-sm btn-flat fa fa-image" data-toggle="tooltip" data-placement="top" title="" data-original-title="Medias"></a>
 						</td>
 					</tr>
 					@endforeach

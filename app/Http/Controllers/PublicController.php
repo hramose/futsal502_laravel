@@ -12,10 +12,16 @@ use App\App\Repositories\PorteroRepo;
 use App\App\Repositories\EventoPartidoRepo;
 use App\App\Repositories\DomoRepo;
 use App\App\Repositories\ArticuloRepo;
+use App\App\Repositories\MediaArticuloRepo;
+use App\App\Repositories\CategoriaRepo;
 
 use App\App\ExtraEntities\FichaPartido;
 
-use View,Redirect;
+use App\App\Entities\Articulo;
+
+use App\App\Managers\ArticuloManager;
+
+use View,Redirect, Variable;
 
 class PublicController extends BaseController {
 
@@ -28,9 +34,10 @@ class PublicController extends BaseController {
 	protected $eventoPartidoRepo;
 	protected $domoRepo;
 	protected $articuloRepo;
+	protected $mediaArticuloRepo;
+	protected $categoriaRepo;
 
-	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo, 
-		PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo, DomoRepo $domoRepo, ArticuloRepo $articuloRepo)
+	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo, PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo, DomoRepo $domoRepo, ArticuloRepo $articuloRepo, MediaArticuloRepo $mediaArticuloRepo, CategoriaRepo $categoriaRepo)
 	{
 		$this->posicionesRepo = $posicionesRepo;
 		$this->campeonatoRepo = $campeonatoRepo;
@@ -41,6 +48,8 @@ class PublicController extends BaseController {
 		$this->eventoPartidoRepo = $eventoPartidoRepo;
 		$this->domoRepo = $domoRepo;
 		$this->articuloRepo = $articuloRepo;
+		$this->mediaArticuloRepo = $mediaArticuloRepo;
+		$this->categoriaRepo = $categoriaRepo;
 
 		View::composer('layouts.default', 'App\Http\Controllers\PublicMenuController');
 	}
@@ -68,8 +77,13 @@ class PublicController extends BaseController {
 
 		//* Partidos Siguientes *//
 		$proximosPartidos = $this->partidoRepo->getFromFechaByCampeonatoByEstado(date('Y-m-d'), $campeonatoId, ['P'], 5);
-		$articulosRecientes = $this->articuloRepo->all('id');
-		return View::make('publico/inicio', compact('articulosRecientes','posiciones','proximosPartidos','ligaId','campeonatoId'));
+		$articulosRecientes = $this->articuloRepo->getUltimas(5);
+		$ultimasNoticias = $this->articuloRepo->getUltimas(12);
+		
+		$followers['twitter'] = Variable::getTwitterFollowers();
+		$followers['facebook'] = Variable::getFacebookLikes();
+
+		return View::make('publico/inicio', compact('articulosRecientes','posiciones','proximosPartidos','ligaId','campeonatoId','ultimasNoticias','followers'));
 	}
 
 	public function posiciones($ligaId, $campeonatoId)
@@ -86,7 +100,8 @@ class PublicController extends BaseController {
 		$partidos = $this->partidoRepo->getByCampeonatoByFaseByEstado($campeonato->id, ['R'], ['J','F']);
 		$equipos = $this->campeonatoEquipoRepo->getEquiposWithPosiciones($campeonato->id);
 		$posiciones = $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
-		return View::make('publico/posiciones', compact('posiciones','campeonato','ligaId','campeonatos'));
+		$articulosPopulares = $this->articuloRepo->getPopulares(5);
+		return View::make('publico/posiciones', compact('posiciones','campeonato','ligaId','campeonatos','articulosPopulares'));
 	}
 
 	public function goleadores($ligaId,$campeonatoId)
@@ -144,8 +159,9 @@ class PublicController extends BaseController {
 			$jornadas[$partido->jornada_id]['jornada'] = $partido->jornada;
 			$jornadas[$partido->jornada_id]['partidos'][] = $partido;	
 		}
-
-		return View::make('publico/calendario', compact('jornadas','campeonato','campeonatos','ligaId'));
+		$categorias = $this->categoriaRepo->getPopulares(5);
+		$articulosPopulares = $this->articuloRepo->getPopulares(5);
+		return View::make('publico/calendario', compact('jornadas','campeonato','campeonatos','ligaId','categorias','articulosPopulares'));
 	}
 
 	public function ficha($partidoId)
@@ -173,6 +189,42 @@ class PublicController extends BaseController {
 	{
 		$domos = $this->domoRepo->activos();
 		return View::make('publico/lugares',compact('domos'));
+	}
+
+	public function verArticulos($autorId, $categoriaId)
+	{
+		$articulos = [];
+		$titulo = '';
+		$categoria = $this->categoriaRepo->find($categoriaId);
+		if($autorId == 0 && $categoriaId == 0){
+			$articulos = $this->articuloRepo->getPublicadas();
+			$titulo = 'Noticias';
+		}
+		elseif($autorId != 0 && $categoriaId != 0){
+			$articulos = $this->articuloRepo->getByAutorByCategoriaByEstado($autorId, $categoriaId, ['A']);
+			$titulo = 'Noticias de ' . $categoria->descripcion;
+		}
+		elseif($autorId != 0){
+			$articulos = $this->articuloRepo->getByAutorByEstado($autorId, ['A']);
+		}
+		elseif($categoriaId != 0){
+			$articulos = $this->articuloRepo->getByCategoriaByEstado($categoriaId, ['A']);
+			$titulo = 'Noticias de ' . $categoria->descripcion;
+		}
+		$articulosPopulares = $this->articuloRepo->getPopulares(5);
+		$categorias = $this->categoriaRepo->getPopulares(5);
+		return View::make('publico/articulos',compact('articulos','articulosPopulares','categorias','titulo'));
+	}
+
+	public function verArticulo(Articulo $articulo)
+	{
+		$manager = new ArticuloManager($articulo, null);
+		$manager->sumarVista();
+		$imagenes = $this->mediaArticuloRepo->getByArticuloByTipo($articulo->id, ['I']);
+		$videos = $this->mediaArticuloRepo->getByArticuloByTipo($articulo->id, ['V']);
+		$articulosPopulares = $this->articuloRepo->getPopulares(5);
+		$categorias = $this->categoriaRepo->getPopulares(5);
+		return View::make('publico/articulo',compact('articulo','imagenes','videos','articulosPopulares','categorias'));	
 	}
 
 

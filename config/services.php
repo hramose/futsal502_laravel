@@ -35,4 +35,11 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'twitter' => [
+        'client_id'     => env('TWITTER_CONSUMER_KEY'),
+        'client_secret' => env('TWITTER_CONSUMER_SECRET'),
+        //'redirect'      => 'http://gfs.guatefutbol.com/account/twitter',
+        'redirect'      => 'http://localhost/sistemas/futsal502/account/twitter',
+    ],
+
 ];

@@ -64,4 +64,16 @@ class ArticuloManager extends BaseManager
 		}
 	}
 
+	function sumarVista()
+	{
+		try{
+			$this->entity->vistas++;
+			$this->entity->save();
+		}
+		catch(\Exception $ex)
+		{
+
+		}
+	}
+
 }

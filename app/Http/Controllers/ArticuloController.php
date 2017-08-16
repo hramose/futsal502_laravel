@@ -39,6 +39,7 @@ class ArticuloController extends BaseController {
 	{
 		$data = Input::all();
 		$data['autor_id'] = \Auth::user()->id;
+		$data['vistas'] = 0;
 		$manager = new ArticuloManager(new Articulo(), $data);
 		$manager->save();
 		Session::flash('success', 'Se agregó el articulo '.$data['titulo'].' con éxito.');

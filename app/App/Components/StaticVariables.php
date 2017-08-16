@@ -1,6 +1,7 @@
 <?php
 
 namespace App\App\Components;
+use Twitter;
 
 class StaticVariables {
 
@@ -52,6 +53,44 @@ class StaticVariables {
 	public function getFases(){ return $this->fases; }
 	public function getFase($key){ return $this->fases[$key]; }
 
+	public function getMesCorto($mes)
+	{
+		switch ($mes) {
+    		case 1: return 'Ene';
+		    case 2: return 'Feb';
+		    case 3: return 'Mar';
+		    case 4: return 'Abr';
+		    case 5: return 'May';
+		    case 6: return 'Jun';
+		    case 7: return 'Jul';
+		    case 8: return 'Ago';
+		    case 9: return 'Sep';
+		    case 10: return 'Oct';
+		    case 11: return 'Nov';
+		    case 12: return 'Dic';
+		}
+		return 'Mes incorrecto.';
+	}
+
+	public function getMesLetras($mesEnNumeros)
+	{
+		switch ($mesEnNumeros) {
+    		case 1: return 'Enero';
+		    case 2: return 'Febrero';
+		    case 3: return 'Marzo';
+		    case 4: return 'Abril';
+		    case 5: return 'Mayo';
+		    case 6: return 'Junio';
+		    case 7: return 'Julio';
+		    case 8: return 'Agosto';
+		    case 9: return 'Septiembre';
+		    case 10: return 'Octubre';
+		    case 11: return 'Noviembre';
+		    case 12: return 'Diciembre';
+		}
+		return 'Mes incorrecto.';
+	}
+
 	public function quitarTildes($cadena)
 	{
 		$cadena = str_replace('á', 'a', $cadena);
@@ -67,6 +106,31 @@ class StaticVariables {
 		$cadena = str_replace('ñ', 'n', $cadena);
 		$cadena = str_replace('Ñ', 'N', $cadena);
 		return $cadena;
+	}
+
+
+	/* SOCIAL */
+
+	public function getTwitterFollowers()
+	{
+		$followers = Twitter::getCredentials();
+		return $followers->followers_count;
+	}
+
+	public function getFacebookLikes()
+	{
+		$fanpage_id = env('FB_FANPAGE_ID');
+		$app_id = env('FB_API_KEY');
+		$app_secret = env('FB_API_SECRET');
+
+		$urls = 'https://graph.facebook.com/v2.7/'. $fanpage_id . '?fields=fan_count&access_token='. $app_id . '|' . $app_secret;
+		$string = @file_get_contents( $urls );
+		if($string) {
+			$fan_count = json_decode( $string );
+			$get_fan_count = $fan_count->fan_count;
+			return $get_fan_count;
+		}
+		return 0;
 	}
 
 }

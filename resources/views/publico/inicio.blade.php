@@ -1,106 +1,37 @@
 @extends('layouts.publico')
 @section('title') Futsal 502 @endsection
 @section('css')
-<link href="{{ asset('assets/public/css/plugins/datatables/datatables.css') }}" rel="stylesheet" type="text/css" />
-@endsection
-@section('slider')
-	<div class="slider-holder">
-		<ul id="main-slides" class="main-slides">
-			<li>
-			    <div id="animated-slider" class="carousel slide carousel-fade">
-			        <div class="carousel-inner" role="listbox">
-			            <div class="item active">
-			            	<img src="{{asset('assets/imagenes/slides/1.jpg')}}" alt="">
-			            </div>
-			             <div class="item">
-			            	<img src="{{asset('assets/imagenes/slides/2.jpg')}}" alt="">
-			            </div>
-			             <div class="item">
-			            	<img src="{{asset('assets/imagenes/slides/3.jpg')}}" alt="">
-			            </div>
-			        </div>
-			        <!-- Wrapper for slides -->
-
-			        <!-- Nan Control -->
-			        <!-- <a class="slider-nav next" href="#animated-slider" data-slide="prev"><i class="fa fa-long-arrow-right"></i></a>
-			        <a class="slider-nav prev" href="#animated-slider" data-slide="next"><i class="fa fa-long-arrow-left"></i></a> -->
-			        <!-- Nan Control -->
-
-			        <!-- Indicators -->
-			        <ul class="carousel-indicators">
-			            <li data-target="#animated-slider" data-slide-to="0" class="active"></li>
-			            <li data-target="#animated-slider" data-slide-to="1"></li>
-			            <li data-target="#animated-slider" data-slide-to="2"></li>
-			        </ul>
-			        <!-- Indicators -->
-
-			    </div>
-			</li>
-
-		</ul>
-
-	</div>
-	<!-- Slider Holder -->
+<link href="{{ asset('assets/publico/css/social.css') }}" rel="stylesheet"/>
 @endsection
 @section('content')
-	
-<!-- Main Content -->
 	<main class="main-content">
-		
-		<!-- Match Detail -->
 		<section class="theme-padding-bottom bg-fixed">
 			<div class="container">
-
-				<!-- Add Banners -->
-				<div class="add-banners">
-					<ul id="add-banners-slider" class="add-banners-slider">
-						<li>
-							<a href="#"><img src="{{asset('assets/imagenes/anuncios/1.jpg')}}" alt=""></a>
-						</li>
-						<li>
-							<a href="#"><img src="{{asset('assets/imagenes/anuncios/2.png')}}" alt=""></a>
-						</li>
-						<li>
-							<a href="#"><img src="{{asset('assets/imagenes/anuncios/3.jpg')}}" alt=""></a>
-						</li>
-					</ul>
-				</div>
-				<!-- Add Banners -->
-
-				<!-- Match Detail Content -->
-				<div class="match-detail-content">
+				<div class="match-detail-content" style="margin-top: 80px">
 					<div class="row">
 						<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 							<div class="row">
-								<!-- Latest News -->
 								<div class="col-xs-12">
 									<div class="latest-news-holder">
-										<h3><span>Últimas Noticias</span></h3>
-
-										<!-- latest-news Slider -->
 										<div class="row no-gutters white-bg">
-
-											<!-- Slider -->
 											<div class="col-sm-9">
 												<ul id="latest-news-slider" class="latest-news-slider">
 													@foreach($articulosRecientes as $ar)
 														<li>
 															<img src="{{$ar->imagen_portada}}" alt="">
+															<span class="blog-title-batch-top">{{$ar->categoria->descripcion}}</span>
 														    <p>
 														    	{{$ar->descripcion_corta}}
-														    	<a href="#">Leer más...</a>
+														    	<a href="{{route('ver_articulo',$ar->id)}}">Leer más...</a>
 														    </p>
 													    </li>
 													@endforeach
 												</ul>
 											</div>
-											<!-- Slider -->
-
-											<!-- Thumnail -->
 											<div class="col-sm-3">
 												<ul id="latest-news-thumb" class="latest-news-thumb">
-													@foreach($articulosRecientes as $ar)
-														<li>
+													@foreach($articulosRecientes as $ar)				
+													<li>
 														<p>{{$ar->titulo}}</p>
 														<span>{{ date('d/m/Y', strtotime($ar->fecha_publicacion)) }}</span>
 													</li>
@@ -111,16 +42,13 @@
 													<li class="next"><span class="fa fa-angle-down"></span></li>
 												</ul>
 											</div>
-											<!-- Thumnail -->
-
 										</div>
-										<!-- latest-news Slider -->
-
 									</div>
 								</div>
-								<!-- Latest News -->
-
-								<!-- Upcoming Fixture -->
+								<div class="col-xs-12 ad-horizontal">
+									<img src="{{asset('assets/imagenes/anuncios/epss-h.gif')}}">
+								</div>
+								@if(count($proximosPartidos) > 0)
 								<div class="col-xs-12">
 									<h3><span><i class="red-color">PROXIMOS </i>PARTIDOS</span><a class="view-all pull-right" href="{{route('calendario',[$ligaId,$campeonatoId])}}">Ver todos<i class="fa fa-angle-double-right"></i></a></h3>
 									<div class="upcoming-fixture">
@@ -149,37 +77,61 @@
 										</div>
 									</div>
 								</div>
-								<!-- Upcoming Fixture -->
-
-								
-
+								@endif
+								<div class="col-xs-12">
+									<h3><span><i class="red-color">ULTIMAS </i>NOTICIAS</span><a class="view-all pull-right" href="{{route('ver_articulos',[0,0])}}">Ver todas<i class="fa fa-angle-double-right"></i></a></h3>
+									<div class="upcoming-fixture">
+										<div class="blog-grid-view"  style="margin-top: 20px">
+											<div class="row">
+												@foreach($ultimasNoticias as $noticia)
+												<div class="col-lg-4 col-xs-12">
+													<div class="large-post-img image-zoom">
+														<img src="{{$noticia->imagen_portada}}" alt="">
+														<span class="blog-title-batch">{{$noticia->categoria->descripcion}}</span>
+													</div>
+													<div class="large-post-detail style-3">
+														<h2><a href="{{route('ver_articulo',$noticia->id)}}">{{$noticia->titulo}}</a></h2>
+													</div>
+													<div class="detail-btm">
+														<span>{{date('d/m/Y', strtotime($noticia->fecha_publicacion))}}</span>
+													</div>
+												</div>
+												@endforeach
+											</div>
+										</div>										
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+							<div class="aside-widget social-counter skin-2 hidden-xs">
+								<a class="item facebook" data-icon="fa fa-facebook" data-text="Likes" href="https://facebook.com/futsal502"><i class="fa fa-facebook"></i><span class="count">{{$followers['facebook']}}</span><em>Me Gusta</em></a>
+								<a class="item twitter" data-icon="fa fa-twitter" data-text="Likes" href="https://twitter.com/futsal502"><i class="fa fa-twitter"></i><span class="count">{{$followers['twitter']}}</span><em>Seguidores</em></a>
+								<a class="item instagram" data-icon="fa fa-instagram" data-text="Likes" href="https://twitter.com/futsal502"><i class="fa fa-instagram"></i><span class="count">{{$followers['twitter']}}</span><em>Seguidores</em></a>
+							</div>
+							<div class="aside-widget">
+								<img src="{{asset('assets/imagenes/anuncios/segurosmyc.png')}}" alt="">
+							</div>
 							<div class="row">
-
-								<!-- Last Match -->
 								<div class="col-lg-12 col-md-12 col-sm-7 col-xs-6 r-full-width" style="margin-bottom: 25px">
 									<div class="last-matches styel-1">
 										<h3><span>POSICIONES</span></h3>
 										<table class="table table-bordered table-hover">
 										    <thead>
 										    	<tr>
-											        <th>#</th>
-											        <th>Equipo</th>
-											        <th>PTS</th>
-											        <th>JJ</th>
-											        <th>DIF</th>
+											        <th class="text-center">#</th>
+											        <th class="text-center">Equipo</th>
+											        <th class="text-center">PTS</th>
+											        <th class="text-center">JJ</th>
 										      	</tr>
 										    </thead>
 										    <tbody>
 										    	@foreach($posiciones as $index => $pos)
 										    	<tr>
-											        <td>{{$index+1}}</td>
+											        <td class="text-center">{{$index+1}}</td>
 											        <td>{{$pos->equipo->descripcion_corta}}</td>
-											        <td>{{$pos->PTS}}</td>
-											        <td>{{$pos->JJ}} </td>
-											        <td>{{$pos->DIF}}</td>
+											        <td width="35px" class="text-center">{{$pos->PTS}}</td>
+											        <td width="35px" class="text-center">{{$pos->JJ}} </td>
 										      	</tr>
 										      	@endforeach
 										    </tbody>
@@ -190,10 +142,19 @@
 						</div>
 					</div>
 				</div>
-				<!-- Match Detail Content -->
-
 			</div>
 		</section>
-		<!-- Match Detail -->
-	
+	</main>
 @endsection
+@section('js')
+<script>
+	$(function(){
+		$('.li-link').each(function(index, li){
+			$(li).on('click', function(){
+				window.location.href = $(this).attr('data-link');
+			});
+		});
+
+	});
+</script>
+@stop

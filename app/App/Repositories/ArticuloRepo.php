@@ -30,15 +30,24 @@ class ArticuloRepo extends BaseRepo{
 						->orderBy('created_at','DESC')->get();
 	}
 
-	/*PARA BLOG*/
-
 	public function getByEstado($estados, $orderBy)
 	{
 		$fecha = date('Y-m-d');
 		return Articulo::whereIn('estado',$estados)
 						->where('fecha_publicacion','<=', $fecha)
 						->with('categoria')->with('autor')
-						->orderBy('created_at','DESC')->get();
+						->orderBy('fecha_publicacion','DESC')->get();
+	}
+
+	/*PARA BLOG*/
+
+	public function getPublicadas()
+	{
+		$fecha = date('Y-m-d');
+		return Articulo::whereIn('estado',['A'])
+						->where('fecha_publicacion','<=', $fecha)
+						->with('categoria')->with('autor')
+						->orderBy('fecha_publicacion','DESC')->paginate(10);
 	}
 
 	public function getBetweenFechasByEstado($fechaInicio, $fechaFin, $estados)
@@ -48,31 +57,59 @@ class ArticuloRepo extends BaseRepo{
 						->where('fecha_publicacion','<=', $fechaFin)
 						->where('fecha_publicacion','>=', $fechaInicio)
 						->with('categoria')->with('autor')
-						->orderBy('created_at','DESC')->get();
+						->orderBy('fecha_publicacion','DESC')->get();
 	}
 
-	public function getByCategoriaByPublicadoByPublico($categoriaId, $publicado, $publico)
+	public function getByAutorByCategoriaByEstado($autorId, $categoriaId, $estados)
 	{
 		$fecha = date('Y-m-d');
 		return Articulo::where('categoria_id',$categoriaId)
-						->whereIn('publicado',$publicado)
-						->whereIn('publico',$publico)
+						->where('autorId',$autorId)
+						->whereIn('estado',$estados)
 						->where('fecha_publicacion','<=', $fecha)
 						->with('categoria')->with('autor')
-						->orderBy('created_at','DESC')->paginate(10);
+						->orderBy('fecha_publicacion','DESC')->paginate(10);
 	}
 
-	public function getByAutorByPublicadoByPublico($autorId, $publicado, $publico)
+	public function getByCategoriaByEstado($categoriaId, $estados)
+	{
+		$fecha = date('Y-m-d');
+		return Articulo::where('categoria_id',$categoriaId)
+						->whereIn('estado',$estados)
+						->where('fecha_publicacion','<=', $fecha)
+						->with('categoria')->with('autor')
+						->orderBy('fecha_publicacion','DESC')->paginate(10);
+	}
+
+	public function getByAutorByEstado($autorId, $estados)
 	{
 		$fecha = date('Y-m-d');
 		return Articulo::where('autor_id',$autorId)
-						->whereIn('publicado',$publicado)
-						->whereIn('publico',$publico)
+						->whereIn('estado',$estados)
 						->where('fecha_publicacion','<=', $fecha)
 						->with('categoria')->with('autor')
-						->orderBy('created_at','DESC')->paginate(10);
+						->orderBy('fecha_publicacion','DESC')->paginate(10);
 	}
 
+	public function getPopulares($limite)
+	{
+		$fecha = date('Y-m-d');
+		return Articulo::where('fecha_publicacion','<=', $fecha)
+						->with('categoria')->with('autor')
+						->orderBy('vistas','DESC')
+						->orderBy('fecha_publicacion','DESC')
+						->limit($limite)
+						->get();
+	}
 
+	public function getUltimas($limite)
+	{
+		$fecha = date('Y-m-d');
+		return Articulo::where('fecha_publicacion','<=', $fecha)
+						->with('categoria')->with('autor')
+						->orderBy('fecha_publicacion','DESC')
+						->limit($limite)
+						->get();
+	}
 
 }

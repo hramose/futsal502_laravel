@@ -5,7 +5,7 @@ use Variable;
 
 class Articulo extends \Eloquent {
 
-	protected $fillable = ['titulo','descripcion_corta','descripcion','imagen_portada','autor_id','categoria_id','estado','fecha_publicacion'];
+	protected $fillable = ['titulo','descripcion_corta','descripcion','imagen_portada','autor_id','categoria_id','estado','fecha_publicacion','vistas'];
 
 	protected $table = 'articulo';
 
@@ -45,6 +45,16 @@ class Articulo extends \Eloquent {
     public function getAnioPublicacionAttribute()
     {
     	return date('Y',strtotime($this->fecha_publicacion));
+    }
+
+    public function getFechaPublicacionCortaAttribute()
+    {
+    	return date('d/m/Y', strtotime($this->fecha_publicacion));
+    }
+
+    public function getFechaPublicacionLetrasAttribute()
+    {
+    	return $this->dia_publicacion . ' ' . $this->mes_publicacion . ' ' . $this->anio_publicacion;
     }
 
 }

@@ -14,15 +14,13 @@ class TwitterController extends BaseController {
   	public function twitter() {
   		try{
     		$twitter_user = \Socialize::driver('twitter')->user();
-            $loginUser = Auth::user(); //dd($facebookUser->user());
-            //dd($twitter_user);
+            /*$loginUser = Auth::user();
             $loginUser->twitter_user = $twitter_user->getNickname();
-            $loginUser->save();
+            $loginUser->save();*/
             \Session::flash('success','Se conectó correctamente a Twitter');
             return Redirect::route('dashboard');
     	}
     	catch (\Exception $e) {
-            //dd($e);
     		\Session::flash('error', 'No se autorizó el registro vía twitter');
             $loginUser = Auth::user();
             $loginUser->twitter_user = null;

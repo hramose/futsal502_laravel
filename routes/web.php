@@ -23,6 +23,16 @@ Route::group(['prefix' => 'articulos'], function () {
 	Route::put('editar/{articulo}','ArticuloController@editar')->name('editar_articulo');
 });
 
+/* MEDIAS ARTICULOS */
+Route::group(['prefix' => 'medias-articulos'], function () {
+	Route::get('listado/{articulo}','MediaArticuloController@listado')->name('medias_articulos');
+	Route::get('agregar-imagen/{articulo}','MediaArticuloController@mostrarAgregarImagen')->name('agregar_imagen_articulo');
+	Route::post('agregar-imagen/{articulo}','MediaArticuloController@agregarImagen')->name('agregar_imagen_articulo');
+	Route::get('agregar-video/{articulo}','MediaArticuloController@mostrarAgregarVideo')->name('agregar_video_articulo');
+	Route::post('agregar-video/{articulo}','MediaArticuloController@agregarVideo')->name('agregar_video_articulo');
+	Route::delete('eliminar','MediaArticuloController@eliminar')->name('eliminar_media_articulo');
+});
+
 /* ALINEACIONES */
 Route::group(['prefix' => 'alineaciones'], function () {
 	Route::get('editar/{partido}/{evento}/{jornada}','AlineacionController@mostrarEditar')->name('editar_alineacion');
@@ -164,6 +174,8 @@ Route::get('calendario/{liga}/{campeonato}','PublicController@calendario')->name
 Route::get('ficha/{partido}','PublicController@ficha')->name('ficha');
 Route::get('en-vivo/{partido}','PublicController@enVivo')->name('en_vivo');
 Route::get('lugares','PublicController@domos')->name('lugares');
+Route::get('ver-articulos/{autorId}/{categoriaId}','PublicController@verArticulos')->name('ver_articulos');
+Route::get('ver-articulo/{articulo}','PublicController@verArticulo')->name('ver_articulo');
 
 Route::get('login','AuthController@mostrarLogin')->name('login');
 Route::post('login','AuthController@login')->name('login');

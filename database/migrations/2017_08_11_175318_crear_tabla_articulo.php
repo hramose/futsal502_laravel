@@ -23,6 +23,7 @@ class CrearTablaArticulo extends Migration
             $table->integer('categoria_id')->unsigned();
             $table->datetime('fecha_publicacion');
             $table->string('etiquetas')->nullable();
+            $table->integer('vistas');
             $table->string('estado',1);
             $table->timestamps();
             $table->string('created_by');
