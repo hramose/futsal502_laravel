@@ -4,7 +4,7 @@ namespace App\App\Entities;
 use Variable;
 
 class Persona extends \Eloquent {
-	protected $fillable = ['primer_nombre','segundo_nombre','primer_apellido','segundo_apellido','rol','pais_id','fecha_nacimiento','posicion','fotografia','estado'];
+	protected $fillable = ['primer_nombre','segundo_nombre','primer_apellido','segundo_apellido','rol','pais_id','fecha_nacimiento','posicion','genero','fotografia','estado'];
 
 	protected $table = 'persona';
 
