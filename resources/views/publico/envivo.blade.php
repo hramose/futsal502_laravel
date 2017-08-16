@@ -91,7 +91,20 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-9">
-				
+				<div class="row">
+					<div class="col-lg-12">
+						<table>
+							<tr>
+								<td>Domo: </td>
+								<td> {{$partido->domo->descripcion}} </td>
+							</tr>
+							<tr>
+								<td>Fecha: </td>
+								<td> {{date('d/m/Y H:i',strtotime($partido->fecha))}} </td>
+							</tr>
+						</table>
+					</div>
+				</div>
 			</div>
 			<div class="col-lg-3">
 				<div class="aside-widget">

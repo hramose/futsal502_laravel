@@ -4,6 +4,10 @@
 <link href="{{ asset('assets/publico/plugins/magnific-popup/dist/magnific-popup.css') }}" rel="stylesheet"/>
 <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
 <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
+<!-- METAS FACEBOOK -->
+<meta content='{{$articulo->title}}' property='og:title'/>
+<meta content='{{$articulo->imagen_portada}}' property='og:image'/>
+<meta content='{{$articulo->description_corta}}' property='og:description'/>
 @endsection
 @section('content')
 <div class="theme-padding white-bg">
