@@ -83,7 +83,7 @@
 								@foreach($articulosPopulares as $ap)
 								<li>
 									<img src="{{$ap->imagen_portada}}" width="56px" height="56px">
-									<h5><a href="{{route('ver_articulo',$ap->id)}}">{{$ap->titulo}}</a></h5>
+									<h5><a href="{{route('ver_articulo',[$ap->id, str_slug($ap->titulo)])}}">{{$ap->titulo}}</a></h5>
 									<span class="red-color"><i class="fa fa-clock-o"></i>
 										{{date('d-m-Y', strtotime($ap->fecha_publicacion))}}
 									</span>

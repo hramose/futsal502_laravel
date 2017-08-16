@@ -21,10 +21,10 @@
 								</div>
 								<div class="col-lg-7 col-md-7 col-xs-12">
 									<div class="large-post-detail style-2">
-										<h2 style="margin-bottom: 5px"><a href="{{route('ver_articulo',$articulo->id)}}">{{$articulo->titulo}}</a></h2>
+										<h2 style="margin-bottom: 5px"><a href="{{route('ver_articulo',[$articulo->id, str_slug($articulo->titulo)])}}">{{$articulo->titulo}}</a></h2>
 										<span class="blog-category" style=""> {{$articulo->categoria->descripcion}} </span> <span class="blog-author">Escrito por <b>{{$articulo->autor->username}}</b></span>
 										<p class="blog-descripcion-breve"> {{$articulo->descripcion_corta}} </p>
-										<a class="btn gary-btn" href="{{route('ver_articulo',$articulo->id)}}"><i>+</i>Leer más</a>
+										<a class="btn gary-btn" href="{{route('ver_articulo',[$articulo->id,str_slug($articulo->titulo)])}}"><i>+</i>Leer más</a>
 									</div>
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 								@foreach($articulosPopulares as $ap)
 								<li>
 									<img src="{{$ap->imagen_portada}}" width="56px" height="56px">
-									<h5><a href="{{route('ver_articulo',$ap->id)}}">{{$ap->titulo}}</a></h5>
+									<h5><a href="{{route('ver_articulo',[$ap->id,str_slug($ap->titulo)])}}">{{$ap->titulo}}</a></h5>
 									<span class="red-color"><i class="fa fa-clock-o"></i>
 										{{date('d-m-Y', strtotime($ap->fecha_publicacion))}}
 									</span>

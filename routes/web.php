@@ -176,7 +176,7 @@ Route::get('ficha/{partido}','PublicController@ficha')->name('ficha');
 Route::get('en-vivo/{partido}','PublicController@enVivo')->name('en_vivo');
 Route::get('lugares','PublicController@domos')->name('lugares');
 Route::get('ver-articulos/{autorId}/{categoriaId}','PublicController@verArticulos')->name('ver_articulos');
-Route::get('ver-articulo/{articulo}','PublicController@verArticulo')->name('ver_articulo');
+Route::get('ver-articulo/{articulo}/{slug}','PublicController@verArticulo')->name('ver_articulo');
 
 Route::get('login','AuthController@mostrarLogin')->name('login');
 Route::post('login','AuthController@login')->name('login');
