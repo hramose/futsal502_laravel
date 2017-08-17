@@ -30,6 +30,7 @@ class PlantillaRepo extends BaseRepo{
 		return Plantilla::where('campeonato_id','=',$campeonatoId)
 						->where('equipo_id',$equipoId)
 						->with('persona')
+						->with('persona.pais')
 						->whereHas('persona', function($q) use ($roles){
 							$q->whereIn('rol',$roles);
 						})

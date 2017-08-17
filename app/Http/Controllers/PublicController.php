@@ -6,14 +6,16 @@ use App\App\Repositories\PosicionesRepo;
 use App\App\Repositories\CampeonatoRepo;
 use App\App\Repositories\ConfiguracionRepo;
 use App\App\Repositories\PartidoRepo;
-use App\App\Repositories\CampeonatoEquipoRepo;
 use App\App\Repositories\GoleadorRepo;
 use App\App\Repositories\PorteroRepo;
 use App\App\Repositories\EventoPartidoRepo;
+use App\App\Repositories\CampeonatoEquipoRepo;
 use App\App\Repositories\DomoRepo;
 use App\App\Repositories\ArticuloRepo;
 use App\App\Repositories\MediaArticuloRepo;
 use App\App\Repositories\CategoriaRepo;
+use App\App\Repositories\EquipoRepo;
+use App\App\Repositories\PlantillaRepo;
 
 use App\App\ExtraEntities\FichaPartido;
 
@@ -36,8 +38,10 @@ class PublicController extends BaseController {
 	protected $articuloRepo;
 	protected $mediaArticuloRepo;
 	protected $categoriaRepo;
+	protected $equipoRepo;
+	protected $plantillaRepo;
 
-	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo, PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo, DomoRepo $domoRepo, ArticuloRepo $articuloRepo, MediaArticuloRepo $mediaArticuloRepo, CategoriaRepo $categoriaRepo)
+	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo, PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo, DomoRepo $domoRepo, ArticuloRepo $articuloRepo, MediaArticuloRepo $mediaArticuloRepo, CategoriaRepo $categoriaRepo, EquipoRepo $equipoRepo, PlantillaRepo $plantillaRepo)
 	{
 		$this->posicionesRepo = $posicionesRepo;
 		$this->campeonatoRepo = $campeonatoRepo;
@@ -50,6 +54,8 @@ class PublicController extends BaseController {
 		$this->articuloRepo = $articuloRepo;
 		$this->mediaArticuloRepo = $mediaArticuloRepo;
 		$this->categoriaRepo = $categoriaRepo;
+		$this->equipoRepo = $equipoRepo;
+		$this->plantillaRepo = $plantillaRepo;
 
 		View::composer('layouts.default', 'App\Http\Controllers\PublicMenuController');
 	}
@@ -105,7 +111,7 @@ class PublicController extends BaseController {
 		return View::make('publico/posiciones', compact('posiciones','campeonato','ligaId','campeonatos','articulosPopulares'));
 	}
 
-	public function goleadores($ligaId,$campeonatoId)
+	public function goleadores($ligaId, $campeonatoId)
 	{
 		$campeonatos = $this->campeonatoRepo->getByLiga($ligaId)->pluck('descripcion','id')->toArray();
 		if($campeonatoId == 0)
@@ -122,22 +128,28 @@ class PublicController extends BaseController {
 
 	public function plantilla($ligaId, $campeonatoId, $equipoId)
 	{
-		$campeonatos = $this->campeonatoRepo->getCampeonatos($ligaId);
+		$campeonatos = $this->campeonatoRepo->getByLiga($ligaId)->pluck('descripcion','id')->toArray();
 		if($campeonatoId == 0)
 		{
 			$campeonato = $this->campeonatoRepo->getActual($ligaId);
 		}
 		else
 		{
-			$campeonato = $this->campeonatoRepo->getCampeonato($campeonatoId);
+			$campeonato = $this->campeonatoRepo->find($campeonatoId);
 		}
+
+		$jugadores = [];
+		$cuerpoTecnico = [];
 		$equipo = null;
 		if($equipoId != 0){
-			$equipo = $this->campeonatoEquipoRepo->getEquipo($equipoId);
+			$equipo = $this->equipoRepo->find($equipoId);
+			$jugadores = $this->plantillaRepo->getByCampeonatoByEquipoByRol($campeonatoId, $equipoId, ['J']);
+			$cuerpoTecnico = $this->plantillaRepo->getByCampeonatoByEquipoByRol($campeonatoId, $equipoId, ['DT']);
 		}
-		$equipos = $this->campeonatoEquipoRepo->getEquipos($campeonato->id);
-		$plantilla = $this->campeonatoEquipoRepo->getPlantilla($campeonato, $equipoId);
-		return View::make('publico/plantilla', compact('plantilla','campeonato','campeonatos','equipos','equipo','equipoId'));
+
+		$equipos = $this->campeonatoEquipoRepo->getEquiposByCampeonato($campeonato->id)->pluck('equipo.descripcion','equipo_id')->toArray();
+		$articulosPopulares = $this->articuloRepo->getPopulares(5);
+		return View::make('publico/plantilla', compact('jugadores','cuerpoTecnico','campeonato','campeonatos','equipos','equipo','equipoId','articulosPopulares','ligaId'));
 	}
 
 	public function calendario($ligaId, $campeonatoId)

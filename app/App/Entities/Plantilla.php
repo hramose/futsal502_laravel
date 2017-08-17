@@ -1,6 +1,7 @@
 <?php
 
 namespace App\App\Entities;
+use Variable;
 
 class Plantilla extends \Eloquent {
 
@@ -28,6 +29,11 @@ class Plantilla extends \Eloquent {
 	public function getDescripcionEstadoAttribute()
 	{
 		return Variable::getEstadoGeneral($this->estado);
+	}
+
+	public function getDescripcionPosicionAttribute()
+	{
+		return Variable::getPosicion($this->posicion);
 	}
 
 }

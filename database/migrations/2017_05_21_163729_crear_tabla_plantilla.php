@@ -19,6 +19,7 @@ class CrearTablaPlantilla extends Migration
             $table->integer('equipo_id')->unsigned();
             $table->integer('persona_id')->unsigned();
             $table->integer('dorsal')->nullable();
+            $table->string('posicion',2);
             $table->string('estado',1);
             $table->timestamps();
             $table->string('created_by',45);

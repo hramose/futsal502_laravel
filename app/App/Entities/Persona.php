@@ -16,6 +16,11 @@ class Persona extends \Eloquent {
 		return Variable::getRol($this->rol);
 	}
 
+	public function getDescripcionGeneroAttribute()
+	{
+		return Variable::getGenero($this->genero);
+	}
+
 	public function getDescripcionPosicionAttribute()
 	{
 		return Variable::getPosicion($this->posicion);

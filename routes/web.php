@@ -60,12 +60,12 @@ Route::group(['prefix' => 'campeonatos-equipos'], function () {
 
 /*PLANTILLAS*/	
 Route::group(['prefix' => 'plantillas'], function () {
-	Route::get('{campeonatoJornadaId}', ['as' => 'plantillas', 'uses' => 'PlantillaController@listado']);
-	Route::get('agregar/{campeonatoJornadaId}', ['as' => 'agregar_plantilla', 'uses' => 'PlantillaController@mostrarAgregar']);
-	Route::post('agregar/{campeonatoJornadaId}', ['as' => 'agregar_plantilla', 'uses' => 'PlantillaController@agregar']);
-	Route::get('editar/{campeoantoJornadaId}', ['as' => 'editar_plantilla', 'uses' => 'PlantillaController@mostrarEditar']);
-	Route::post('editar/{campeoantoJornadaId}', ['as' => 'editar_plantilla', 'uses' => 'PlantillaController@editar']);
-	Route::post('eliminar/{campeoantoJornadaId}', ['as' => 'eliminar_plantilla', 'uses' => 'PlantillaController@eliminar']);
+	Route::get('{campeonato}', ['as' => 'plantillas', 'uses' => 'PlantillaController@listado']);
+	Route::get('agregar/{campeonato}', ['as' => 'agregar_plantilla', 'uses' => 'PlantillaController@mostrarAgregar']);
+	Route::post('agregar/{campeonato}', ['as' => 'agregar_plantilla', 'uses' => 'PlantillaController@agregar']);
+	Route::get('editar/{campeoanto}', ['as' => 'editar_plantilla', 'uses' => 'PlantillaController@mostrarEditar']);
+	Route::post('editar/{campeoanto}', ['as' => 'editar_plantilla', 'uses' => 'PlantillaController@editar']);
+	Route::post('eliminar/{campeoanto}', ['as' => 'eliminar_plantilla', 'uses' => 'PlantillaController@eliminar']);
 });
 
 /* DOMOS */
@@ -171,6 +171,7 @@ Route::get('/','PublicController@mostrarInicio')->name('inicio');
 Route::get('posiciones/{liga}/{campeonato}','PublicController@posiciones')->name('posiciones');
 Route::get('goleadores/{liga}/{campeonato}','PublicController@goleadores')->name('goleadores');
 Route::get('calendario/{liga}/{campeonato}','PublicController@calendario')->name('calendario');
+Route::get('plantilla/{liga}/{campeonato}/{equipo}','PublicController@plantilla')->name('plantilla');
 Route::get('previa/{partido}','PublicController@previa')->name('previa');
 Route::get('ficha/{partido}','PublicController@ficha')->name('ficha');
 Route::get('en-vivo/{partido}','PublicController@enVivo')->name('en_vivo');

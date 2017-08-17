@@ -22,6 +22,7 @@ class StaticVariables {
 	];
 
 	protected $posiciones = [
+		'PD' => 'Por Definir',
 		'AI' => 'Ala Izquierda',
 		'AD' => 'Ala Derecha',
 		'PO' => 'Portero',
@@ -30,6 +31,9 @@ class StaticVariables {
 		'DT' => 'Director Técnico',
 		'AT' => 'Asistente Técnico',
 		'PF' => 'Preparador Físico',
+		'UT' => 'Utilero',
+		'KN' => 'Kinesiólogo',
+		'PM' => 'Paramédico',
 		'AR' => 'Arbitro',
 	];
 
