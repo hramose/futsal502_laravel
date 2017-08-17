@@ -8,6 +8,7 @@
 <meta expr:content='{{$articulo->titulo}}' property='og:title'/>
 <meta expr:content='{{$articulo->imagen_portada}}' property='og:image'/>
 <meta expr:content='{{$articulo->descripcion_corta}}' property='og:description'/>
+<meta expr:content='{{route('ver_articulo',[$articulo->id, str_slug($articulo->titulo)])}}' property='og:url'/>
 @endsection
 @section('content')
 <div class="theme-padding white-bg">
