@@ -216,7 +216,7 @@ body{
         <li><a href="{{route('inicio')}}">Inicio</a></li>
         <li><a href="{{route('posiciones',[1,0])}}">Posiciones</a></li>
         <li><a href="{{route('calendario',[1,0])}}">Calendario</a></li>
-        <li><a href="about.html">Plantillas</a></li>                   
+        <li><a href="{{route('plantilla',[1,0,0])}}">Plantillas</a></li>
     </ul>
 </nav>
 <!-- Slide Menu -->
