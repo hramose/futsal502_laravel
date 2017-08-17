@@ -5,10 +5,11 @@
 <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
 <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
 <!-- METAS FACEBOOK -->
-<meta expr:content='{{$articulo->titulo}}' property='og:title'/>
-<meta expr:content='{{$articulo->imagen_portada}}' property='og:image'/>
-<meta expr:content='{{$articulo->descripcion_corta}}' property='og:description'/>
-<meta expr:content='{{route('ver_articulo',[$articulo->id, str_slug($articulo->titulo)])}}' property='og:url'/>
+<meta property="og:url" content="{{route('ver_articulo',[$articulo->id, str_slug($articulo->titulo)])}}" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{$articulo->titulo}}" />
+<meta property="og:description" content="{{$articulo->descripcion_corta}}" />
+<meta property="og:image" content="{{$articulo->imagen_portada}}" />
 @endsection
 @section('content')
 <div class="theme-padding white-bg">
