@@ -82,7 +82,7 @@ class PublicController extends BaseController {
 		$posiciones = $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
 
 		//* Partidos Siguientes *//
-		$proximosPartidos = $this->partidoRepo->getFromFechaByCampeonatoByEstado(date('Y-m-d'), $campeonatoId, ['P'], 5);
+		$proximosPartidos = $this->partidoRepo->getFromFechaByCampeonatoByEstado(date('Y-m-d 23:59:59'), $campeonatoId, ['P'], 5);
 		$articulosRecientes = $this->articuloRepo->getUltimas(5);
 		$ultimasNoticias = $this->articuloRepo->getUltimas(12);
 		
