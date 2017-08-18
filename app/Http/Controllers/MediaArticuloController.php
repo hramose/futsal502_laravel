@@ -22,7 +22,7 @@ class MediaArticuloController extends BaseController {
 
 	public function listado(Articulo $articulo)
 	{		
-		$medias = $this->mediaArticuloRepo->all('created_at');
+		$medias = $this->mediaArticuloRepo->getByArticulo($articulo->id);
 		return View::make('administracion/medias_articulos/listado', compact('medias','articulo'));
 	}
 
