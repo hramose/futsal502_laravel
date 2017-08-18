@@ -61,7 +61,6 @@ class PartidoRepo extends BaseRepo{
 
 	public function getFromFechaByCampeonatoByEstado($fecha, $campeonatoId,  $estados, $numeroPartidos)
 	{
-		dd($fecha);
 		return Partido::where('campeonato_id',$campeonatoId)
 						->where('fecha','>=',$fecha)
 						->whereIn('estado',$estados)
