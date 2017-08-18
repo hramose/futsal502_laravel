@@ -1,5 +1,6 @@
 <?php
 
+date_default_timezone_set('America/Guatemala');
 Route::group(['middleware' => 'auth'], function(){
 
 Route::get('dashboard','AuthController@mostrarDashboard')->name('dashboard');
