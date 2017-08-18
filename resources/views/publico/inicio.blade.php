@@ -60,10 +60,11 @@
 												        <td>
 												        	<div class="logo-width-name"><img src="{{$partido->equipo_local->logo}}" width="36px">{{$partido->equipo_local->descripcion_corta}}</div>
 												        </td>
-												        <td class="upcoming-fixture-date text-center">
+												        <td class="upcoming-fixture-date text-center" style="    padding-bottom: 0;">
 												        	<a href="{{route('ficha',$partido->id)}}" style="color:red">
 												        	<span>{{date('d/m - H:i', strtotime($partido->fecha))}}</span>
 												        	</a>
+												        	<span style="top: -15px;">{{$partido->domo->descripcion}}</span>
 												        </td>
 												        <td>
 												        	<div class="logo-width-name text-right">{{$partido->equipo_visita->descripcion_corta}}
