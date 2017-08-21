@@ -32,7 +32,7 @@ class ArticuloRepo extends BaseRepo{
 
 	public function getByEstado($estados, $orderBy)
 	{
-		$fecha = date('Y-m-d');
+		$fecha = date('Y-m-d HH:ii');
 		return Articulo::whereIn('estado',$estados)
 						->where('fecha_publicacion','<=', $fecha)
 						->with('categoria')->with('autor')
@@ -43,7 +43,7 @@ class ArticuloRepo extends BaseRepo{
 
 	public function getPublicadas()
 	{
-		$fecha = date('Y-m-d');
+		$fecha = date('Y-m-d HH:ii');
 		return Articulo::whereIn('estado',['A'])
 						->where('fecha_publicacion','<=', $fecha)
 						->with('categoria')->with('autor')
@@ -52,7 +52,7 @@ class ArticuloRepo extends BaseRepo{
 
 	public function getBetweenFechasByEstado($fechaInicio, $fechaFin, $estados)
 	{
-		$fecha = date('Y-m-d');
+		$fecha = date('Y-m-d HH:ii');
 		return Articulo::whereIn('estado',$estados)
 						->where('fecha_publicacion','<=', $fechaFin)
 						->where('fecha_publicacion','>=', $fechaInicio)
@@ -62,7 +62,7 @@ class ArticuloRepo extends BaseRepo{
 
 	public function getByAutorByCategoriaByEstado($autorId, $categoriaId, $estados)
 	{
-		$fecha = date('Y-m-d');
+		$fecha = date('Y-m-d HH:ii');
 		return Articulo::where('categoria_id',$categoriaId)
 						->where('autorId',$autorId)
 						->whereIn('estado',$estados)
@@ -73,7 +73,7 @@ class ArticuloRepo extends BaseRepo{
 
 	public function getByCategoriaByEstado($categoriaId, $estados)
 	{
-		$fecha = date('Y-m-d');
+		$fecha = date('Y-m-d HH:ii');
 		return Articulo::where('categoria_id',$categoriaId)
 						->whereIn('estado',$estados)
 						->where('fecha_publicacion','<=', $fecha)
@@ -83,7 +83,7 @@ class ArticuloRepo extends BaseRepo{
 
 	public function getByAutorByEstado($autorId, $estados)
 	{
-		$fecha = date('Y-m-d');
+		$fecha = date('Y-m-d HH:ii');
 		return Articulo::where('autor_id',$autorId)
 						->whereIn('estado',$estados)
 						->where('fecha_publicacion','<=', $fecha)
@@ -93,7 +93,7 @@ class ArticuloRepo extends BaseRepo{
 
 	public function getPopulares($limite)
 	{
-		$fecha = date('Y-m-d');
+		$fecha = date('Y-m-d HH:ii');
 		return Articulo::where('fecha_publicacion','<=', $fecha)
 						->with('categoria')->with('autor')
 						->orderBy('vistas','DESC')
@@ -104,7 +104,7 @@ class ArticuloRepo extends BaseRepo{
 
 	public function getUltimas($limite)
 	{
-		$fecha = date('Y-m-d');
+		$fecha = date('Y-m-d HH:ii');
 		return Articulo::where('fecha_publicacion','<=', $fecha)
 						->with('categoria')->with('autor')
 						->orderBy('fecha_publicacion','DESC')
