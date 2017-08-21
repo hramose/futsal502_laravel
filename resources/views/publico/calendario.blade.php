@@ -54,6 +54,9 @@
 											{{$partido->equipo_visita->descripcion_corta}}
 										</td>
 									</tr>
+									<tr >
+										<td colspan="3" class="text-center bg-primary text-white" style="font-size: 12px !important; padding: 3px">{{$partido->domo->descripcion}}</td>
+									</tr>
 									@endforeach
 								</table>
 							</div>

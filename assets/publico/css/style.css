@@ -1616,3 +1616,7 @@ border-radius: 100%; color: #19160e;}
 	margin: 20px; 
 	text-align: center;
 }
+
+.bg-primary {
+	background-color: #063e71 !important;
+}

@@ -29,7 +29,7 @@
 						<div class="table-responsive">
 							<table class="table table-bordered table-hover">
 							    <thead>
-							    	<tr>
+							    	<tr class="bg-primary">
 								        <th class="text-center">POS</th>
 										<th class="text-center">EQUIPO</th>
 										<th class="text-center">PTS</th>
@@ -50,7 +50,7 @@
 											<img src="{{$posicion->equipo->logo}}" style="height: 25px; width: 25px"> 
 												{{$posicion->equipo->descripcion}}
 										</td>
-										<td class="text-center">{{$posicion->PTS}}</td>
+										<td class="text-center bg-primary text-white">{{$posicion->PTS}}</td>
 										<td class="text-center">{{$posicion->JJ}}</td>
 										<td class="text-center">{{$posicion->JG}}</td>
 										<td class="text-center">{{$posicion->JE}}</td>
