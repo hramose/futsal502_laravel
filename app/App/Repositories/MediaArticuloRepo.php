@@ -11,6 +11,12 @@ class MediaArticuloRepo extends BaseRepo{
 		return new MediaArticulo;
 	}
 
+	public function getByArticulo($articuloId)
+	{
+		return MediaArticulo::where('articulo_id',$articuloId)
+							->get();
+	}
+
 	public function getByArticuloByTipo($articuloId, $tipos)
 	{
 		return MediaArticulo::where('articulo_id',$articuloId)
