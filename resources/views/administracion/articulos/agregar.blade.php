@@ -36,7 +36,7 @@
 
 		$('#fecha').datetimepicker({
 			locale: 'es',
-			format: 'YYYY-MM-DD HH:m'
+			format: 'YYYY-MM-DD HH:mm'
 		});
 		
 		$('input[type="checkbox"]').iCheck({
