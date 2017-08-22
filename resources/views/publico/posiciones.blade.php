@@ -47,7 +47,7 @@
 									<tr>
 										<td class="text-center">{{$index+1}}</td>
 										<td style="text-align: left"> 
-											<span style="width: 50px">
+											<span style="width: 50px !important; float: left">
 												<img src="{{$posicion->equipo->logo}}" 
 														style="height: 25px; max-width: 50px"> 
 											</span>
