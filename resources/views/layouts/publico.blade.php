@@ -36,8 +36,8 @@ body{
   }
 </style>
 @yield('css')
-</head>
-<body>
+
+
 <!--GOOGLE ANALYTICS-->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -50,6 +50,9 @@ body{
 
 </script>
 <!-- END GOOGLE ANALYTICS -->
+
+</head>
+<body>
 <!-- Wrapper -->
 <div class="wrap push">
     <!-- Header -->
