@@ -137,6 +137,9 @@
 										      	</tr>
 										      	@endif
 										      	@endforeach
+										      	<tr>
+										      		<td colspan="4" class="bg-primary text-center"><a href="{{route('posiciones',[1,0])}}" class="text-white">Ver tabla completa</a></td>
+										      	</tr>
 										    </tbody>
 									  	</table>
 									</div>
