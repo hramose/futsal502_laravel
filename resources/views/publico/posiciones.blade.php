@@ -47,8 +47,13 @@
 									<tr>
 										<td class="text-center">{{$index+1}}</td>
 										<td style="text-align: left"> 
-											<img src="{{$posicion->equipo->logo}}" style="height: 25px; width: 25px"> 
+											<span style="width: 50px">
+												<img src="{{$posicion->equipo->logo}}" 
+														style="height: 25px; max-width: 50px"> 
+											</span>
+											<span>
 												{{$posicion->equipo->descripcion}}
+											</span>
 										</td>
 										<td class="text-center bg-primary text-white">{{$posicion->PTS}}</td>
 										<td class="text-center">{{$posicion->JJ}}</td>
