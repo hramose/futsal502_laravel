@@ -46,7 +46,7 @@
 <script>
 	$(document).ready(function() {
    		$('.table').dataTable({
-   			"bSort" : true
+   			"bSort" : false
    		});
 	});
 </script>

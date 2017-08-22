@@ -25,7 +25,7 @@ class ArticuloController extends BaseController {
 	public function listado()
 	{
 		
-		$articulos = $this->articuloRepo->all('created_at');
+		$articulos = $this->articuloRepo->all('fecha_publicacion');
 		return View::make('administracion/articulos/listado', compact('articulos'));
 	}
 
