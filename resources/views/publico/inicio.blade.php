@@ -116,7 +116,7 @@
 							<div class="row">
 								<div class="col-lg-12 col-md-12 col-sm-7 col-xs-6 r-full-width" style="margin-bottom: 25px">
 									<div class="last-matches styel-1">
-										<h3><span>POSICIONES</span></h3>
+										<h3><a href="{{route('posiciones',[1,0])}}"><span>POSICIONES</span></a></h3>
 										<table class="table table-bordered table-hover">
 										    <thead>
 										    	<tr>
