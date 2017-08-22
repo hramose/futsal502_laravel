@@ -128,12 +128,14 @@
 										    </thead>
 										    <tbody>
 										    	@foreach($posiciones as $index => $pos)
+										    	@if($index<3)
 										    	<tr>
 											        <td class="text-center">{{$index+1}}</td>
 											        <td>{{$pos->equipo->descripcion_corta}}</td>
 											        <td width="35px" class="text-center">{{$pos->PTS}}</td>
 											        <td width="35px" class="text-center">{{$pos->JJ}} </td>
 										      	</tr>
+										      	@endif
 										      	@endforeach
 										    </tbody>
 									  	</table>
