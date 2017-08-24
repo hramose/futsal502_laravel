@@ -13,7 +13,7 @@ class ArticuloRepo extends BaseRepo{
 
 	public function all($orderBy)
 	{
-		return Articulo::with('autor')->with('categoria')->orderBy($orderBy)->get();
+		return Articulo::with('autor')->with('categoria')->orderBy($orderBy,' DESC')->get();
 	}
 
 	public function getByCategoria($categoriaId)

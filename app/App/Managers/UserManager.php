@@ -94,6 +94,8 @@ class UserManager
 		return true;
 	}
 
+	
+
 	public function validate($rules)
 	{
 		$validation = \Validator::make($this->data, $rules);

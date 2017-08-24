@@ -54,4 +54,18 @@ class UsuarioManager extends BaseManager
 		return true;
 	}
 
+	public function resetPassword()
+	{
+		$this->entity->password = $this->entity->username;
+		$this->entity->save();
+		return true;
+	}
+
+	public function inactivar()
+	{
+		$this->entity->estado = 'I';
+		$this->entity->save();
+		return true;
+	}
+
 }

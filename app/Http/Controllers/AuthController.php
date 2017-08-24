@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Controller, Redirect, Input, Auth, View;
+use Controller, Redirect, Input, Auth, View,Session;
 
 class AuthController extends BaseController {
 
@@ -27,10 +27,16 @@ class AuthController extends BaseController {
 
 		if(Auth::attempt($credentials))
 		{
-			return Redirect::route('dashboard');
-		}
-		
-		return Redirect::back()->with('login-error',1);
+			if(Auth::user()->estado == 'A')
+				return Redirect::route('dashboard');
+			else{
+				Session::flash('error','El usuario esta inactivo. Contacte al administrador.');
+				return redirect()->route('login');
+			}
+
+		}		
+		Session::flash('error','Credenciales inválidas.');
+		return redirect()->route('login');
 	}
 
 	public function mostrarDashboard()

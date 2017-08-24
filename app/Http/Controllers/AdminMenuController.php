@@ -17,6 +17,10 @@ class AdminMenuController {
         $menu->push((object)['title' => 'Dashboard', 'url' => route('dashboard'), 'class' => '' ,'icon' => 'fa fa-dashboard']);
 
         $subMenu = new Collection();
+		$subMenu->push((object)['title' => 'Usuarios', 'url' => route('usuarios')]);
+		$menu->push((object)['title' => 'Administración', 'url' => '#', 'subMenu'=> $subMenu, 'icon'=>'fa fa-users']);
+
+        $subMenu = new Collection();
         $subMenu->push((object)['title' => 'Categorias', 'url' => route('categorias')]);
 		$subMenu->push((object)['title' => 'Domo', 'url' => route('domos')]);
 		$subMenu->push((object)['title' => 'Equipos', 'url' => route('equipos')]);
