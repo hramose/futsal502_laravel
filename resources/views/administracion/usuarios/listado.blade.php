@@ -25,13 +25,9 @@
 						<td>{{$usuario->perfil->descripcion}}</td>
 						<td>{{$usuario->descripcion_estado}}</td>
 						<td>
-							@if(Gate::allows('edit_super_admin', $usuario))
 							<a href="{{route('reset_password',$usuario->id)}}" class="btn btn-warning btn-sm btn-flat fa fa-edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reset Contraseña"></a>
-							@endif
-							@if(Gate::allows('is_super_admin') && $usuario->estado == 'A')
 							<a href="{{route('inactivar_usuario',$usuario->id)}}" class="btn btn-danger btn-sm btn-flat fa fa-times" data-toggle="tooltip" data-placement="top" title="" data-original-title="Inactivar"></a>
-							@endif
-							</td>
+						</td>
 					</tr>
 					@endforeach
 				</tbody>

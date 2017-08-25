@@ -2,6 +2,87 @@
 @section('title') Futsal 502 @endsection
 @section('css')
 <link href="{{ asset('assets/publico/css/social.css') }}" rel="stylesheet"/>
+<style>
+	.articles-box {
+		margin: 0 0 10px 0;
+	    padding: 0;
+	    border: 0;
+	    font-size: 100%;
+	    font: inherit;
+	    vertical-align: top;
+	}
+	.articles-box .article{
+		margin: 0 !important;
+	    padding: 0 !important;
+	    position: relative;
+	}
+	a.darken {
+	    display: inline-block;
+	    background: black;
+	    padding: 0;
+	}
+	.darken img{
+		-webkit-transition: all 0.5s linear;
+       -moz-transition: all 0.5s linear;
+        -ms-transition: all 0.5s linear;
+         -o-transition: all 0.5s linear;
+            transition: all 0.5s linear;
+	}
+	.darken:hover img{
+		opacity: 0.8;
+	}
+	.article img{
+		width: 100%;
+		position: relative;		
+	}
+	.article div.title-box{
+		display: block;
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		background: linear-gradient(to bottom,rgba(217,10,10,0) 0%,rgba(6, 62, 113, 0.58) 14%,#063e71 100%);
+		color: white !important;
+		padding: 10px;
+	}
+	.article:hover div.title-box{
+		
+	}
+	.article-title{
+		color: white;
+		margin: 0;
+		padding: 0;
+		font-size: 18px
+	}
+	.article-category{
+		color: white;
+		margin: 0;
+		padding: 5px 10px;
+		font-size: 10px;
+		background: #063e71;
+		top: 5px;
+    	position: absolute;
+    	font-weight: bold;
+	}
+	.article-description{
+		color: white;
+		margin: 0;
+		padding: 0;
+	}
+	.article-date{
+		color: white;
+		margin: 0;
+		padding: 0;
+		font-size: 8px;
+		float: left;
+	}
+	.article-views{
+		color: white;
+		margin: 0;
+		padding: 0;
+		font-size: 8px;
+		float: right;
+	}
+</style>
 @endsection
 @section('content')
 	<main class="main-content">
@@ -11,7 +92,25 @@
 					<div class="row">
 						<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 							<div class="row">
-								<div class="col-xs-12">
+								<div class="row articles-box">
+								@foreach($articulosRecientes as $ar)
+									<div class="col-lg-6 article image-zoom">
+									<a href="{{route('ver_articulo',[$ar->id, str_slug($ar->titulo)])}}" class="darken">
+										<img src="{{$ar->imagen_portada}}" >
+										<span class="article-category">{{$ar->categoria->descripcion}}</span>
+										<div class="title-box">
+											<h3 class="article-title">{{$ar->titulo}}</h3>
+											<span class="article-date">{{$ar->fecha_publicacion_letras}}</span>
+											<span class="article-views"><i class="fa fa-eye"></i> {{$ar->vistas}}</span>
+											<!--<p class="article-description">
+												{{$ar->descripcion_corta}}
+											</p>-->
+										</div>
+									</a>
+									</div>
+								@endforeach
+								</div>
+								<!--<div class="col-xs-12">
 									<div class="latest-news-holder">
 										<div class="row no-gutters white-bg">
 											<div class="col-sm-9">
@@ -44,7 +143,7 @@
 											</div>
 										</div>
 									</div>
-								</div>
+								</div>-->
 								<div class="col-xs-12 ad-horizontal">
 									<img src="{{asset('assets/imagenes/anuncios/epss-h.gif')}}">
 								</div>

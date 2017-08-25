@@ -165,6 +165,19 @@ Route::group(['prefix' => 'personas'], function () {
 	Route::post('editar/{persona}','PersonaController@editar')->name('editar_persona');
 });
 
+/* USUARIOS */
+Route::group(['prefix' => 'usuarios'], function () {
+	Route::get('listado','UsuarioController@listado')->name('usuarios');
+	Route::get('agregar','UsuarioController@mostrarAgregar')->name('agregar_usuario');
+	Route::post('agregar','UsuarioController@agregar')->name('agregar_usuario');
+	Route::get('editar/{user}','UsuarioController@mostrarEditar')->name('editar_usuario');
+	Route::put('editar/{user}','UsuarioController@editar')->name('editar_usuario');
+	Route::get('reset-password/{user}','UsuarioController@resetPassword')->name('reset_password');
+	Route::get('inactivar/{user}','UsuarioController@inactivarUsuario')->name('inactivar_usuario');
+	Route::get('cambiar-password/{user}','UsuarioController@mostrarCambiarPassword')->name('cambiar_password');
+	Route::put('cambiar-password/{user}','UsuarioController@cambiarPassword')->name('cambiar_password');
+});
+
 
 });
 
