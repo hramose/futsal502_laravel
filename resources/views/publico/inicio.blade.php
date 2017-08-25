@@ -73,6 +73,14 @@
 		margin: 0;
 		padding: 0;
 		font-size: 8px;
+		float: left;
+	}
+	.article-views{
+		color: white;
+		margin: 0;
+		padding: 0;
+		font-size: 8px;
+		float: right;
 	}
 </style>
 @endsection
@@ -93,6 +101,7 @@
 										<div class="title-box">
 											<h3 class="article-title">{{$ar->titulo}}</h3>
 											<span class="article-date">{{$ar->fecha_publicacion_letras}}</span>
+											<span class="article-views"><i class="fa fa-eye"></i> {{$ar->vistas}}</span>
 											<!--<p class="article-description">
 												{{$ar->descripcion_corta}}
 											</p>-->
