@@ -95,7 +95,7 @@
 								<div class="row articles-box">
 								@foreach($articulosRecientes as $ar)
 									<div class="col-lg-6 article image-zoom">
-									<a href="" class="darken">
+									<a href="{{route('ver_articulo',[$ar->id, str_slug($ar->titulo)])}}" class="darken">
 										<img src="{{$ar->imagen_portada}}" >
 										<span class="article-category">{{$ar->categoria->descripcion}}</span>
 										<div class="title-box">
