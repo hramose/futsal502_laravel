@@ -106,6 +106,7 @@ class ArticuloRepo extends BaseRepo{
 	{
 		$fecha = date('Y-m-d H:i');
 		return Articulo::where('fecha_publicacion','<=', $fecha)
+						->where('estado','A')
 						->with('categoria')->with('autor')
 						->orderBy('fecha_publicacion','DESC')
 						->limit($limite)
