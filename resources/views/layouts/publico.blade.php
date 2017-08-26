@@ -86,7 +86,7 @@ body{
                 <div class="maga-drop-wrap">
                     <!-- Logo -->
                     <div class="logo">
-                        <a href="home-1.html"><img src="{{ asset('assets/imagenes/logos/logo_sm.png') }}"></a>
+                        <a href="#"><img src="{{ asset('assets/imagenes/logos/logo_sm.png') }}"></a>
                     </div>
                     <!-- Logo -->
                     <!-- Nav List -->
