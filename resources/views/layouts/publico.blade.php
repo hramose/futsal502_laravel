@@ -50,7 +50,6 @@ body{
 
 </script>
 <!-- END GOOGLE ANALYTICS -->
-
 </head>
 <body>
 <!-- Wrapper -->
