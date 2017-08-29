@@ -64,14 +64,49 @@
 							@if(count($videos) > 0)
 							<h4>VIDEOS</h4>
 							@endif
-						</article>
+						</article>						
+						<div class="tags-holder">						
+							<ul class="social-icons">
+								<li><b>Comparte este articulo</b></li>
+							</ul>
+						</div>
+						<div id="share"></div>
+						<hr>
+						<div class="comment-holder theme-padding-bottom">
+							<h2>{{count($comentarios)}} COMENTARIOS</h2>
+							<ul>
+							@foreach($comentarios as $comentario)
+								<li>
+									<div class="comment-detail" style="padding-left: 25px">
+										<h5><a href="#">{{$comentario->nombre}}</a></h5>
+										<span>{{$comentario->fecha_creacion_letras}}</span>
+										<p>{{$comentario->comentario}}</p>
+									</div>
+								</li>
+							@endforeach
+							</ul>
+						</div>
+						<div class="leave-a-reply">
+							<h2>Deja tu comentario</h2>
+							{!! Form::open(['route' => ['agregar_comentario_articulo',$articulo->id], 'method' => 'POST', 'id' => 'form', 'class'=>'validate-form']) !!}
+							<div class="row">
+								<div class="col-sm-4"> 
+									<div class="form-group">
+								    	<input type="text" name="nombre" class="form-control" placeholder="Nombre">
+								    	<i class="fa fa-user"></i>
+								   	</div>
+								   	<button class="btn red-btn full-width">Enviar Comentario</button>
+								</div>
+								<div class="col-sm-8">
+									<div class="form-group">
+										<textarea class="form-control style-d" rows="11" id="comment" placeholder="Escribe tu comentario aquí..." name="comentario"></textarea>
+										<i class="fa fa-pencil-square-o"></i>
+									</div>
+								</div>
+							</div>
+							{!! Form::close() !!}
+						</div>					
 					</div>
-					<div id="share"></div>
-					<div class="tags-holder">						
-						<ul class="social-icons pull-right">
-							<li>Comparte este articulo</li>							
-						</ul>
-					</div>							
 				</div>
 			</div>
 			<!-- Blog Content -->
@@ -130,8 +165,12 @@
     </script>
 <script type="text/javascript" src="{{ asset('assets/publico/plugins/isotope/dist/isotope.pkgd.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/publico/plugins/magnific-popup/dist/jquery.magnific-popup.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/publico/js/echo.js') }}"></script>
 <script type="text/javascript">
             $(window).load(function(){
+
+            	//echo.init();
+
                 var $container = $('.portfolioContainer');
                 $container.isotope({
                     filter: '*',

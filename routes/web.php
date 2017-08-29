@@ -34,6 +34,13 @@ Route::group(['prefix' => 'medias-articulos'], function () {
 	Route::delete('eliminar','MediaArticuloController@eliminar')->name('eliminar_media_articulo');
 });
 
+/* MEDIAS ARTICULOS */
+Route::group(['prefix' => 'comentarios-articulos'], function () {
+	Route::get('listado/{articulo}','ComentarioArticuloController@listado')->name('comentarios_articulo');
+	Route::get('editar/{articulo}','ComentarioArticuloController@mostrarEditar')->name('editar_comentario_articulo');
+	Route::post('editar/{articulo}','ComentarioArticuloController@editar')->name('editar_comentario_articulo');
+});
+
 /* ALINEACIONES */
 Route::group(['prefix' => 'alineaciones'], function () {
 	Route::get('editar/{partido}/{evento}/{jornada}','AlineacionController@mostrarEditar')->name('editar_alineacion');
@@ -192,6 +199,8 @@ Route::get('en-vivo/{partido}','PublicController@enVivo')->name('en_vivo');
 Route::get('lugares','PublicController@domos')->name('lugares');
 Route::get('ver-articulos/{autorId}/{categoriaId}','PublicController@verArticulos')->name('ver_articulos');
 Route::get('ver-articulo/{articulo}/{slug}','PublicController@verArticulo')->name('ver_articulo');
+Route::get('agregar/{articulo}','ComentarioArticuloController@mostrarAgregar')->name('agregar_comentario_articulo');
+Route::post('agregar/{articulo}','ComentarioArticuloController@agregar')->name('agregar_comentario_articulo');
 
 Route::get('login','AuthController@mostrarLogin')->name('login');
 Route::post('login','AuthController@login')->name('login');

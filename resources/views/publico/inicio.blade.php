@@ -181,7 +181,7 @@
 								<div class="col-xs-12">
 									<h3><span><i class="red-color">ULTIMAS </i>NOTICIAS</span><a class="view-all pull-right" href="{{route('ver_articulos',[0,0])}}">Ver todas<i class="fa fa-angle-double-right"></i></a></h3>
 									<div class="upcoming-fixture">
-										<div class="blog-grid-view"  style="margin-top: 20px">
+										<div class="blog-grid-view" style="margin-top: 20px">
 											<div class="row">
 												@foreach($ultimasNoticias as $noticia)
 												<div class="col-lg-4 col-xs-12">
@@ -190,7 +190,7 @@
 														<span class="blog-title-batch">{{$noticia->categoria->descripcion}}</span>
 													</div>
 													<div class="large-post-detail style-3">
-														<h2><a href="{{route('ver_articulo',[$noticia->id,str_slug($noticia->titulo)])}}">{{$noticia->titulo}}</a></h2>
+														<h2><a style="min-height: 35px" href="{{route('ver_articulo',[$noticia->id,str_slug($noticia->titulo)])}}">{{$noticia->titulo}}</a></h2>
 													</div>
 													<div class="detail-btm">
 														<span>{{date('d/m/Y', strtotime($noticia->fecha_publicacion))}}</span>
