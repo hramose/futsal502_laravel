@@ -163,7 +163,7 @@
 												<span class="blog-title-batch">{{$noticia->categoria->descripcion}}</span>
 											</div>
 											<div class="large-post-detail style-3">
-												<h2><a href="{{route('ver_articulo',[$noticia->id,str_slug($noticia->titulo)])}}">{{$noticia->titulo}}</a></h2>
+												<h2><a href="{{route('ver_articulo',[$noticia->id,str_slug($noticia->titulo)])}}" style="min-height: 35px;">{{$noticia->titulo}}</a></h2>
 											</div>
 											<div class="detail-btm">
 												<span>{{date('d/m/Y', strtotime($noticia->fecha_publicacion))}}</span>
