@@ -117,40 +117,6 @@
 							</div>
 						@endforeach
 						</div>
-						<!--<div class="col-xs-12">
-							<div class="latest-news-holder">
-								<div class="row no-gutters white-bg">
-									<div class="col-sm-9">
-										<ul id="latest-news-slider" class="latest-news-slider">
-											@foreach($articulosRecientes as $ar)
-												<li>
-													<img src="{{$ar->imagen_portada}}" alt="">
-													<span class="blog-title-batch-top">{{$ar->categoria->descripcion}}</span>
-												    <p>
-												    	{{$ar->descripcion_corta}}
-												    	<a href="{{route('ver_articulo',[$ar->id, str_slug($ar->titulo)])}}">Leer más...</a>
-												    </p>
-											    </li>
-											@endforeach
-										</ul>
-									</div>
-									<div class="col-sm-3">
-										<ul id="latest-news-thumb" class="latest-news-thumb">
-											@foreach($articulosRecientes as $ar)				
-											<li>
-												<p>{{$ar->titulo}}</p>
-												<span>{{ date('d/m/Y', strtotime($ar->fecha_publicacion)) }}</span>
-											</li>
-											@endforeach
-										</ul>
-										<ul class="news-thumb-arrows">
-											<li class="prev"><span class="fa fa-angle-up"></span></li>
-											<li class="next"><span class="fa fa-angle-down"></span></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>-->
 						<div class="col-xs-12 ad-horizontal">
 							<img src="{{asset('assets/imagenes/anuncios/epss-h.gif')}}">
 						</div>

@@ -13,6 +13,7 @@ use App\App\Repositories\CampeonatoEquipoRepo;
 use App\App\Repositories\DomoRepo;
 use App\App\Repositories\ArticuloRepo;
 use App\App\Repositories\MediaArticuloRepo;
+use App\App\Repositories\ComentarioArticuloRepo;
 use App\App\Repositories\CategoriaRepo;
 use App\App\Repositories\EquipoRepo;
 use App\App\Repositories\PlantillaRepo;
@@ -40,8 +41,9 @@ class PublicController extends BaseController {
 	protected $categoriaRepo;
 	protected $equipoRepo;
 	protected $plantillaRepo;
+	protected $comentarioArticuloRepo;
 
-	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo, PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo, DomoRepo $domoRepo, ArticuloRepo $articuloRepo, MediaArticuloRepo $mediaArticuloRepo, CategoriaRepo $categoriaRepo, EquipoRepo $equipoRepo, PlantillaRepo $plantillaRepo)
+	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo, PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo, DomoRepo $domoRepo, ArticuloRepo $articuloRepo, MediaArticuloRepo $mediaArticuloRepo, CategoriaRepo $categoriaRepo, EquipoRepo $equipoRepo, PlantillaRepo $plantillaRepo, ComentarioArticuloRepo $comentarioArticuloRepo)
 	{
 		$this->posicionesRepo = $posicionesRepo;
 		$this->campeonatoRepo = $campeonatoRepo;
@@ -56,6 +58,7 @@ class PublicController extends BaseController {
 		$this->categoriaRepo = $categoriaRepo;
 		$this->equipoRepo = $equipoRepo;
 		$this->plantillaRepo = $plantillaRepo;
+		$this->comentarioArticuloRepo = $comentarioArticuloRepo;
 
 		View::composer('layouts.default', 'App\Http\Controllers\PublicMenuController');
 	}
@@ -235,18 +238,10 @@ class PublicController extends BaseController {
 		$manager->sumarVista();
 		$imagenes = $this->mediaArticuloRepo->getByArticuloByTipo($articulo->id, ['I']);
 		$videos = $this->mediaArticuloRepo->getByArticuloByTipo($articulo->id, ['V']);
+		$comentarios = $this->comentarioArticuloRepo->getByArticuloByEstado($articulo->id, ['A']);
 		$articulosPopulares = $this->articuloRepo->getPopulares(5);
 		$categorias = $this->categoriaRepo->getPopulares(5);
-		return View::make('publico/articulo',compact('articulo','imagenes','videos','articulosPopulares','categorias'));	
+
+		return View::make('publico/articulo',compact('articulo','imagenes','videos','articulosPopulares','categorias','comentarios'));	
 	}
-
-
-	function getFecha($extraDays){
-		$fecha = date('Y-m-d');
-		$nuevafecha = strtotime ( $extraDays , strtotime ( $fecha ) ) ;
-		$nuevafecha = date ( 'Y-m-d' , $nuevafecha );
-		return $nuevafecha;
-	}
-
-
 }

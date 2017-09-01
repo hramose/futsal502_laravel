@@ -13,11 +13,11 @@ trait UserStamps
 
         static::creating(function ($model) {
             $user = \Auth::user();
-            if($user){
+            if(!is_null($user)){
                 $username = $user->username;
             }
             else{
-                $username = "admin";
+                $username = "publico";
             }
             $model->created_by = $username;
             $model->updated_by = $username;
@@ -25,11 +25,11 @@ trait UserStamps
 
         static::updating(function ($model) {
             $user = \Auth::user();
-            if($user){
+            if(!is_null($user)){
                 $username = $user->username;
             }
             else{
-                $username = "admin";
+                $username = "publico";
             }
             $model->updated_by = $username;
         });

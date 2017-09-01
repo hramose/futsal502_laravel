@@ -22,6 +22,7 @@ abstract class BaseManager
 		$validation = \Validator::make($this->data, $rules);
 		if ($validation->fails())
         {
+        	dd($validation->messages());
             throw new ValidationException('Validation failed', $validation->messages());
         }
 	}
@@ -29,9 +30,15 @@ abstract class BaseManager
 	public function save()
 	{
 		$this->isValid();
-		$this->entity->fill($this->prepareData($this->data));		
-		$this->entity->save();
-		return $this->entity;
+		try{
+			$this->entity->fill($this->prepareData($this->data));		
+			$this->entity->save();
+			return $this->entity;
+		}
+		catch(\Exception $ex)
+		{
+			dd($ex);
+		}
 	}
 
 }
