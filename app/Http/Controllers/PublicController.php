@@ -84,7 +84,7 @@ class PublicController extends BaseController {
 		//* Partidos Siguientes *//
 		$proximosPartidos = $this->partidoRepo->getFromFechaByCampeonatoByEstado(date('Y-m-d 00:00:00'), $campeonatoId, ['P'], 5);
 		$articulosRecientes = $this->articuloRepo->getUltimas(4);
-		$ultimasNoticias = $this->articuloRepo->getUltimas(12)->diff($articulosRecientes);
+		$ultimasNoticias = $this->articuloRepo->getUltimas(13)->diff($articulosRecientes);
 		
 		$followers['twitter'] = Variable::getTwitterFollowers();
 		$followers['facebook'] = Variable::getFacebookLikes();
