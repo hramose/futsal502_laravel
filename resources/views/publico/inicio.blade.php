@@ -157,7 +157,7 @@
 								<div class="blog-grid-view"  style="margin-top: 20px">
 									<div class="row">
 										@foreach($ultimasNoticias as $noticia)
-										<div class="col-lg-4 col-xs-12" style="padding-bottom: 5px;">
+										<div class="col-lg-4 col-xs-12" style="padding-bottom: 10px;">
 											<div class="large-post-img image-zoom" >
 												<img src="{{$noticia->imagen_portada}}" alt="">
 												<span class="blog-title-batch">{{$noticia->categoria->descripcion}}</span>
