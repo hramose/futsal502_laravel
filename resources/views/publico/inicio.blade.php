@@ -161,12 +161,14 @@
 											<div class="large-post-img image-zoom">
 												<img src="{{$noticia->imagen_portada}}" alt="">
 												<span class="blog-title-batch">{{$noticia->categoria->descripcion}}</span>
+												<span style="position: absolute; top: 0; padding: 5px; right: 0;
+    background: #063e71; color: white; font-size: 10px">{{date('d/m/Y', strtotime($noticia->fecha_publicacion))}}</span>
+												<div class="detail-btm" style="">
+												
+											</div>
 											</div>
 											<div class="large-post-detail style-3">
-												<h2><a href="{{route('ver_articulo',[$noticia->id,str_slug($noticia->titulo)])}}" style="min-height: 35px;">{{$noticia->titulo}}</a></h2>
-											</div>
-											<div class="detail-btm">
-												<span>{{date('d/m/Y', strtotime($noticia->fecha_publicacion))}}</span>
+												<h2><a href="{{route('ver_articulo',[$noticia->id,str_slug($noticia->titulo)])}}" style="min-height: 35px; padding: 3px 5px;" class="bg-primary text-white">{{$noticia->titulo}}</a></h2>
 											</div>
 										</div>
 										@endforeach
