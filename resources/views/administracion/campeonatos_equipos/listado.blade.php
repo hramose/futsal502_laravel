@@ -18,7 +18,8 @@
 				<thead>
 					<tr>
 						<th width="25px"></th>
-						<th>EQUIPO</th>	
+						<th>EQUIPO</th>
+						<th width="100px">GRUPO</th>
 						<th></th>			
 					</tr>
 				</thead>
@@ -30,6 +31,7 @@
 							<input type="hidden" name="equipos[{{$equipo->id}}][id]" value="{{$equipo->id}}">
 						</td>
 						<td>{{$equipo->equipo->descripcion}}</td>
+						<td>{{$equipo->descripcion_grupo}}</td>
 						<td>
 							<a href="{{route('plantillas', $equipo->id)}}" class="btn btn-info btn-sm fa fa-user" data-toggle="tooltip" data-placement="top" title="" data-original-title="Personas"></a>
 						</td>

@@ -17,6 +17,7 @@
 						<th>FECHA FIN</th>
 						<th>MOSTRAR APP</th>
 						<th>ACTUAL</th>
+						<th>GRUPOS</th>
 						<th>ESTADO</th>
 						<th></th>
 					</tr>
@@ -27,25 +28,15 @@
 						<td>{{$campeonato->descripcion}}</td>
 						<td>{{date('d-m-Y', strtotime($campeonato->fecha_inicio))}}</td>
 						<td>{{date('d-m-Y', strtotime($campeonato->fecha_fin))}}</td>
-						<td>
-							@if($campeonato->mostrar_app)
-								<i class="fa fa-check square bg-green"></i>
-							@else
-								<i class="fa fa-times square bg-red"></i>
-							@endif
-						</td>
-						<td>
-							@if($campeonato->actual)
-								<i class="fa fa-check square bg-green"></i>
-							@else
-								<i class="fa fa-times square bg-red"></i>
-							@endif
-						</td>
-						<td>{{$campeonato->descripcion_estado}}</td>
+						<td>{!! $campeonato->descripcion_mostrar_app !!}</td>
+						<td>{!! $campeonato->descripcion_actual !!}</td>
+						<td>{!! $campeonato->descripcion_grupos !!}</td>
+						<td>{{ $campeonato->descripcion_estado }}</td>
 						<td>
 							<a href="{{route('editar_campeonato',$campeonato->id)}}" class="btn btn-warning btn-sm fa fa-edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"></a>
 							<a href="{{route('campeonatos_equipos',$campeonato->id)}}" class="btn btn-info btn-sm fa fa-users" data-toggle="tooltip" data-placement="top" title="" data-original-title="Equipos"></a>
 							<a href="{{route('partidos',$campeonato->id)}}" class="btn btn-default btn-sm fa fa-futbol-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Partidos"></a>
+							<a href="{{route('posiciones_campeonato',$campeonato->id)}}" class="btn btn-default btn-sm fa fa-futbol-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Posiciones"></a>
 						</td>
 					</tr>
 					@endforeach

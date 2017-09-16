@@ -5,6 +5,7 @@ namespace App\App\ExtraEntities;
 class EquipoPosicion {
 	
 	public $equipo;
+	public $grupo;
 	public $POS;
 	public $JJ;
 	public $JG;
@@ -15,9 +16,10 @@ class EquipoPosicion {
 	public $DIF;
 	public $PTS;
 
-	public function __construct($equipo)
+	public function __construct($equipo, $grupo)
 	{
 		$this->equipo = $equipo;
+		$this->grupo = $grupo;
 		$this->POS = 0;
 		$this->JJ = 0;
 		$this->JG = 0;

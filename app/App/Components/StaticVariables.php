@@ -37,6 +37,25 @@ class StaticVariables {
 		'AR' => 'Arbitro',
 	];
 
+	protected $grupos = [
+		'1' => 'Grupo 1',
+		'2' => 'Grupo 2',
+		'3' => 'Grupo 3',
+		'4' => 'Grupo 4',
+		'5' => 'Grupo 5',
+		'6' => 'Grupo 6',
+		'7' => 'Grupo 7',
+		'8' => 'Grupo 8',
+		'A' => 'Grupo A',
+		'B' => 'Grupo B',
+		'C' => 'Grupo C',
+		'D' => 'Grupo D',
+		'E' => 'Grupo E',
+		'F' => 'Grupo F',
+		'G' => 'Grupo G',
+		'H' => 'Grupo H',
+	];
+
 	protected $fases = [
 		'R' => 'Fase Regular',
 		'F' => 'Fase Final'
@@ -50,6 +69,9 @@ class StaticVariables {
 
 	public function getPosiciones(){ return $this->posiciones; }
 	public function getPosicion($key){ return $this->posiciones[$key]; }
+
+	public function getGrupos(){ return $this->grupos; }
+	public function getGrupo($key){ return $this->grupos[$key]; }
 
 	public function getRoles(){ return $this->roles; }
 	public function getRol($key){ return $this->roles[$key]; }

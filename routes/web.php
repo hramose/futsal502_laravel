@@ -55,6 +55,8 @@ Route::group(['prefix' => 'campeonatos'], function () {
 	Route::post('agregar/{liga}','CampeonatoController@agregar')->name('agregar_campeonato');
 	Route::get('editar/{campeonato}','CampeonatoController@mostrarEditar')->name('editar_campeonato');
 	Route::post('editar/{campeonato}','CampeonatoController@editar')->name('editar_campeonato');
+	Route::get('posiciones/{campeonato}','CampeonatoController@mostrarPosiciones')->name('posiciones_campeonato');
+	Route::get('posiciones-grupos/{campeonato}','CampeonatoController@mostrarPosiciones')->name('posiciones_grupos_campeonato');
 });
 /*CAMPEONATOS EQUIPOS*/	
 Route::group(['prefix' => 'campeonatos-equipos'], function () {

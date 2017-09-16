@@ -43,7 +43,7 @@ class CampeonatoEquipoRepo extends BaseRepo{
 		 $equipos = array();
 		 foreach($equiposCampeonato as $equipo)
 		 {
-		 	$e = new EquipoPosicion($equipo->equipo);
+		 	$e = new EquipoPosicion($equipo->equipo, $equipo->grupo);
 		 	$equipos[] = $e;
 		 }
 		 return $equipos;

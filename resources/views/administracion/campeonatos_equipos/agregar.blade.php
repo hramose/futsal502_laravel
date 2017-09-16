@@ -12,7 +12,8 @@
 				<thead>
 					<tr>
 						<th width="25px"></th>
-						<th>EQUIPO</th>				
+						<th>EQUIPO</th>
+						<th width="100px">GRUPO</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -23,6 +24,14 @@
 							<input type="hidden" name="equipos[{{$equipo->id}}][id]" value="{{$equipo->id}}">
 						</td>
 						<td>{{$equipo->descripcion}}</td>
+						<td>
+							<select name="equipos[{{$equipo->id}}][grupo]" class="form-control">
+								<option value="">Seleccione un Grupo</option>
+								@foreach($grupos as $index => $grupo)
+									<option value="{{$index}}">{{$grupo}}</option>
+								@endforeach
+							</select>
+						</td>
 					</tr>
 					@endforeach
 				</tbody>

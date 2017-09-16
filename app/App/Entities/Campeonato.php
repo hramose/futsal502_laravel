@@ -26,4 +26,28 @@ class Campeonato extends \Eloquent {
 		return $this->belongsToMany(Equipo::class, 'campeonato_equipo');
 	}
 
+	public function getDescripcionActualAttribute()
+	{
+		if($this->actual)
+			return '<i class="fa fa-check square bg-green"></i>';
+		else
+			return '<i class="fa fa-times square bg-red"></i>';
+	}
+
+	public function getDescripcionMostrarAppAttribute()
+	{
+		if($this->mostrar_app)
+			return '<i class="fa fa-check square bg-green"></i>';
+		else
+			return '<i class="fa fa-times square bg-red"></i>';
+	}
+
+	public function getDescripcionGruposAttribute()
+	{
+		if($this->grupos)
+			return '<i class="fa fa-check square bg-green"></i>';
+		else
+			return '<i class="fa fa-times square bg-red"></i>';
+	}
+
 }

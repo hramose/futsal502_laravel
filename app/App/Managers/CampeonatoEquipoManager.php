@@ -36,6 +36,7 @@ class CampeonatoEquipoManager extends BaseManager
 		        		$ec = new CampeonatoEquipo();
 		        		$ec->campeonato_id = $campeonatoId;
 		        		$ec->equipo_id = $equipo['id'];
+		        		$ec->grupo = $equipo['grupo'];
 		        		$ec->save();
 		        	}
 		        }		        

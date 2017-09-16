@@ -21,6 +21,7 @@ class CrearTablaCampeonato extends Migration
             $table->integer('liga_id')->unsigned();
             $table->tinyInteger('actual');
             $table->tinyInteger('mostrar_app');
+            $table->tinyInteger('grupos');
             $table->string('hashtag');
             $table->string('estado',1);
             $table->timestamps();

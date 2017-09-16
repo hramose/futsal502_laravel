@@ -17,6 +17,7 @@ class CrearTablaCampeonatoEquipo extends Migration
             $table->increments('id');
             $table->integer('campeonato_id')->unsigned();
             $table->integer('equipo_id')->unsigned();
+            $table->string('grupo',2)->unsigned();
             $table->timestamps();
             $table->string('created_by',45);
             $table->string('updated_by',45);

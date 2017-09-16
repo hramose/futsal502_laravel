@@ -12,6 +12,7 @@
 			{!! Field::text('fecha_fin', null, ['data-required'=> 'true','class'=>'fecha']) !!}
 			{!! Field::checkbox('mostrar_app') !!}
 			{!! Field::checkbox('actual') !!}
+			{!! Field::checkbox('grupos') !!}
 			{!! Field::text('hashtag') !!}
 			{!! Field::select('estado', $estados, null, ['data-required'=> 'true']) !!}
 	  	</div>

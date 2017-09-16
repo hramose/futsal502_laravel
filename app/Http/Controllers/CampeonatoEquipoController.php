@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\App\Repositories\CampeonatoEquipoRepo;
 use App\App\Managers\CampeonatoEquipoManager;
 use App\App\Entities\CampeonatoEquipo;
-use Controller, Redirect, Input, View, Session;
+use Controller, Redirect, Input, View, Session, Variable;
 
 use App\App\Repositories\CampeonatoRepo;
 
@@ -32,7 +32,8 @@ class CampeonatoEquipoController extends BaseController {
 	{
 		$campeonato = $this->campeonatoRepo->find($campeonatoId);
 		$equipos = $this->campeonatoEquipoRepo->getEquiposNotInCampeonato($campeonatoId);
-		return view('administracion/campeonatos_equipos/agregar', compact('campeonato','equipos'));
+		$grupos = Variable::getGrupos();
+		return view('administracion/campeonatos_equipos/agregar', compact('campeonato','equipos','grupos'));
 	}
 
 	public function agregar($campeonatoId)

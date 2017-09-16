@@ -9,16 +9,25 @@ use Controller, Redirect, Input, View, Session, Variable;
 
 use App\App\Entities\Liga;
 use App\App\Repositories\LigaRepo;
+use App\App\Repositories\PartidoRepo;
+use App\App\Repositories\CampeonatoEquipoRepo;
+use App\App\Repositories\PosicionesRepo;
 
 class CampeonatoController extends BaseController {
 
 	protected $campeonatoRepo;
 	protected $ligaRepo;
+	protected $partidoRepo;
+	protected $campeonatoEquipoRepo;
+	protected $posicionesRepo;
 
-	public function __construct(CampeonatoRepo $campeonatoRepo, LigaRepo $ligaRepo)
+	public function __construct(CampeonatoRepo $campeonatoRepo, LigaRepo $ligaRepo, PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, PosicionesRepo $posicionesRepo)
 	{
 		$this->campeonatoRepo = $campeonatoRepo;
 		$this->ligaRepo = $ligaRepo;
+		$this->partidoRepo = $partidoRepo;
+		$this->campeonatoEquipoRepo = $campeonatoEquipoRepo;
+		$this->posicionesRepo = $posicionesRepo;
 		View::composer('layouts.admin', 'App\Http\Controllers\AdminMenuController');
 	}
 
@@ -58,6 +67,34 @@ class CampeonatoController extends BaseController {
 		$manager->save();
 		Session::flash('success', 'Se editó el campeonato '.$campeonato->descripcion.' con éxito.');
 		return redirect(route('campeonatos', $campeonato->liga_id));
+	}
+
+	public function mostrarPosiciones(Campeonato $campeonato)
+	{
+		$partidos = $this->partidoRepo->getByCampeonatoByFaseByEstado($campeonato->id, ['R'], ['J','F']);
+		$equipos = $this->campeonatoEquipoRepo->getEquiposWithPosiciones($campeonato->id);
+		$posiciones = $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
+
+		$grupos = null;
+		if($campeonato->grupos)
+		{
+			$grupos = [];
+			foreach($equipos as $equipo)
+			{
+				$grupos[$equipo->grupo]['grupo'] = Variable::getGrupo($equipo->grupo);
+				foreach($posiciones as $posicion)
+				{
+					if($posicion->equipo->id == $equipo->equipo->id)
+						$grupos[$equipo->grupo]['posiciones'][] = $posicion;
+				}
+				
+			}
+			usort($grupos, function($a, $b){
+				return strcmp($a['grupo'], $b['grupo']);
+			});
+		}
+
+		return View::make('administracion/campeonatos/posiciones', compact('posiciones','campeonato','grupos'));
 	}
 
 
