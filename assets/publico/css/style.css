@@ -1620,3 +1620,11 @@ border-radius: 100%; color: #19160e;}
 .bg-primary {
 	background-color: #063e71 !important;
 }
+
+.subtitle
+{
+	background: #063e71;
+    color: white;
+    padding: 10px 15px;
+    border-bottom: 7px solid #85c5e1;
+}

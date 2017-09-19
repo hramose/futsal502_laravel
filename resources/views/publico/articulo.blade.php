@@ -72,6 +72,7 @@
 						</div>
 						<div id="share"></div>
 						<hr>
+						<div id="comments"></div>
 						<div class="comment-holder theme-padding-bottom">
 							<h2>{{count($comentarios)}} COMENTARIOS</h2>
 							<ul>
@@ -198,6 +199,7 @@
                 });
             });
             $(document).ready(function() {
+
                 $('.image-popup').magnificPopup({
                     type: 'image',
                     closeOnContentClick: true,
@@ -208,6 +210,10 @@
                         preload: [0,1] // Will preload 0 - before current, and 1 after the current image
                     }
                 });
+
+                if (location.hash) {
+			        location.href = location.hash;
+			    }
             });
         </script>
 @endsection

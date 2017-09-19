@@ -68,4 +68,11 @@ class UsuarioManager extends BaseManager
 		return true;
 	}
 
+	public function activar()
+	{
+		$this->entity->estado = 'A';
+		$this->entity->save();
+		return true;
+	}
+
 }

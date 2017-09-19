@@ -90,5 +90,15 @@ class UsuarioController extends BaseController {
 		return redirect()->route('usuarios');
 	}
 
+	public function activarUsuario($id)
+	{
+		$usuario = $this->usuarioRepo->find($id);
+		$data = Input::all();
+		$manager = new UsuarioManager($usuario, $data);
+		$manager->activar();
+		Session::flash('success', 'Se activó el usuario '.$usuario->username.' con éxito.');
+		return redirect()->route('usuarios');
+	}
+
 
 }

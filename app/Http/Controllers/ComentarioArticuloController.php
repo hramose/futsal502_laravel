@@ -37,7 +37,8 @@ class ComentarioArticuloController extends BaseController {
 		$manager = new ComentarioArticuloManager(new ComentarioArticulo(), $data);
 		$manager->save();
 		Session::flash('success', 'Gracias por compartir tu opinión con nosotros.');
-		return redirect()->route('ver_articulo', [$articulo->id, str_slug($articulo->titulo)]);
+		$ruta = route('ver_articulo', [$articulo->id, str_slug($articulo->titulo)]) . '#comments';
+		return redirect()->to($ruta);
 	}
 
 	public function eliminar()

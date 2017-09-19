@@ -92,9 +92,23 @@ body{
                     <!-- Nav List -->
                     <ul class="nav-list pull-right">
                         <li><a href="{{route('inicio')}}">Inicio</a></li>
-                        <li><a href="{{route('posiciones',[1,0])}}">Posiciones</a></li>
-                        <li><a href="{{route('calendario',[1,0])}}">Calendario</a></li>
-                        <li><a href="{{route('plantilla',[1,0,0])}}">Plantillas</a></li>
+                        <li>
+                            <a href="#">Liga Mayor</a>
+                            <ul>
+                                <li><a href="{{route('posiciones',[1,0])}}">Posiciones</a></li>
+                                <li><a href="{{route('calendario',[1,0])}}">Calendario</a></li>
+                                <li><a href="{{route('plantilla',[1,0,0])}}">Plantillas</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Torneo de Copa</a>
+                            <ul>
+                                <li><a href="{{route('posiciones',[2,0])}}">Posiciones</a></li>
+                                <li><a href="{{route('calendario',[2,0])}}">Calendario</a></li>
+                                <!--<li><a href="{{route('plantilla',[2,0,0])}}">Plantillas</a></li>-->
+                            </ul>
+                        </li>
+                        <li><a href="{{route('ver_articulos',[0,5])}}">Conoce el Juego</a></li>
                     </ul>
                     <!-- Nav List -->
                 </div>
