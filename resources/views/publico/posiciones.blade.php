@@ -31,16 +31,16 @@
 							<table class="table table-bordered table-hover">
 							    <thead>
 							    	<tr class="bg-primary">
-								        <th class="text-center" width="65px">POS</th>
+								        <th class="text-center" width="50px">POS</th>
 										<th class="text-center">EQUIPO</th>
-										<th class="text-center" width="65px">PTS</th>
-										<th class="text-center" width="65px">JJ</th>
-										<th class="text-center" width="65px">JG</th>
-										<th class="text-center" width="65px">JE</th>
-										<th class="text-center" width="65px">JP</th>
-										<th class="text-center" width="65px">GF</th>
-										<th class="text-center" width="65px">GC</th>
-										<th class="text-center" width="65px">DIF</th>
+										<th class="text-center" width="50px">PTS</th>
+										<th class="text-center" width="50px">JJ</th>
+										<th class="text-center" width="50px">JG</th>
+										<th class="text-center" width="50px">JE</th>
+										<th class="text-center" width="50px">JP</th>
+										<th class="text-center" width="50px">GF</th>
+										<th class="text-center" width="50px">GC</th>
+										<th class="text-center" width="50px">DIF</th>
 							      	</tr>
 							    </thead>
 							    <tbody class="color">
@@ -76,16 +76,16 @@
 										<table class="table table-bordered table-hover">
 										    <thead>
 										    	<tr class="bg-primary">
-											        <th class="text-center" width="65px">POS</th>
+											        <th class="text-center" width="50px">POS</th>
 													<th class="text-center">EQUIPO</th>
-													<th class="text-center" width="65px">PTS</th>
-													<th class="text-center" width="65px">JJ</th>
-													<th class="text-center" width="65px">JG</th>
-													<th class="text-center" width="65px">JE</th>
-													<th class="text-center" width="65px">JP</th>
-													<th class="text-center" width="65px">GF</th>
-													<th class="text-center" width="65px">GC</th>
-													<th class="text-center" width="65px">DIF</th>
+													<th class="text-center" width="50px">PTS</th>
+													<th class="text-center" width="50px">JJ</th>
+													<th class="text-center" width="50px">JG</th>
+													<th class="text-center" width="50px">JE</th>
+													<th class="text-center" width="50px">JP</th>
+													<th class="text-center" width="50px">GF</th>
+													<th class="text-center" width="50px">GC</th>
+													<th class="text-center" width="50px">DIF</th>
 										      	</tr>
 										    </thead>
 										    <tbody class="color">
