@@ -31,16 +31,16 @@
 							<table class="table table-bordered table-hover">
 							    <thead>
 							    	<tr class="bg-primary">
-								        <th class="text-center">POS</th>
+								        <th class="text-center" width="65px">POS</th>
 										<th class="text-center">EQUIPO</th>
-										<th class="text-center">PTS</th>
-										<th class="text-center">JJ</th>
-										<th class="text-center">JG</th>
-										<th class="text-center">JE</th>
-										<th class="text-center">JP</th>
-										<th class="text-center">GF</th>
-										<th class="text-center">GC</th>
-										<th class="text-center">DIF</th>
+										<th class="text-center" width="65px">PTS</th>
+										<th class="text-center" width="65px">JJ</th>
+										<th class="text-center" width="65px">JG</th>
+										<th class="text-center" width="65px">JE</th>
+										<th class="text-center" width="65px">JP</th>
+										<th class="text-center" width="65px">GF</th>
+										<th class="text-center" width="65px">GC</th>
+										<th class="text-center" width="65px">DIF</th>
 							      	</tr>
 							    </thead>
 							    <tbody class="color">
