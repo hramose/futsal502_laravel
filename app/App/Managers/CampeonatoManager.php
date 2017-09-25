@@ -33,6 +33,7 @@ class CampeonatoManager extends BaseManager
 	{
 		$data['mostrar_app'] = isset($data['mostrar_app']) ? 1 : 0;
 		$data['actual'] = isset($data['actual']) ? 1 : 0;
+		$data['grupos'] = isset($data['grupos']) ? 1 : 0;
 		return $data;
 	}
 

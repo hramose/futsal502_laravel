@@ -109,25 +109,16 @@ class PublicController extends BaseController {
 		}
 		$partidos = $this->partidoRepo->getByCampeonatoByFaseByEstado($campeonato->id, ['R'], ['J','F']);
 		$equipos = $this->campeonatoEquipoRepo->getEquiposWithPosiciones($campeonato->id);
-		$posiciones = $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
 
 		$grupos = null;
+		$posiciones = [];
 		if($campeonato->grupos)
 		{
-			$grupos = [];
-			foreach($equipos as $equipo)
-			{
-				$grupos[$equipo->grupo]['grupo'] = Variable::getGrupo($equipo->grupo);
-				foreach($posiciones as $posicion)
-				{
-					if($posicion->equipo->id == $equipo->equipo->id)
-						$grupos[$equipo->grupo]['posiciones'][] = $posicion;
-				}
-				
-			}
-			usort($grupos, function($a, $b){
-				return strcmp($a['grupo'], $b['grupo']);
-			});
+			$grupos = $this->posicionesRepo->getTablaGrupos($campeonato->id, $partidos, $equipos);
+		}
+		else
+		{
+			$posiciones = $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
 		}
 
 		$articulosPopulares = $this->articuloRepo->getPopulares(5);

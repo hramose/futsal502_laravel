@@ -1,6 +1,7 @@
 <?php
 
 namespace App\App\Repositories;
+use Variable;
 
 class PosicionesRepo {
 
@@ -65,8 +66,37 @@ class PosicionesRepo {
             }
 		}
 		usort($equipos, array('App\App\Repositories\PosicionesRepo','cmp'));
+        $pos = 1;
+        foreach($equipos as $equipo){
+            $equipo->POS = $pos;
+            $pos++;
+        }
 		return $equipos;
 	}
+
+    public function getTablaGrupos($campeonatoId, $partidos, $equipos)
+    {
+        $posiciones = $this->getTabla($campeonatoId, $partidos, $equipos);
+        $grupos = [];
+        foreach($equipos as $equipo)
+        {
+            $grupos[$equipo->grupo]['grupo'] = Variable::getGrupo($equipo->grupo);
+            foreach($posiciones as $posicion)
+            {
+                if($posicion->equipo->id == $equipo->equipo->id)
+                    $grupos[$equipo->grupo]['posiciones'][$posicion->POS] = $posicion;
+            }
+            
+        }
+        usort($grupos, function($a, $b){
+            return strcmp($a['grupo'], $b['grupo']);
+        });
+        foreach($grupos as $index => $grupo)
+        {
+            usort($grupos[$index]['posiciones'], array('App\App\Repositories\PosicionesRepo','cmp'));
+        }
+        return $grupos;
+    }
 
 	function cmp( $a, $b ) {
         if ($a->PTS == $b->PTS) {

@@ -73,28 +73,37 @@ class CampeonatoController extends BaseController {
 	{
 		$partidos = $this->partidoRepo->getByCampeonatoByFaseByEstado($campeonato->id, ['R'], ['J','F']);
 		$equipos = $this->campeonatoEquipoRepo->getEquiposWithPosiciones($campeonato->id);
-		$posiciones = $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
 
 		$grupos = null;
+		$posiciones = [];
 		if($campeonato->grupos)
 		{
-			$grupos = [];
-			foreach($equipos as $equipo)
-			{
-				$grupos[$equipo->grupo]['grupo'] = Variable::getGrupo($equipo->grupo);
-				foreach($posiciones as $posicion)
-				{
-					if($posicion->equipo->id == $equipo->equipo->id)
-						$grupos[$equipo->grupo]['posiciones'][] = $posicion;
-				}
-				
-			}
-			usort($grupos, function($a, $b){
-				return strcmp($a['grupo'], $b['grupo']);
-			});
+			$grupos = $this->posicionesRepo->getTablaGrupos($campeonato->id, $partidos, $equipos);
+		}
+		else
+		{
+			$posiciones = $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
 		}
 
 		return View::make('administracion/campeonatos/posiciones', compact('posiciones','campeonato','grupos'));
+	}
+
+	function cmp( $a, $b ) {
+        if ($a->PTS == $b->PTS) {
+            if ($a->DIF == $b->DIF) {
+                if($a->GF == $b->GF){
+                    if($a->GC == $b->GC)
+                    	return strcmp($a->equipo->descripcion, $b->equipo->descripcion);
+                    else
+                        return $a->GC > $b->GC ? -1 : 1;
+                }
+                else{
+                    return $a->GF > $b->GF ? -1 : 1;
+                }
+            }
+            return $a->DIF > $b->DIF ? -1 : 1;
+        }
+        return $a->PTS > $b->PTS ? -1 : 1;
 	}
 
 
