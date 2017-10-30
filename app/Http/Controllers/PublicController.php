@@ -109,9 +109,20 @@ class PublicController extends BaseController {
 		}
 		$partidos = $this->partidoRepo->getByCampeonatoByFaseByEstado($campeonato->id, ['R'], ['J','F']);
 		$equipos = $this->campeonatoEquipoRepo->getEquiposWithPosiciones($campeonato->id);
-		$posiciones = $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
+
+		$grupos = null;
+		$posiciones = [];
+		if($campeonato->grupos)
+		{
+			$grupos = $this->posicionesRepo->getTablaGrupos($campeonato->id, $partidos, $equipos);
+		}
+		else
+		{
+			$posiciones = $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
+		}
+
 		$articulosPopulares = $this->articuloRepo->getPopulares(5);
-		return View::make('publico/posiciones', compact('posiciones','campeonato','ligaId','campeonatos','articulosPopulares'));
+		return View::make('publico/posiciones', compact('posiciones','campeonato','ligaId','campeonatos','articulosPopulares','grupos'));
 	}
 
 	public function goleadores($ligaId, $campeonatoId)
@@ -218,14 +229,14 @@ class PublicController extends BaseController {
 		}
 		elseif($autorId != 0 && $categoriaId != 0){
 			$articulos = $this->articuloRepo->getByAutorByCategoriaByEstado($autorId, $categoriaId, ['A']);
-			$titulo = 'Noticias de ' . $categoria->descripcion;
+			$titulo = $categoria->descripcion;
 		}
 		elseif($autorId != 0){
 			$articulos = $this->articuloRepo->getByAutorByEstado($autorId, ['A']);
 		}
 		elseif($categoriaId != 0){
 			$articulos = $this->articuloRepo->getByCategoriaByEstado($categoriaId, ['A']);
-			$titulo = 'Noticias de ' . $categoria->descripcion;
+			$titulo = $categoria->descripcion;
 		}
 		$articulosPopulares = $this->articuloRepo->getPopulares(5);
 		$categorias = $this->categoriaRepo->getPopulares(5);

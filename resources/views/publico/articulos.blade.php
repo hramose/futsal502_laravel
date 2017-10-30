@@ -8,6 +8,7 @@
 	<div class="container">
 		<div class="row">		
 			<div class="col-lg-9 col-md-9 col-sm-8 col-xs-7 r-full-width">
+				<h3 class="subtitle">{{$titulo}}</h3>
 				<div class="blog-list-View theme-padding-bottom">
 					<div class="theme-padding-bottom">
 						@foreach($articulos as $articulo)

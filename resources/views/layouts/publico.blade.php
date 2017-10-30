@@ -19,6 +19,13 @@
 <!-- FontsOnline -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800|Open+Sans:400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 <!-- JavaScripts -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-2559791194045065",
+    enable_page_level_ads: true
+  });
+</script>
 <script src="{{ asset('assets/publico/js/vendor/modernizr.js')}}"></script>
 <link rel="shortcut icon" href="{{ asset('assets/imagenes/logos/ico.png') }}">
 <style>
@@ -92,9 +99,23 @@ body{
                     <!-- Nav List -->
                     <ul class="nav-list pull-right">
                         <li><a href="{{route('inicio')}}">Inicio</a></li>
-                        <li><a href="{{route('posiciones',[1,0])}}">Posiciones</a></li>
-                        <li><a href="{{route('calendario',[1,0])}}">Calendario</a></li>
-                        <li><a href="{{route('plantilla',[1,0,0])}}">Plantillas</a></li>
+                        <li>
+                            <a href="#">Liga Mayor</a>
+                            <ul>
+                                <li><a href="{{route('posiciones',[1,0])}}">Posiciones</a></li>
+                                <li><a href="{{route('calendario',[1,0])}}">Calendario</a></li>
+                                <li><a href="{{route('plantilla',[1,0,0])}}">Plantillas</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Torneo de Copa</a>
+                            <ul>
+                                <li><a href="{{route('posiciones',[2,0])}}">Posiciones</a></li>
+                                <li><a href="{{route('calendario',[2,0])}}">Calendario</a></li>
+                                <!--<li><a href="{{route('plantilla',[2,0,0])}}">Plantillas</a></li>-->
+                            </ul>
+                        </li>
+                        <li><a href="{{route('ver_articulos',[0,5])}}">Conoce el Juego</a></li>
                     </ul>
                     <!-- Nav List -->
                 </div>
