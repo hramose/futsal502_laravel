@@ -15,6 +15,7 @@ use App\App\Repositories\AlineacionRepo;
 use App\App\Repositories\LigaRepo;
 use App\App\Repositories\DomoRepo;
 use App\App\Repositories\EquipoRepo;
+use App\App\Repositories\ArticuloRepo;
 
 use App\App\ExtraEntities\FichaPartido;
 
@@ -36,11 +37,13 @@ class APIController extends BaseController {
 	protected $ligaRepo;
 	protected $domoRepo;
 	protected $equipoRepo;
+	protected $articuloRepo;
 
 	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo, 
 		PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo,
 		AlineacionRepo $alineacionRepo, LigaRepo $ligaRepo, DomoRepo $domoRepo, EquipoRepo $equipoRepo, 
-		PlantillaRepo $plantillaRepo)
+		PlantillaRepo $plantillaRepo, 
+		ArticuloRepo $articuloRepo)
 	{
 		$this->posicionesRepo = $posicionesRepo;
 		$this->campeonatoRepo = $campeonatoRepo;
@@ -54,6 +57,7 @@ class APIController extends BaseController {
 		$this->ligaRepo = $ligaRepo;
 		$this->domoRepo = $domoRepo;
 		$this->equipoRepo = $equipoRepo;
+		$this->articuloRepo = $articuloRepo;
 
 		header('Access-Control-Allow-Origin: *');
 		header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
@@ -63,6 +67,11 @@ class APIController extends BaseController {
 		    http_response_code(200);
 		    exit(0);
 		}
+	}
+
+	public function articulos()
+	{
+		return json_encode($articulos = $this->articuloRepo->all('fecha_publicacion'));
 	}
 
 	public function posiciones($ligaId, $campeonatoId)

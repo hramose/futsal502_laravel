@@ -1,6 +1,16 @@
 <?php
 
 date_default_timezone_set('America/Guatemala');
+header('Access-Control-Allow-Headers:Origin, Content-Type, X-XSRF-TOKEN, Authorization');
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+//header('Access-Control-Allow-Headers: Authorization,Content-Type');
+
+	/*if("OPTIONS" == $_SERVER['REQUEST_METHOD']) {
+	    http_response_code(200);
+	    exit(0);
+	}*/
+
 Route::group(['middleware' => 'auth'], function(){
 
 Route::get('dashboard','AuthController@mostrarDashboard')->name('dashboard');
@@ -217,3 +227,5 @@ Route::get('account/facebook', 'FacebookController@facebook');
 Route::get('twitter', ['as' => 'twitter', 'uses' => 'TwitterController@twitter_redirect']);
 // Get back to redirect url
 Route::get('account/twitter', 'TwitterController@twitter');
+
+Route::get('api/noticias','APIController@articulos')->name('api.articulos');
