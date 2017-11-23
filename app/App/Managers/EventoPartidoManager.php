@@ -7,7 +7,7 @@ use App\App\Repositories\AlineacionRepo;
 use App\App\Repositories\EventoPartidoRepo;
 
 use App\App\Entities\EventoPartido;
-use Redirect, Session, Twitter;
+use Redirect, Session;//, Twitter;
 use Facebook\Facebook as Facebook;
 
 class EventoPartidoManager extends BaseManager
@@ -105,7 +105,7 @@ class EventoPartidoManager extends BaseManager
 			throw new SaveDataException('¡Error!', $ex);
 		}
 
-		
+
 	}
 
 	function agregarPersona($partido,$equipoId)
@@ -149,10 +149,10 @@ class EventoPartidoManager extends BaseManager
 					$partido->save();
 				}
 				/*Se obtiene el comentario*/
-				$this->entity->comentario = $this->getComentario($partido, $this->entity->evento_id, 
+				$this->entity->comentario = $this->getComentario($partido, $this->entity->evento_id,
 														$this->entity->equipo_id, $personaRepo->find($this->entity->persona_id));
 				$this->entity->save();
-				
+
 
 			\DB::commit();
 
@@ -262,8 +262,8 @@ class EventoPartidoManager extends BaseManager
 
 	private function getResultado($partido)
 	{
-		return $partido->equipo_local->descripcion . ' ' . 
-					$partido->goles_local . ' - ' . $partido->goles_visita . ' ' . 
+		return $partido->equipo_local->descripcion . ' ' .
+					$partido->goles_local . ' - ' . $partido->goles_visita . ' ' .
 				$partido->equipo_visita->descripcion;
 	}
 
@@ -292,7 +292,7 @@ class EventoPartidoManager extends BaseManager
 			$fanPageId = env('FB_FANPAGE_ID');
 			$accessToken = \Session::get('access_token');
 			$data['message'] = $mensaje;
-    		$post_url = '/'.$fanPageId.'/feed';            		
+    		$post_url = '/'.$fanPageId.'/feed';
     		$facebook->post($post_url, $data, $accessToken);
     		\Session::flash('fb-success', 'Se posteó en facebook correctamente.');
 		}
@@ -318,7 +318,7 @@ class EventoPartidoManager extends BaseManager
 			$data['caption'] = $mensaje;
 			$data['url'] = $imagen;
 			//dd($data);
-    		$post_url = '/'.$fanPageId.'/photos';            		
+    		$post_url = '/'.$fanPageId.'/photos';
     		$facebook->post($post_url, $data, $accessToken);
     		\Session::flash('fb-success', 'Se posteó en facebook correctamente.');
 		}
@@ -331,21 +331,21 @@ class EventoPartidoManager extends BaseManager
 
 	public function postTwitter($mensaje)
 	{
-		try{
-			return Twitter::postTweet(array('status' => $mensaje, 'format' => 'json'));
-			\Session::flash('tw-success', 'Se posteó en twitter correctamente.');
-		}
-		catch(\Exception $ex)
-		{
-			\Session::flash('tw-error', 'ERROR DE TWITTER: ' . $ex->getMessage());
-            return Redirect::back();
-		}
+		// try{
+		// 	return Twitter::postTweet(array('status' => $mensaje, 'format' => 'json'));
+		// 	\Session::flash('tw-success', 'Se posteó en twitter correctamente.');
+		// }
+		// catch(\Exception $ex)
+		// {
+		// 	\Session::flash('tw-error', 'ERROR DE TWITTER: ' . $ex->getMessage());
+    //         return Redirect::back();
+		// }
 	}
 
 	public function postImageTwitter($urlImagen, $mensaje)
 	{
-		$uploaded_media = Twitter::uploadMedia(['media' => file_get_contents($urlImagen)]);
-  		return Twitter::postTweet(['status' => $mensaje, 'media_ids' =>  $uploaded_media->media_id_string]);
+		// $uploaded_media = Twitter::uploadMedia(['media' => file_get_contents($urlImagen)]);
+  	// 	return Twitter::postTweet(['status' => $mensaje, 'media_ids' =>  $uploaded_media->media_id_string]);
 	}
 
 }

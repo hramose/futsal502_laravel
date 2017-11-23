@@ -171,7 +171,7 @@ return [
         App\App\Components\FieldServiceProvider::class,
         App\App\Components\VariableServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Thujohn\Twitter\TwitterServiceProvider::class,
+        //Thujohn\Twitter\TwitterServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -234,12 +234,12 @@ return [
         'Input' => Illuminate\Support\Facades\Input::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        
+
         'Field'     => App\App\Components\Field::class,
         'Variable'  => App\App\Components\Variable::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
-        'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
+        //'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
     ],
 
 ];
