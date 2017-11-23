@@ -1,7 +1,7 @@
 <?php
 
 namespace App\App\Components;
-use Twitter;
+//use Twitter;
 
 class StaticVariables {
 
@@ -139,14 +139,15 @@ class StaticVariables {
 
 	public function getTwitterFollowers()
 	{
-		try{
-			$followers = Twitter::getCredentials();
-			return $followers->followers_count;
-		}
-		catch(\Exception $ex)
-		{
-			return 0;
-		}
+		// try{
+		// 	$followers = Twitter::getCredentials();
+		// 	return $followers->followers_count;
+		// }
+		// catch(\Exception $ex)
+		// {
+		// 	return 0;
+		// }
+		return 1;
 	}
 
 	public function getFacebookLikes()
