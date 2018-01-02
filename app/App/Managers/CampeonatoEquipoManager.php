@@ -36,10 +36,10 @@ class CampeonatoEquipoManager extends BaseManager
 		        		$ec = new CampeonatoEquipo();
 		        		$ec->campeonato_id = $campeonatoId;
 		        		$ec->equipo_id = $equipo['id'];
-		        		$ec->grupo = $equipo['grupo'];
+		        		$ec->grupo = isset($equipo['grupo']) ? $equipo['grupo'] : 0;
 		        		$ec->save();
 		        	}
-		        }		        
+		        }
 	        \DB::commit();
 	    }
 	    catch(\Exception $ex)
@@ -67,7 +67,7 @@ class CampeonatoEquipoManager extends BaseManager
 						}
 		        	}
 		        }
-		        
+
 	        \DB::commit();
 	    }
 	    catch(\Exception $ex)
@@ -90,7 +90,7 @@ class CampeonatoEquipoManager extends BaseManager
 		        	if(isset($equipo['seleccionado']))
 		        	{
 		        		$e = $campeonatoEquipoRepo->getEquipoByCampeonato($campeonatoNuevo, $equipo['id']);
-		        		if(is_null($e)){			        		
+		        		if(is_null($e)){
 		        			$ec = new CampeonatoEquipo();
 			        		$ec->campeonato_id = $campeonatoNuevo;
 			        		$ec->equipo_id = $equipo['id'];
@@ -101,7 +101,7 @@ class CampeonatoEquipoManager extends BaseManager
 			        	}
 
 			        	if(isset($this->data['incluir_personas'])){
-			        		
+
 							$personas = $plantillaRepo->getPersonas($campeonatoNuevo, $equipo['id']);
 							foreach($personas as $persona){
 								$persona->delete();
@@ -118,7 +118,7 @@ class CampeonatoEquipoManager extends BaseManager
 
 		        	}
 		        }
-		        
+
 	        \DB::commit();
 	    }
 	    catch(\Exception $ex)
