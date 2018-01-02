@@ -66,7 +66,7 @@
 		$('select').on('change', function () {
 			var $campeonato = $(this).val();
 			if($campeonato != ''){
-        var url = '{{route("inicio")}}/calendario/{{$ligaId}}/'+ $(this).val();
+        var url = '{{route("inicio")}}/externo-calendario/{{$ligaId}}/'+ $(this).val();
         if (url) { // require a URL
             window.location = url; // redirect
         }
