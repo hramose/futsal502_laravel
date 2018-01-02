@@ -38,6 +38,7 @@ class StaticVariables {
 	];
 
 	protected $grupos = [
+		0, 'Sin Grupo',
 		'1' => 'Grupo 1',
 		'2' => 'Grupo 2',
 		'3' => 'Grupo 3',
