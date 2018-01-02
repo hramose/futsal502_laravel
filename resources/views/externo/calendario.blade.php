@@ -2,7 +2,7 @@
 @section('content')
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-9 col-sm-8">
+			<div class="col-lg-12">
 				<div class="macth-fixture">
 					<h5>{{$campeonato->descripcion}}</h5>
 					<div class="row">

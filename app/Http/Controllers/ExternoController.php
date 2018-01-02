@@ -156,9 +156,7 @@ class ExternoController extends BaseController {
 			$jornadas[$partido->jornada_id]['jornada'] = $partido->jornada;
 			$jornadas[$partido->jornada_id]['partidos'][] = $partido;
 		}
-		$categorias = $this->categoriaRepo->getPopulares(5);
-		$articulosPopulares = $this->articuloRepo->getPopulares(5);
-		return View::make('publico/calendario', compact('jornadas','campeonato','campeonatos','ligaId','categorias','articulosPopulares'));
+		return View::make('externo/calendario', compact('jornadas','campeonato','campeonatos','ligaId'));
 	}
 
 	public function ficha($partidoId)
