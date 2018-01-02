@@ -17,23 +17,23 @@
 							<table class="table table-bordered table-hover">
 							    <thead>
 							    	<tr class="bg-primary">
-						        <th class="text-center" width="50px">POS</th>
+						        <th class="text-center" width="30px">POS</th>
 										<th class="text-center">EQUIPO</th>
-										<th class="text-center" width="50px">PTS</th>
-										<th class="text-center" width="50px">JJ</th>
-										<th class="text-center" width="50px">JG</th>
-										<th class="text-center" width="50px">JE</th>
-										<th class="text-center" width="50px">JP</th>
-										<th class="text-center" width="50px">GF</th>
-										<th class="text-center" width="50px">GC</th>
-										<th class="text-center" width="50px">DIF</th>
+										<th class="text-center" width="30px">PTS</th>
+										<th class="text-center" width="30px">JJ</th>
+										<th class="text-center" width="30px">JG</th>
+										<th class="text-center" width="30px">JE</th>
+										<th class="text-center" width="30px">JP</th>
+										<th class="text-center" width="30px">GF</th>
+										<th class="text-center" width="30px">GC</th>
+										<th class="text-center" width="30px">DIF</th>
 							      	</tr>
 							    </thead>
 							    <tbody class="color">
 									@foreach($posiciones as $index => $posicion)
 									<tr>
 										<td class="text-center">{{$index+1}}</td>
-										<td style="text-align: left">
+										<td style="text-align: left; padding-left: 5px;">
 											<span style="width: 50px !important; float: left; text-align: center;">
 												<img src="{{$posicion->equipo->logo}}"
 														style="height: 25px; max-width: 50px">
@@ -62,16 +62,16 @@
 										<table class="table table-bordered table-hover">
 										    <thead>
 										    	<tr class="bg-primary">
-											        <th class="text-center" width="50px">POS</th>
+											        <th class="text-center" width="30px">POS</th>
 													<th class="text-center">EQUIPO</th>
-													<th class="text-center" width="50px">PTS</th>
-													<th class="text-center" width="50px">JJ</th>
-													<th class="text-center" width="50px">JG</th>
-													<th class="text-center" width="50px">JE</th>
-													<th class="text-center" width="50px">JP</th>
-													<th class="text-center" width="50px">GF</th>
-													<th class="text-center" width="50px">GC</th>
-													<th class="text-center" width="50px">DIF</th>
+													<th class="text-center" width="30px">PTS</th>
+													<th class="text-center" width="30px">JJ</th>
+													<th class="text-center" width="30px">JG</th>
+													<th class="text-center" width="30px">JE</th>
+													<th class="text-center" width="30px">JP</th>
+													<th class="text-center" width="30px">GF</th>
+													<th class="text-center" width="30px">GC</th>
+													<th class="text-center" width="30px">DIF</th>
 										      	</tr>
 										    </thead>
 										    <tbody class="color">
