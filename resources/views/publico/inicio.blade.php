@@ -33,7 +33,7 @@
 	}
 	.article img{
 		width: 100%;
-		position: relative;		
+		position: relative;
 	}
 	.article div.title-box{
 		display: block;
@@ -45,7 +45,7 @@
 		padding: 10px;
 	}
 	.article:hover div.title-box{
-		
+
 	}
 	.article-title{
 		color: white;
@@ -81,6 +81,15 @@
 		padding: 0;
 		font-size: 8px;
 		float: right;
+	}
+	.post-date{
+		position: absolute;
+		top: 0;
+		padding: 5px;
+		right: 0;
+		background: #063e71;
+		color: white;
+		font-size: 10px;
 	}
 	.match-detail-content{
 		margin-top: 80px;
@@ -157,15 +166,12 @@
 								<div class="blog-grid-view"  style="margin-top: 20px">
 									<div class="row">
 										@foreach($ultimasNoticias as $noticia)
-										<div class="col-lg-4 col-xs-12" style="padding-bottom: 10px;">
+										<div class="col-lg-6 col-xs-12" style="padding-bottom: 10px;">
 											<div class="large-post-img image-zoom" >
 												<img src="{{$noticia->imagen_portada}}" alt="">
-												<span class="blog-title-batch">{{$noticia->categoria->descripcion}}</span>
-												<span style="position: absolute; top: 0; padding: 5px; right: 0;
-    background: #063e71; color: white; font-size: 10px">{{date('d/m/Y', strtotime($noticia->fecha_publicacion))}}</span>
-												<div class="detail-btm" style="">
-												
-											</div>
+												<span class="blog-title-batch-top">{{$noticia->categoria->descripcion}}</span>
+												<span class="post-date">{{date('d/m/Y', strtotime($noticia->fecha_publicacion))}}</span>
+												<div class="detail-btm" style=""></div>
 											</div>
 											<div class="large-post-detail style-3">
 												<h2><a href="{{route('ver_articulo',[$noticia->id,str_slug($noticia->titulo)])}}" style="min-height: 35px; padding: 3px 5px;" class="bg-primary text-white">{{$noticia->titulo}}</a></h2>
@@ -173,7 +179,7 @@
 										</div>
 										@endforeach
 									</div>
-								</div>										
+								</div>
 							</div>
 						</div>
 					</div>
@@ -218,7 +224,7 @@
 							  	</table>
 							</div>
 						</div>
-					</div> 
+					</div>
 				</div>
 			</div>
 		</div>

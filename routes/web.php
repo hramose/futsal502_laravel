@@ -68,7 +68,7 @@ Route::group(['prefix' => 'campeonatos'], function () {
 	Route::get('posiciones/{campeonato}','CampeonatoController@mostrarPosiciones')->name('posiciones_campeonato');
 	Route::get('posiciones-grupos/{campeonato}','CampeonatoController@mostrarPosiciones')->name('posiciones_grupos_campeonato');
 });
-/*CAMPEONATOS EQUIPOS*/	
+/*CAMPEONATOS EQUIPOS*/
 Route::group(['prefix' => 'campeonatos-equipos'], function () {
 	Route::get('/{campeonato}','CampeonatoEquipoController@listado')->name('campeonatos_equipos');
 	Route::get('agregar/{campeonato}','CampeonatoEquipoController@mostrarAgregar')->name('agregar_equipos_campeonato');
@@ -78,7 +78,7 @@ Route::group(['prefix' => 'campeonatos-equipos'], function () {
 	Route::post('trasladar-equipos/{campeonato}/{campeonatoAntiguoId}', 'CampeonatoEquipoController@trasladarEquipos')->name('trasladar_equipos_campeonato');
 });
 
-/*PLANTILLAS*/	
+/*PLANTILLAS*/
 Route::group(['prefix' => 'plantillas'], function () {
 	Route::get('{campeonato}', ['as' => 'plantillas', 'uses' => 'PlantillaController@listado']);
 	Route::get('agregar/{campeonato}', ['as' => 'agregar_plantilla', 'uses' => 'PlantillaController@mostrarAgregar']);
@@ -229,3 +229,17 @@ Route::get('twitter', ['as' => 'twitter', 'uses' => 'TwitterController@twitter_r
 Route::get('account/twitter', 'TwitterController@twitter');
 
 Route::get('api/noticias','APIController@articulos')->name('api.articulos');
+
+
+
+
+
+//*EXTERNO*//
+Route::get('externo-posiciones/{liga}/{campeonato}','ExternoController@posiciones')->name('externo.posiciones');
+Route::get('externo-goleadores/{liga}/{campeonato}','ExternoController@goleadores')->name('externo.goleadores');
+Route::get('externo-calendario/{liga}/{campeonato}','ExternoController@calendario')->name('externo.calendario');
+Route::get('externo-plantilla/{liga}/{campeonato}/{equipo}','ExternoController@plantilla')->name('externo.plantilla');
+Route::get('externo-previa/{partido}','ExternoController@previa')->name('externo.previa');
+Route::get('externo-ficha/{partido}','ExternoController@ficha')->name('externo.ficha');
+Route::get('externo-en-vivo/{partido}','ExternoController@enVivo')->name('externo.en_vivo');
+Route::get('externo-lugares','ExternoController@domos')->name('externo.lugares');

@@ -11,22 +11,15 @@ use App\App\Repositories\PorteroRepo;
 use App\App\Repositories\EventoPartidoRepo;
 use App\App\Repositories\CampeonatoEquipoRepo;
 use App\App\Repositories\DomoRepo;
-use App\App\Repositories\ArticuloRepo;
-use App\App\Repositories\MediaArticuloRepo;
-use App\App\Repositories\ComentarioArticuloRepo;
 use App\App\Repositories\CategoriaRepo;
 use App\App\Repositories\EquipoRepo;
 use App\App\Repositories\PlantillaRepo;
 
 use App\App\ExtraEntities\FichaPartido;
 
-use App\App\Entities\Articulo;
-
-use App\App\Managers\ArticuloManager;
-
 use View,Redirect, Variable, Cache;
 
-class PublicController extends BaseController {
+class ExternoController extends BaseController {
 
 	protected $posicionesRepo;
 	protected $campeonatoRepo;
@@ -43,7 +36,11 @@ class PublicController extends BaseController {
 	protected $plantillaRepo;
 	protected $comentarioArticuloRepo;
 
-	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo, PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo, DomoRepo $domoRepo, ArticuloRepo $articuloRepo, MediaArticuloRepo $mediaArticuloRepo, CategoriaRepo $categoriaRepo, EquipoRepo $equipoRepo, PlantillaRepo $plantillaRepo, ComentarioArticuloRepo $comentarioArticuloRepo)
+	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo,
+															CampeonatoRepo $campeonatoRepo, PartidoRepo $partidoRepo,
+															CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo,
+															EventoPartidoRepo $eventoPartidoRepo, DomoRepo $domoRepo,
+															EquipoRepo $equipoRepo, PlantillaRepo $plantillaRepo)
 	{
 		$this->posicionesRepo = $posicionesRepo;
 		$this->campeonatoRepo = $campeonatoRepo;
@@ -53,65 +50,10 @@ class PublicController extends BaseController {
 		$this->configuracionRepo = $configuracionRepo;
 		$this->eventoPartidoRepo = $eventoPartidoRepo;
 		$this->domoRepo = $domoRepo;
-		$this->articuloRepo = $articuloRepo;
-		$this->mediaArticuloRepo = $mediaArticuloRepo;
-		$this->categoriaRepo = $categoriaRepo;
 		$this->equipoRepo = $equipoRepo;
 		$this->plantillaRepo = $plantillaRepo;
-		$this->comentarioArticuloRepo = $comentarioArticuloRepo;
 
 		View::composer('layouts.default', 'App\Http\Controllers\PublicMenuController');
-	}
-
-	public function mostrarInicio()
-	{
-		$ligaId = 1;
-		$campeonatoId = 0;
-		//$articulosRecientes = $this->articuloRepo->getBetweenFechasByEstado($fechaInicio, $fechaFin, ['S']);
-		$campeonatos = Cache::remember('posiciones.campeonatos'.$ligaId, 1, function() use ($ligaId) {
-       return $this->campeonatoRepo->getByLigaByEstado($ligaId,['A'])->pluck('descripcion','id')->toArray();
-    });
-
-		if($campeonatoId == 0)
-		{
-			$campeonato = Cache::remember('posiciones.campeonatoActual'.$ligaId, 1, function() use ($ligaId) {
-				return $this->campeonatoRepo->getActual($ligaId);
-			});
-		}
-		else
-		{
-			$campeonato = Cache::remember('posiciones.campeonatoFind'.$campeonatoId, 1, function() use ($campeonatoId) {
-				return $campeonato = $this->campeonatoRepo->find($campeonatoId);
-			});
-		}
-		$campeonatoId = $campeonato->id;
-
-		/*POSICIONES*/
-		$partidos = Cache::remember('partidosPosiciones'.$campeonato->id, 1, function() use ($campeonato) {
-       return $this->partidoRepo->getByCampeonatoByFaseByEstado($campeonato->id, ['R'], ['J','F']);
-    });
-		$equipos = Cache::remember('equiposWithPosiciones'.$campeonato->id, 1, function() use ($campeonato) {
-       return $this->campeonatoEquipoRepo->getEquiposWithPosiciones($campeonato->id);
-    });
-		$posiciones = Cache::remember('posiciones'.$campeonato->id, 1, function() use($campeonato, $partidos, $equipos) {
-       return $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
-    });
-		//* Partidos Siguientes *//
-		$proximosPartidos = Cache::remember('proximosPartidos'.$campeonatoId, 1, function() use($campeonatoId) {
-			return $this->partidoRepo->getFromFechaByCampeonatoByEstado(date('Y-m-d 00:00:00'), $campeonatoId, ['P'], 5);
-		});
-		$articulosRecientes = Cache::remember('articulosRecientes', 1, function() {
-			return $this->articuloRepo->getUltimas(4);
-		});
-		$ultimasNoticias = Cache::remember('ultimasNoticias', 1, function() use($articulosRecientes) {
-			return $this->articuloRepo->getUltimas(13)->diff($articulosRecientes);
-		});
-
-		$followers['twitter'] = Variable::getTwitterFollowers();
-		$followers['facebook'] = Variable::getFacebookLikes();
-		$followers['instagram'] = Variable::getInstagramFollowers();
-
-		return View::make('publico/inicio', compact('articulosRecientes','posiciones','proximosPartidos','ligaId','campeonatoId','ultimasNoticias','followers'));
 	}
 
 	public function posiciones($ligaId, $campeonatoId)
@@ -139,21 +81,18 @@ class PublicController extends BaseController {
 			{
 				$posiciones = $this->posicionesRepo->getTabla($campeonato->id, $partidos, $equipos);
 			}
-			$articulosPopulares = $this->articuloRepo->getPopulares(5);
 
 			$data['campeonatos'] = $campeonatos;
 			$data['campeonato'] = $campeonato;
 			$data['grupos'] = $grupos;
 			$data['posiciones'] = $posiciones;
-			$data['articulosPopulares'] = $articulosPopulares;
 			return $data;
 		});
 		$posiciones = $data['posiciones'];
 		$campeonato = $data['campeonato'];
 		$campeonatos = $data['campeonatos'];
 		$grupos = $data['grupos'];
-		$articulosPopulares = $data['articulosPopulares'];
-		return View::make('publico/posiciones', compact('posiciones','campeonato','ligaId','campeonatos','articulosPopulares','grupos'));
+		return View::make('externo/posiciones', compact('posiciones','campeonato','ligaId','campeonatos','grupos'));
 	}
 
 	public function goleadores($ligaId, $campeonatoId)
