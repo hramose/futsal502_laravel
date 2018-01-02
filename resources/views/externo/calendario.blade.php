@@ -23,7 +23,7 @@
 											<img src="{{$partido->equipo_local->logo}}" height="25px" width="25px">
 										</td>
 										<td class="text-center" style="color: white !important; background-color: #063e71" width="20%">
-											<a href="{{route('ficha',$partido->id)}}" class="text-white" style="text-decoration: none; font-weight: bold" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver Ficha">
+											<!--<a href="{{route('ficha',$partido->id)}}" class="text-white" style="text-decoration: none; font-weight: bold" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver Ficha">-->
 												@if($partido->estado != 'P')
 													{{$partido->goles_local}} - {{$partido->goles_visita}}
 												@else
@@ -32,7 +32,7 @@
 													{{date('H:i',strtotime($partido->fecha))}}
 													</span>
 												@endif
-											</a>
+											<!--</a>-->
 										</td>
 										<td class="text-left" width="40%">
 											<img src="{{$partido->equipo_visita->logo}}" height="25px" width="25px">
