@@ -64,12 +64,15 @@
 	$(function(){
 
 		$('select').on('change', function () {
-          var url = '{{route("inicio")}}/calendario/{{$ligaId}}/'+ $(this).val();
-          if (url) { // require a URL
-              window.location = url; // redirect
-          }
-          return false;
-      });
+			var $campeonato = $(this).val();
+			if($campeonato != ''){
+        var url = '{{route("inicio")}}/calendario/{{$ligaId}}/'+ $(this).val();
+        if (url) { // require a URL
+            window.location = url; // redirect
+        }
+        return false;
+			}
+    });
 
 	});
 
