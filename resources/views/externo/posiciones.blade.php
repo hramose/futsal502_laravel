@@ -117,11 +117,15 @@
 
 	$(function(){
 		$('select').on('change', function () {
-          var url = '{{route("inicio")}}/externo-posiciones/{{$ligaId}}/'+ $(this).val();
+
+				var $campeonato = $(this).val();
+				if($campeonato != ''){			
+          var url = '{{route("inicio")}}/externo-posiciones/{{$ligaId}}/'+ ;
           if (url) { // require a URL
               window.location = url; // redirect
           }
           return false;
+				}
       });
 
 	});
