@@ -1,7 +1,7 @@
 @extends('layouts.externo')
 @section('title') Tabla de Posiciones - {{$campeonato->descripcion}} @stop
 @section('content')
-	<div class="container">
+	<div class="container" style="padding: 5px !important; width: 100%;">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="macth-fixture">
@@ -18,7 +18,7 @@
 							    <thead>
 							    	<tr class="bg-primary">
 						        <th class="text-center" width="30px">POS</th>
-										<th class="text-center">EQUIPO</th>
+										<th class="text-center" style="min-width:180px;">EQUIPO</th>
 										<th class="text-center" width="30px">PTS</th>
 										<th class="text-center" width="30px">JJ</th>
 										<th class="text-center" width="30px">JG</th>
@@ -33,7 +33,7 @@
 									@foreach($posiciones as $index => $posicion)
 									<tr>
 										<td class="text-center">{{$index+1}}</td>
-										<td style="text-align: left; padding-left: 5px;">
+										<td style="text-align: left; padding-left: 5px; min-width:300px;">
 											<span style="width: 50px !important; float: left; text-align: center;">
 												<img src="{{$posicion->equipo->logo}}"
 														style="height: 25px; max-width: 50px">
@@ -63,7 +63,7 @@
 										    <thead>
 										    	<tr class="bg-primary">
 											        <th class="text-center" width="30px">POS</th>
-													<th class="text-center">EQUIPO</th>
+													<th class="text-center" style="min-width:180px;">EQUIPO</th>
 													<th class="text-center" width="30px">PTS</th>
 													<th class="text-center" width="30px">JJ</th>
 													<th class="text-center" width="30px">JG</th>
@@ -78,7 +78,7 @@
 												@foreach($grupo['posiciones'] as $index => $posicion)
 												<tr>
 													<td class="text-center">{{$index+1}}</td>
-													<td style="text-align: left">
+													<td style="text-align: left; min-width:300px;">
 														<span style="width: 50px !important; float: left; text-align: center;">
 															<img src="{{$posicion->equipo->logo}}"
 																	style="height: 25px; max-width: 50px">
@@ -119,8 +119,8 @@
 		$('select').on('change', function () {
 
 				var $campeonato = $(this).val();
-				if($campeonato != ''){			
-          var url = '{{route("inicio")}}/externo-posiciones/{{$ligaId}}/'+ ;
+				if($campeonato != ''){
+          var url = '{{route("inicio")}}/externo-posiciones/{{$ligaId}}/'+ $campeonato ;
           if (url) { // require a URL
               window.location = url; // redirect
           }
