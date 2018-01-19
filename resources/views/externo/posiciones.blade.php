@@ -1,5 +1,19 @@
 @extends('layouts.externo')
 @section('title') Tabla de Posiciones - {{$campeonato->descripcion}} @stop
+@section('css')
+<style>
+	@media screen and (max-width:767px){
+		.tdteam {
+			text-align: left;
+			padding-left: 5px;
+			min-width: 300px !important;
+		}
+		.table-responsive {
+	    overflow-x: auto;
+		}
+	}
+</style>
+@endsection
 @section('content')
 	<div class="container" style="padding: 5px !important; width: 100%;">
 		<div class="row">
@@ -18,7 +32,7 @@
 							    <thead>
 							    	<tr class="bg-primary">
 						        <th class="text-center" width="30px">POS</th>
-										<th class="text-center" style="min-width:180px;">EQUIPO</th>
+										<th class="text-center tdteam">EQUIPO</th>
 										<th class="text-center" width="30px">PTS</th>
 										<th class="text-center" width="30px">JJ</th>
 										<th class="text-center" width="30px">JG</th>
@@ -33,7 +47,7 @@
 									@foreach($posiciones as $index => $posicion)
 									<tr>
 										<td class="text-center">{{$index+1}}</td>
-										<td style="text-align: left; padding-left: 5px; min-width:300px;">
+										<td class="tdteam" style="">
 											<span style="width: 50px !important; float: left; text-align: center;">
 												<img src="{{$posicion->equipo->logo}}"
 														style="height: 25px; max-width: 50px">
