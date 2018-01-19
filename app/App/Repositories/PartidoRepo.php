@@ -46,7 +46,24 @@ class PartidoRepo extends BaseRepo{
 		$partidos = $partidos->sortBy(function($partido){
 			return $partido->jornada->numero . strtotime($partido->fecha);
 		});
-		
+
+		return $partidos;
+
+	}
+
+	public function getByCampeonatoForCalendario($campeonatoId)
+	{
+		$partidos = Partido::where('campeonato_id',$campeonatoId)
+						->with('jornada')
+						->with('equipo_local')
+						->with('equipo_visita')
+						->with('domo')
+						->orderBy('fecha')
+						->get();
+		$partidos = $partidos->sortBy(function($partido){
+			return $partido->jornada->numero*-1 . strtotime($partido->fecha);
+		});
+
 		return $partidos;
 
 	}
@@ -114,7 +131,7 @@ class PartidoRepo extends BaseRepo{
 							$q->where('liga_id',$ligaId);
 						})
 						->whereIn('estado_id', $estados)
-						->WhereRaw('( ( equipo_local_id = '.$equipo1Id.' AND equipo_visita_id = '.$equipo2Id.' ) OR ( 
+						->WhereRaw('( ( equipo_local_id = '.$equipo1Id.' AND equipo_visita_id = '.$equipo2Id.' ) OR (
 										equipo_local_id = '.$equipo2Id.' AND equipo_visita_id = '.$equipo1Id.') )')
 						->orderBy('fecha','DESC')
 						->get();
@@ -122,7 +139,7 @@ class PartidoRepo extends BaseRepo{
 
 	private function orderByJornada($partidoA, $partidoB)
 	{
-		if(  $partidoA->jornada->numero ==  $partidoB->jornada->numero ){ return 0 ; } 
+		if(  $partidoA->jornada->numero ==  $partidoB->jornada->numero ){ return 0 ; }
   		return ($partidoA->jornada->numero < $partidoB->jornada->numero) ? -1 : 1;
 	}
 

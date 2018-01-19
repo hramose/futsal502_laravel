@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="author" content="Alejandro Muralles Peña"/>
 <link rel="stylesheet" href="{{ asset('assets/publico/css/bootstrap/bootstrap.min.css') }}">

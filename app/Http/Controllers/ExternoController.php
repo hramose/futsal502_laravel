@@ -148,7 +148,7 @@ class ExternoController extends BaseController {
 			$campeonato = $this->campeonatoRepo->find($campeonatoId);
 		}
 
-		$partidos = $this->partidoRepo->getByCampeonato($campeonato->id);
+		$partidos = $this->partidoRepo->getByCampeonatoForCalendario($campeonato->id);
 
 		$jornadas = array();
 

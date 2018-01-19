@@ -1,4 +1,7 @@
 @extends('layouts.externo')
+@section('css')
+<link rel="stylesheet" href="{{ asset('assets/publico/css/essentials.css') }}">
+@endsection
 @section('content')
 	<div class="container">
 		<div class="row">
@@ -11,10 +14,13 @@
 						</div>
 					</div>
 					<div class="row">
+						<div class="toggle toggle-accordion">
+						@php $i=0; @endphp
 						@foreach($jornadas as $jornada)
-						<div class="col-lg-6 col-md-6">
-							<h4>{{$jornada['jornada']->descripcion}}</h4>
-							<div class="table-responsive" style="border: none;">
+							<div class="toggle @if($i==0) active @endif"> @php $i++; @endphp
+								<label>{{$jornada['jornada']->descripcion}}</label>
+								<div class="toggle-content">
+									<div class="table-responsive" style="border: none;">
 								<table class="table table-responsive unbordered">
 									@foreach($jornada['partidos'] as $partido)
 									<tr>
@@ -45,8 +51,10 @@
 									@endforeach
 								</table>
 							</div>
-						</div>
+								</div>
+							</div>
 						@endforeach
+						</div>
 					</div>
 				</div>
 			</div>
@@ -57,6 +65,7 @@
 @stop
 
 @section('js')
+<script type="text/javascript" src="{{asset('assets/publico/js/scripts.js')}}"></script>
 <script>
 
 	var segundos = 0;
