@@ -2,7 +2,7 @@
 @section('title') Tabla de Posiciones - {{$campeonato->descripcion}} @stop
 @section('css')
 <style>
-	@media screen and (max-width:767px){
+	@media screen and (max-width:767px) and (device-width : 414px) {
 		.tdteam {
 			text-align: left;
 			padding-left: 5px;
