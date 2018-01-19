@@ -1887,7 +1887,7 @@ div.toggle > label:before {
 }
 
 div.toggle > label:hover {
-	background: rgba(0,0,0,0.15);
+	/*background: rgba(0,0,0,0.15);*/
 }
 
 div.toggle > label + p {
