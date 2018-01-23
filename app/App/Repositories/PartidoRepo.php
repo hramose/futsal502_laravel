@@ -61,7 +61,7 @@ class PartidoRepo extends BaseRepo{
 						->orderBy('fecha')
 						->get();
 		$partidos = $partidos->sortBy(function($partido){
-			return $partido->jornada->numero*-1 . strtotime($partido->fecha);
+			return $partido->jornada->numero*-1;
 		});
 
 		return $partidos;
