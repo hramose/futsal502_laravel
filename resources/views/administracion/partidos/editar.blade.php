@@ -7,8 +7,8 @@
 <div class="box box-primary">
 	{!! Form::model($partido, ['route' => array('editar_partido', $partido->id), 'method' => 'POST', 'id' => 'form', 'class'=>'validate-form']) !!}
 		<div class="box-body">
-			{!! Field::text('goles_local', null, ['data-required'=> 'true']) !!}
-			{!! Field::text('goles_visita', null, ['data-required'=> 'true']) !!}
+			{!! Field::text('goles_local', null, ['data-required'=> 'false']) !!}
+			{!! Field::text('goles_visita', null, ['data-required'=> 'false']) !!}
 			{!! Field::text('descripcion_penales', null, ['data-required'=> 'false']) !!}
 			{!! Field::select('estado', $estados, null, ['data-required'=> 'false']) !!}
 		</div>
