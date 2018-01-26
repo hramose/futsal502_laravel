@@ -14,6 +14,7 @@ use App\App\Repositories\DomoRepo;
 use App\App\Repositories\CategoriaRepo;
 use App\App\Repositories\EquipoRepo;
 use App\App\Repositories\PlantillaRepo;
+use App\App\Repositories\VwPartidoRepo;
 
 use App\App\ExtraEntities\FichaPartido;
 
@@ -35,12 +36,13 @@ class ExternoController extends BaseController {
 	protected $equipoRepo;
 	protected $plantillaRepo;
 	protected $comentarioArticuloRepo;
+	protected $vwPartidoRepo;
 
 	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo,
 															CampeonatoRepo $campeonatoRepo, PartidoRepo $partidoRepo,
 															CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo,
 															EventoPartidoRepo $eventoPartidoRepo, DomoRepo $domoRepo,
-															EquipoRepo $equipoRepo, PlantillaRepo $plantillaRepo)
+															EquipoRepo $equipoRepo, PlantillaRepo $plantillaRepo, VwPartidoRepo $vwPartidoRepo)
 	{
 		$this->posicionesRepo = $posicionesRepo;
 		$this->campeonatoRepo = $campeonatoRepo;
@@ -52,6 +54,7 @@ class ExternoController extends BaseController {
 		$this->domoRepo = $domoRepo;
 		$this->equipoRepo = $equipoRepo;
 		$this->plantillaRepo = $plantillaRepo;
+		$this->vwPartidoRepo = $vwPartidoRepo;
 
 		View::composer('layouts.default', 'App\Http\Controllers\PublicMenuController');
 	}
@@ -148,12 +151,13 @@ class ExternoController extends BaseController {
 			$campeonato = $this->campeonatoRepo->find($campeonatoId);
 		}
 
-		$partidos = $this->partidoRepo->getByCampeonatoForCalendario($campeonato->id);
+		$partidos = $this->vwPartidoRepo->getByCampeonato($campeonato->id, 'DESC');
 
 		$jornadas = array();
 
 		foreach($partidos as $partido){
-			$jornadas[$partido->jornada_id]['jornada'] = $partido->jornada;
+			$jornadas[$partido->jornada_id]['jornada']['id'] = $partido->numero_jornada;
+			$jornadas[$partido->jornada_id]['jornada']['descripcion'] = $partido->jornada;
 			$jornadas[$partido->jornada_id]['partidos'][] = $partido;
 		}
 		return View::make('externo/calendario', compact('jornadas','campeonato','campeonatos','ligaId'));

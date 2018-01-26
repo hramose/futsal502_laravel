@@ -2,102 +2,71 @@
 
 namespace App\App\Repositories;
 
-use App\App\Entities\Partido;
+use App\App\Entities\VwPartido;
 use App\App\Entities\Persona;
 
-class PartidoRepo extends BaseRepo{
+class VwPartidoRepo extends BaseRepo{
 
 	public function getModel()
 	{
-		return new Partido;
+		return new VwPartido;
 	}
 
 	public function getByCampeonatoByFase($campeonatoId, $fases)
 	{
-		return Partido::where('campeonato_id',$campeonatoId)
-						->whereHas('jornada', function($q) use ($fases) {
-							$q->whereIn('fase',$fases);
-						})
+		return VwPartido::where('campeonato_id',$campeonatoId)
+					  ->whereIn('fase',$fases)
 						->orderBy('fecha')
 						->get();
 	}
 
 	public function getByCampeonatoByFaseByEstado($campeonatoId, $fases, $estados)
 	{
-		return Partido::where('campeonato_id',$campeonatoId)
-						->whereHas('jornada',function($q) use ($fases)
-							{
-								$q->whereIn('fase',$fases);
-							})
+		return VwPartido::where('campeonato_id',$campeonatoId)
+						->whereIn('fase',$fases)
 						->whereIn('estado',$estados)
 						->orderBy('fecha')
 						->get();
 	}
 
-	public function getByCampeonato($campeonatoId)
+	public function getByCampeonato($campeonatoId, $orderJornada='ASC')
 	{
-		$partidos = Partido::where('campeonato_id',$campeonatoId)
-						->with('jornada')
-						->with('equipo_local')
-						->with('equipo_visita')
-						->with('domo')
+		return VwPartido::where('campeonato_id',$campeonatoId)
+            ->orderBy('numero_jornada',$orderJornada)
 						->orderBy('fecha')
 						->get();
-		$partidos = $partidos->sortBy(function($partido){
-			return $partido->jornada->numero . strtotime($partido->fecha);
-		});
-
-		return $partidos;
-
 	}
 
-	public function getByCampeonatoForCalendario($campeonatoId)
+	/*public function getByCampeonatoByEquipo($campeonatoId, $equipoId)
 	{
-		$partidos = Partido::where('campeonato_id',$campeonatoId)
-						->with('jornada')
-						->with('equipo_local')
-						->with('equipo_visita')
-						->with('domo')
-						->orderBy('fecha')
-						->get();
-		$partidos = $partidos->sortBy(function($partido){
-			return $partido->jornada->numero*-1 + strtotime($partido->fecha);
-		});
-
-		return $partidos;
-
-	}
-
-	public function getByCampeonatoByEquipo($campeonatoId, $equipoId)
-	{
-		return Partido::where('campeonato_id',$campeonatoId)
+		return VwPartido::where('campeonato_id',$campeonatoId)
 						->whereRaw('(equipo_local_id = '.$equipoId .' OR equipo_visita_id = '.$equipoId.')')
 						->orderBy('fecha')
 						->get();
 	}
 
-	public function getFromFechaByCampeonatoByEstado($fecha, $campeonatoId,  $estados, $numeroPartidos)
+	public function getFromFechaByCampeonatoByEstado($fecha, $campeonatoId,  $estados, $numeroVwPartidos)
 	{
-		return Partido::where('campeonato_id',$campeonatoId)
+		return VwPartido::where('campeonato_id',$campeonatoId)
 						->where('fecha','>=',$fecha)
 						->whereIn('estado',$estados)
 						->with('equipo_local')
 						->with('equipo_visita')
 						->orderBy('fecha','ASC')
-						->limit($numeroPartidos)
+						->limit($numeroVwPartidos)
 						->get();
 	}
 
 	public function getByDia($fecha)
 	{
-		return Partido::whereBetween('fecha',[date('Y-m-d 00:00:00', strtotime($fecha)), date('Y-m-d 23:59:59', strtotime($fecha))])
+		return VwPartido::whereBetween('fecha',[date('Y-m-d 00:00:00', strtotime($fecha)), date('Y-m-d 23:59:59', strtotime($fecha))])
 						->orderBy('fecha')
 						->get();
 	}
 
 	public function getByJornada($campeonatoId, $jornadaId)
 	{
-		return Partido::where('campeonato_id',$campeonatoId)
+		return VwPartido::where('campeonato_id',$campeonatoId)
 						->where('jornada_id',$jornadaId)
 						->with('equipo_local')
 						->with('equipo_visita')
@@ -108,7 +77,7 @@ class PartidoRepo extends BaseRepo{
 
 	public function getOtrosByJornada($campeonatoId, $jornadaId,$partidoId)
 	{
-		return Partido::where('campeonato_id',$campeonatoId)
+		return VwPartido::where('campeonato_id',$campeonatoId)
 						->where('jornada_id',$jornadaId)
 						->where('id','!=',$partidoId)
 						->orderBy('fecha')
@@ -117,7 +86,7 @@ class PartidoRepo extends BaseRepo{
 
 	public function getByCampeonatoByFechas($campeonatoId, $fechaInicio, $fechaFin)
 	{
-		$partidos = Partido::where('campeonato_id',$campeonatoId)
+		$partidos = VwPartido::where('campeonato_id',$campeonatoId)
 						->whereBetween('fecha',[$fechaInicio, $fechaFin])->orderBy('fecha')->get();
 		$partidos = $partidos->sortBy(function($partido){
 			return $partido->jornada->numero . strtotime($partido->fecha);
@@ -127,7 +96,7 @@ class PartidoRepo extends BaseRepo{
 
 	public function getBetweenEquiposByEstado($ligaId, $equipo1Id, $equipo2Id, $estados)
 	{
-		return Partido::whereHas('campeonato',function($q) use($ligaId){
+		return VwPartido::whereHas('campeonato',function($q) use($ligaId){
 							$q->where('liga_id',$ligaId);
 						})
 						->whereIn('estado_id', $estados)
@@ -141,6 +110,6 @@ class PartidoRepo extends BaseRepo{
 	{
 		if(  $partidoA->jornada->numero ==  $partidoB->jornada->numero ){ return 0 ; }
   		return ($partidoA->jornada->numero < $partidoB->jornada->numero) ? -1 : 1;
-	}
+	}*/
 
 }

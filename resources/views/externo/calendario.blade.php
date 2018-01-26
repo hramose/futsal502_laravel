@@ -18,15 +18,15 @@
 						@php $i=0; @endphp
 						@foreach($jornadas as $jornada)
 							<div class="toggle @if($i==0) active @endif"> @php $i++; @endphp
-								<label>{{$jornada['jornada']->descripcion}}</label>
+								<label>{{$jornada['jornada']['descripcion']}}</label>
 								<div class="toggle-content">
 									<div class="table-responsive" style="border: none;">
 								<table class="table table-responsive unbordered">
 									@foreach($jornada['partidos'] as $partido)
 									<tr>
 										<td class="text-right" width="40%">
-											{{$partido->equipo_local->descripcion_corta}}
-											<img src="{{$partido->equipo_local->logo}}" height="25px" width="25px">
+											{{$partido['descripcion_corta_equipo_local']}}
+											<img src="{{$partido['logo_equipo_local']}}" height="25px" width="25px">
 										</td>
 										<td class="text-center" style="color: white !important; background-color: #063e71" width="20%">
 											<!--<a href="{{route('ficha',$partido->id)}}" class="text-white" style="text-decoration: none; font-weight: bold" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver Ficha">-->
@@ -41,12 +41,12 @@
 											<!--</a>-->
 										</td>
 										<td class="text-left" width="40%">
-											<img src="{{$partido->equipo_visita->logo}}" height="25px" width="25px">
-											{{$partido->equipo_visita->descripcion_corta}}
+											<img src="{{$partido->logo_equipo_visita}}" height="25px" width="25px">
+											{{$partido->descripcion_corta_equipo_visita}}
 										</td>
 									</tr>
 									<tr >
-										<td colspan="3" class="text-center bg-primary text-white" style="font-size: 12px !important; padding: 3px">{{$partido->domo->descripcion}}</td>
+										<td colspan="3" class="text-center bg-primary text-white" style="font-size: 12px !important; padding: 3px">{{$partido->domo}}</td>
 									</tr>
 									@endforeach
 								</table>
