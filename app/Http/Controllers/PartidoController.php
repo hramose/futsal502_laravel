@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\App\Repositories\PartidoRepo;
 use App\App\Managers\PartidoManager;
 use App\App\Entities\Partido;
-use Controller, Redirect, Input, View, Session;
+use Controller, Redirect, Input, View, Session, Variable;
 
 use App\App\Repositories\LigaRepo;
 use App\App\Repositories\PersonaRepo;
@@ -80,7 +80,8 @@ class PartidoController extends BaseController {
 		$domos = $this->domoRepo->lists('descripcion','id');
 		$jornadas = $this->jornadaRepo->lists('descripcion','id');
 		$equipos = $campeonato->equipos->pluck('descripcion','id')->toArray();
-		return view('administracion/partidos/editar', compact('partido','campeonato','arbitros','domos','jornadas','campeonato','equipos'));
+		$estados = Variable::getEstadosPartidos();
+		return view('administracion/partidos/editar', compact('partido','campeonato','arbitros','domos','jornadas','campeonato','equipos','estados'));
 	}
 
 	public function editar($id)
@@ -88,11 +89,15 @@ class PartidoController extends BaseController {
 		$partido = $this->partidoRepo->find($id);
 		$data = Input::all();
 		$data['campeonato_id'] = $partido->campeonato_id;
-		$data['estado_id'] = $partido->estado_id;
+		$data['equipo_local_id'] = $partido->equipo_local_id;
+		$data['equipo_visita_id'] = $partido->equipo_visita_id;
+		$data['fecha'] = $partido->fecha;
+		$data['jornada_id'] = $partido->jornada_id;
+		$data['arbitro_central_id'] = $partido->arbitro_central_id;
 		$manager = new PartidoManager($partido, $data);
 		$manager->save();
 		Session::flash('success', 'Se editó el partido con éxito.');
-		return redirect(route('partidos_campeonato',$partido->campeonato_id));
+		return redirect()->route('partidos',$partido->campeonato_id);
 	}
 
 	public function mostrarAgregarJornada($campeonatoId, $numeroPartidos)

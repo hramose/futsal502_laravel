@@ -62,6 +62,14 @@ class StaticVariables {
 		'F' => 'Fase Final'
 	];
 
+	protected $estadosPartidos = [
+		'P' => 'Programado',
+		'J' => 'En Juego',
+		'F' => 'Finalizado',
+		'R' => 'Reprogramado',
+		'S' => 'Suspendido'
+	];
+
 	public function getEstadosGenerales(){ return $this->estadosGenerales; }
 	public function getEstadoGeneral($key){ return $this->estadosGenerales[$key]; }
 
@@ -79,6 +87,9 @@ class StaticVariables {
 
 	public function getFases(){ return $this->fases; }
 	public function getFase($key){ return $this->fases[$key]; }
+
+	public function getEstadosPartidos(){ return $this->estadosPartidos; }
+	public function getEstadoPartido($key){ return $this->estadosPartidos[$key]; }
 
 	public function getMesCorto($mes)
 	{

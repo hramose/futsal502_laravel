@@ -30,14 +30,22 @@
 										</td>
 										<td class="text-center" style="color: white !important; background-color: #063e71" width="20%">
 											<!--<a href="{{route('ficha',$partido->id)}}" class="text-white" style="text-decoration: none; font-weight: bold" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver Ficha">-->
-												@if($partido->estado != 'P')
+												@if($partido->estado == 'J' || $partido->estado == 'F')
 													<span style="font-size: 20px; font-weight: bold">
 														{{$partido->goles_local}} - {{$partido->goles_visita}}
 													</span>
-												@else
+												@elseif($partido->estado == 'P')
 													<span style="font-size: 12px">
 													{{date('d-m',strtotime($partido->fecha))}} /
 													{{date('H:i',strtotime($partido->fecha))}}
+													</span>
+												@elseif($partido->estado == 'R')
+													<span style="font-size: 10px">
+													Reprogramado
+													</span>
+												@elseif($partido->estado == 'S')
+													<span style="font-size: 10px">
+													Suspendido
 													</span>
 												@endif
 											<!--</a>-->
