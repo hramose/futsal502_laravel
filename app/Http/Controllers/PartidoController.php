@@ -91,7 +91,7 @@ class PartidoController extends BaseController {
 		$data['campeonato_id'] = $partido->campeonato_id;
 		$data['equipo_local_id'] = $partido->equipo_local_id;
 		$data['equipo_visita_id'] = $partido->equipo_visita_id;
-		$data['fecha'] = $partido->fecha;
+		$data['fecha'] = $data['fecha'].' '.$data['hora'];
 		$data['jornada_id'] = $partido->jornada_id;
 		$data['arbitro_central_id'] = $partido->arbitro_central_id;
 		$manager = new PartidoManager($partido, $data);
