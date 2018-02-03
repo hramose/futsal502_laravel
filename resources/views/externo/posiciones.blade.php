@@ -12,6 +12,21 @@
 	    overflow-x: auto;
 		}
 	}
+	@media only screen
+    and (device-width : 414px)
+    and (device-height : 736px)
+    and (-webkit-device-pixel-ratio : 3) {
+
+			.tdteam {
+				text-align: left;
+				padding-left: 5px;
+				min-width: 300px !important;
+			}
+			.table-responsive {
+				overflow-x: auto;
+			}
+
+		}
 </style>
 @endsection
 @section('content')
