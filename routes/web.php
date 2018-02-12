@@ -200,7 +200,7 @@ Route::group(['prefix' => 'usuarios'], function () {
 
 });
 
-Route::get('/','PublicController@mostrarInicio')->name('inicio');
+Route::get('/','AuthController@mostrarLogin')->name('inicio');
 Route::get('posiciones/{liga}/{campeonato}','PublicController@posiciones')->name('posiciones');
 Route::get('goleadores/{liga}/{campeonato}','PublicController@goleadores')->name('goleadores');
 Route::get('calendario/{liga}/{campeonato}','PublicController@calendario')->name('calendario');
@@ -243,3 +243,9 @@ Route::get('externo-previa/{partido}','ExternoController@previa')->name('externo
 Route::get('externo-ficha/{partido}','ExternoController@ficha')->name('externo.ficha');
 Route::get('externo-en-vivo/{partido}','ExternoController@enVivo')->name('externo.en_vivo');
 Route::get('externo-lugares','ExternoController@domos')->name('externo.lugares');
+
+
+/* API */
+Route::group(['prefix' => 'api'], function () {
+	Route::get('ligas','APIController@ligas')->name('api.ligas');
+});

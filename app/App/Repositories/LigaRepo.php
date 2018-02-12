@@ -11,4 +11,9 @@ class LigaRepo extends BaseRepo{
 		return new Liga;
 	}
 
+	public function getForApp()
+	{
+		return Liga::where('mostrar_app',1)->orderBy('orden')->select('id','descripcion')->get();
+	}
+
 }

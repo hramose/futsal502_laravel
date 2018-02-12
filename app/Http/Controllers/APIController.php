@@ -39,10 +39,10 @@ class APIController extends BaseController {
 	protected $equipoRepo;
 	protected $articuloRepo;
 
-	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo, 
+	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo,
 		PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo,
-		AlineacionRepo $alineacionRepo, LigaRepo $ligaRepo, DomoRepo $domoRepo, EquipoRepo $equipoRepo, 
-		PlantillaRepo $plantillaRepo, 
+		AlineacionRepo $alineacionRepo, LigaRepo $ligaRepo, DomoRepo $domoRepo, EquipoRepo $equipoRepo,
+		PlantillaRepo $plantillaRepo,
 		ArticuloRepo $articuloRepo)
 	{
 		$this->posicionesRepo = $posicionesRepo;
@@ -67,12 +67,15 @@ class APIController extends BaseController {
 		    http_response_code(200);
 		    exit(0);
 		}
+		
 	}
 
-	public function articulos()
+	public function ligas()
 	{
-		return json_encode($articulos = $this->articuloRepo->all('fecha_publicacion'));
+		$ligas = $this->ligaRepo->getForApp();
+		return json_encode($ligas);
 	}
+
 
 	public function posiciones($ligaId, $campeonatoId)
 	{
@@ -105,7 +108,7 @@ class APIController extends BaseController {
 			$campeonato = $this->campeonatoRepo->find($campeonatoId);
 		}
 		$goleadores = $this->goleadorRepo->getGoleadores($campeonato);
-		
+
 		$data['goleadores'] = $goleadores;
 		$data['campeonato'] = $campeonato;
 		return json_encode($data);
@@ -141,7 +144,7 @@ class APIController extends BaseController {
 		}
 
 		$eventos = $this->eventoPartidoRepo->getByCampeonatoByEquipo($campeonato->id, $equipoId, array(9,10,11));
-		
+
 		foreach($eventos as $evento)
 		{
 			if($evento->evento_id == 9)
@@ -159,9 +162,9 @@ class APIController extends BaseController {
 					$plantilla[$evento->jugador_id]['amarillas'] = $plantilla[$evento->jugador_id]['amarillas'] - 1;
 				}
 				else{
-					$plantilla[$evento->jugador_id]['rojas'] = $plantilla[$evento->jugador_id]['rojas'] + 1;	
+					$plantilla[$evento->jugador_id]['rojas'] = $plantilla[$evento->jugador_id]['rojas'] + 1;
 				}
-				
+
 			}
 		}
 
@@ -185,14 +188,14 @@ class APIController extends BaseController {
 		{
 			$campeonato = $this->campeonatoRepo->find($campeonatoId);
 		}
-		
+
 		$partidos = $this->partidoRepo->getByCampeonato($campeonato->id);
 
 		$jornadas = array();
 		$jornadaActual = 1;
 		foreach($partidos as $partido){
 			$jornadas[$partido->jornada_id]['jornada'] = $partido->jornada->descripcion;
-			
+
 			$p = new \App\App\Entities\Partido;
 			$p->id = $partido->id;
 			$p->equipoLocal = $partido->equipoLocal->descripcion;
@@ -207,7 +210,7 @@ class APIController extends BaseController {
 			if($partido->estado_id != 1)
 				$jornadaActual = $partido->jornada->numero;
 
-			$jornadas[$partido->jornada_id]['partidos'][] = $p;	
+			$jornadas[$partido->jornada_id]['partidos'][] = $p;
 		}
 
 		$data['jornadas'] = $jornadas;
@@ -240,7 +243,7 @@ class APIController extends BaseController {
 		if($partido->estado_id != 1){
 
 			$eventos = $this->eventoPartidoRepo->getByPartido($partidoId);
-		
+
 			$i = 0;
 			foreach($eventos as $evento)
 			{
@@ -265,7 +268,7 @@ class APIController extends BaseController {
 		$p->estado = $partido->descripcion_estado;
 
 		$data['partido'] = $p;
-		
+
 		return json_encode($data);
 	}
 
@@ -294,19 +297,13 @@ class APIController extends BaseController {
 		$data['dtLocal'] = [];
 		if(!is_null($dtVisita))  $data['dtVisita']['nombre'] = $dtVisita->nombre_completo;
 		if(!is_null($dtLocal))  $data['dtLocal']['nombre'] = $dtLocal->nombre_completo;
-		
+
 		return json_encode($data);
 	}
 
 	public function domos()
 	{
 		$data['domos'] = $this->domoRepo->getByEstado(['A'],'descripcion');
-		return json_encode($data);
-	}
-
-	public function ligas()
-	{
-		$data['ligas'] = $this->ligaRepo->getByEstado(['A'],'descripcion');
 		return json_encode($data);
 	}
 
@@ -329,7 +326,7 @@ class APIController extends BaseController {
 			$e['nombre'] = $team->equipo->descripcion;
 			$e['imagen'] = $team->equipo->imagen;
 			$equipos[] = $e;
-		} 
+		}
 		usort($equipos,function($a,$b){
 			return strcmp($a['nombre'],$b['nombre']);
 		});
