@@ -248,4 +248,6 @@ Route::get('externo-lugares','ExternoController@domos')->name('externo.lugares')
 /* API */
 Route::group(['prefix' => 'api'], function () {
 	Route::get('ligas','APIController@ligas')->name('api.ligas');
+	Route::get('posiciones/{liga}/{campeonato}','APIController@posiciones')->name('api.posiciones');
+	Route::get('calendario/{liga}/{campeonato}','APIController@calendario')->name('api.calendario');
 });

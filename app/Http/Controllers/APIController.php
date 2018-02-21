@@ -16,12 +16,13 @@ use App\App\Repositories\LigaRepo;
 use App\App\Repositories\DomoRepo;
 use App\App\Repositories\EquipoRepo;
 use App\App\Repositories\ArticuloRepo;
+use App\App\Repositories\VwPartidoRepo;
 
 use App\App\ExtraEntities\FichaPartido;
 
 use App\App\Entities\Domo;
 
-use View, Input;
+use View, Input, Variable;
 
 class APIController extends BaseController {
 
@@ -38,12 +39,12 @@ class APIController extends BaseController {
 	protected $domoRepo;
 	protected $equipoRepo;
 	protected $articuloRepo;
+	protected $vwPartidoRepo;
 
 	public function __construct(PosicionesRepo $posicionesRepo, ConfiguracionRepo $configuracionRepo, CampeonatoRepo $campeonatoRepo,
 		PartidoRepo $partidoRepo, CampeonatoEquipoRepo $campeonatoEquipoRepo, GoleadorRepo $goleadorRepo, EventoPartidoRepo $eventoPartidoRepo,
 		AlineacionRepo $alineacionRepo, LigaRepo $ligaRepo, DomoRepo $domoRepo, EquipoRepo $equipoRepo,
-		PlantillaRepo $plantillaRepo,
-		ArticuloRepo $articuloRepo)
+		PlantillaRepo $plantillaRepo, ArticuloRepo $articuloRepo, VwPartidoRepo $vwPartidoRepo)
 	{
 		$this->posicionesRepo = $posicionesRepo;
 		$this->campeonatoRepo = $campeonatoRepo;
@@ -58,6 +59,7 @@ class APIController extends BaseController {
 		$this->domoRepo = $domoRepo;
 		$this->equipoRepo = $equipoRepo;
 		$this->articuloRepo = $articuloRepo;
+		$this->vwPartidoRepo = $vwPartidoRepo;
 
 		header('Access-Control-Allow-Origin: *');
 		header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
@@ -67,7 +69,7 @@ class APIController extends BaseController {
 		    http_response_code(200);
 		    exit(0);
 		}
-		
+
 	}
 
 	public function ligas()
@@ -189,38 +191,60 @@ class APIController extends BaseController {
 			$campeonato = $this->campeonatoRepo->find($campeonatoId);
 		}
 
-		$partidos = $this->partidoRepo->getByCampeonato($campeonato->id);
-
+		$partidos = $this->vwPartidoRepo->getByCampeonato($campeonato->id, 'DESC');
+		//dd($partidos);
 		$jornadas = array();
-		$jornadaActual = 1;
+
 		foreach($partidos as $partido){
-			$jornadas[$partido->jornada_id]['jornada'] = $partido->jornada->descripcion;
+			$jornadas[$partido->jornada_id]['jornada'] = $partido->jornada;
+			$jornadas[$partido->jornada_id]['jornada_id'] = $partido->jornada_id;
+			$jornadas[$partido->jornada_id]['fechas'][date('Ymd',strtotime($partido->fecha))]['fecha'] = date('d/m',strtotime($partido->fecha));
+			$jornadas[$partido->jornada_id]['fechas'][date('Ymd',strtotime($partido->fecha))]['dia'] = Variable::getDiaLetras(date('w', strtotime($partido->fecha)));
 
 			$p = new \App\App\Entities\Partido;
 			$p->id = $partido->id;
-			$p->equipoLocal = $partido->equipoLocal->descripcion;
-			$p->equipoVisita = $partido->equipoVisita->descripcion;
-			$p->golesLocal = $partido->goles_local;
-			$p->golesVisita = $partido->goles_visita;
+			$p->equipo_local = [
+				'descripcion'=> $partido->descripcion_equipo_local,
+				'descripcion_corta'=> $partido->descripcion_corta_equipo_local,
+				'descripcion_corta'=> $partido->descripcion_corta_equipo_local,
+				'siglas'=> $partido->siglas_equipo_local,
+				'logo'=> $partido->logo_equipo_local,
+			];
+			$p->equipo_visita = [
+				'descripcion'=> $partido->descripcion_equipo_visita,
+				'descripcion_corta'=> $partido->descripcion_corta_equipo_visita,
+				'descripcion_corta'=> $partido->descripcion_corta_equipo_visita,
+				'siglas'=> $partido->siglas_equipo_visita,
+				'logo'=> $partido->logo_equipo_visita,
+			];
+			$p->goles_local = $partido->goles_local;
+			$p->goles_visita = $partido->goles_visita;
+			$p->dia_semana = Variable::getDiaLetras(date('w', strtotime($partido->fecha)));
 			$p->fecha = date('d/m',strtotime($partido->fecha));
-			$p->hora = date('H:ia',strtotime($partido->fecha));
-			$p->domo = $partido->domo->descripcion;
-			$p->estado = $partido->descripcion_estado;
+			$p->hora = date('H:i',strtotime($partido->fecha));
+			$p->domo = $partido->domo;
+			//$p->descripcion_estado = $partido->descripcion_estado;
+			$p->estado = $partido->estado;
 
-			if($partido->estado_id != 1)
-				$jornadaActual = $partido->jornada->numero;
-
-			$jornadas[$partido->jornada_id]['partidos'][] = $p;
+			$jornadas[$partido->jornada_id]['fechas'][date('Ymd',strtotime($partido->fecha))]['partidos'][] = $p;
 		}
-
-		$data['jornadas'] = $jornadas;
-		$data['jornada_actual'] = $jornadaActual;
+		foreach($jornadas as $index => $jornada)
+		{
+			foreach($jornada['fechas'] as $fecha)
+			{
+				$fechas[] = $fecha;
+			}
+			$jornada['fechas'] = $fechas;
+			$fechas = [];
+			$data['jornadas'][] = $jornada;
+		}
 
 		$c = new \App\App\Entities\Campeonato;
 		$c->id = $campeonato->id;
 		$c->nombre = $campeonato->descripcion;
 		$data['campeonato'] = $c;
-		return json_encode($data);
+
+		return $data;
 	}
 
 	public function ficha($partidoId)
