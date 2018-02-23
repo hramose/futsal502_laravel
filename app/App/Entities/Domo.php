@@ -16,4 +16,9 @@ class Domo extends \Eloquent {
 		return Variable::getEstadoGeneral($this->estado);
 	}
 
+	public function getImagenAttribute($imagen)
+  {
+  	return \Storage::disk('public')->url($imagen);
+  }
+
 }

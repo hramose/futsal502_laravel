@@ -6,7 +6,7 @@ use Variable;
 class Equipo extends \Eloquent {
 
 	use UserStamps;
-	
+
 	protected $fillable = ['descripcion','descripcion_corta','siglas','logo','estado'];
 
 	protected $table = 'equipo';
@@ -17,8 +17,8 @@ class Equipo extends \Eloquent {
 	}
 
 	public function getLogoAttribute($logo)
-    {
-    	return \Storage::disk('public')->url($logo);
-    }
+  {
+  	return \Storage::disk('public')->url($logo);
+  }
 
 }
