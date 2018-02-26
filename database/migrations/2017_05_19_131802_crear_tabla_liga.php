@@ -16,6 +16,7 @@ class CrearTablaLiga extends Migration
         Schema::create('liga', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descripcion');
+            $table->string('imagen_app');
             $table->integer('orden');
             $table->tinyInteger('mostrar_app');
             $table->string('estado',1);

@@ -32,4 +32,38 @@ class LigaManager extends BaseManager
 		return $data;
 	}
 
+	public function save()
+	{
+		$rules = $this->getRules();
+		$validation = \Validator::make($this->data, $rules);
+		if ($validation->fails())
+        {
+            throw new ValidationException('Validation failed', $validation->messages());
+        }
+        try{
+			\DB::beginTransaction();
+
+			$this->entity->fill($this->prepareData($this->data));
+			if(is_null($this->entity->id))
+			{
+				$this->entity->imagen_app = 'ligas/imagen_app.png';
+			}
+			$this->entity->save();
+			if(\Input::hasFile('imagen_app'))
+			{
+				$image = \Input::file('imagen_app');
+				$imageName = $this->entity->id.'.'.$image->getClientOriginalExtension();
+				$this->entity->imagen_app = $image->storeAs('ligas',$imageName,'public');
+			}
+			$this->entity->save();
+
+			\DB::commit();
+			return $this->entity;
+		}
+		catch(\Exception $ex)
+		{
+			throw new SaveDataException("Error!", $ex);
+		}
+	}
+
 }

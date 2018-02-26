@@ -7,7 +7,7 @@ class Liga extends \Eloquent {
 
 	use UserStamps;
 
-	protected $fillable = ['descripcion','orden','mostrar_app','estado'];
+	protected $fillable = ['descripcion','imagen_app','orden','mostrar_app','estado'];
 
 	protected $table = 'liga';
 
@@ -15,5 +15,10 @@ class Liga extends \Eloquent {
 	{
 		return Variable::getEstadoGeneral($this->estado);
 	}
+
+	public function getImagenAppAttribute($imagen_app)
+  {
+  	return \Storage::disk('public')->url($imagen_app);
+  }
 
 }
