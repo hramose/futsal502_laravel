@@ -79,6 +79,26 @@ class NotificacionUsuarioController extends BaseController {
 		}
 	}
 
+	public function crear($usuarioId)
+	{
+		$usuario = $this->notificacionUsuarioRepo->getByUsuario($usuarioId);
+		if(is_null($usuario))
+		{
+			$data['usuario'] = $usuarioId;
+			$data['estado'] = 'A';
+			$manager = new NotificacionUsuarioManager(new NotificacionUsuario(), $data);
+			if($manager->save()){
+				$response = ['result' => true, 'message' => 'Se activaron las notificaciones.'];
+			}
+			else{
+				$response = ['result' => false, 'message' => 'No se pudo activar las notificaciones.'];
+			}
+		}
+		else{
+			return json_encode(['result'=>true,'message'=>'Existe el usuario.','usuario'=>$usuario]);
+		}		
+	}
+
 	public function usuario($usuarioId)
 	{
 		$usuario = $this->notificacionUsuarioRepo->getByUsuario($usuarioId);

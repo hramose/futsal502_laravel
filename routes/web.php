@@ -256,6 +256,7 @@ Route::group(['prefix' => 'api'], function () {
 	Route::get('calendario/{liga}/{campeonato}','APIController@calendario')->name('api.calendario');
 	Route::get('domos','APIController@domos')->name('api.domos');
 
+	Route::get('crear-usuario-notificacion/{usuario}','NotificacionUsuarioController@crear')->name('crear_notificacion_usuario');
 	Route::get('usuario-notificacion/{usuario}','NotificacionUsuarioController@usuario')->name('obtener_notificacion_usuario');
 	Route::get('activar-notificaciones/{usuario}','NotificacionUsuarioController@activar')->name('activar_notificacion_usuario');
 	Route::get('inactivar-notificaciones/{usuario}','NotificacionUsuarioController@inactivar')->name('inactivar_notificacion_usuario');
