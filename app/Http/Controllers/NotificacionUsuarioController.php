@@ -84,10 +84,10 @@ class NotificacionUsuarioController extends BaseController {
 		$usuario = $this->notificacionUsuarioRepo->getByUsuario($usuarioId);
 		if(is_null($usuario))
 		{
-			return json_encode(['result'=>'false','message'=>'No existe el usuario.']);
+			return json_encode(['result'=>false,'message'=>'No existe el usuario.']);
 		}
 		else{
-			return json_encode(['result'=>'true','message'=>'Existe el usuario.','usuario'=>$usuario]);
+			return json_encode(['result'=>true,'message'=>'Existe el usuario.','usuario'=>$usuario]);
 		}
 	}
 
