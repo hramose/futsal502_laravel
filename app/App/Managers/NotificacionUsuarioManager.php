@@ -18,8 +18,8 @@ class NotificacionUsuarioManager extends BaseManager
 	{
 
 		$rules = [
-			'user'  => 'required',
-			'token' => 'required'
+			'usuario'  => 'required',
+			'estado' => 'required'
 		];
 
 		return $rules;
@@ -28,6 +28,20 @@ class NotificacionUsuarioManager extends BaseManager
 	function prepareData($data)
 	{
 		return $data;
+	}
+
+	public function save()
+	{
+		$this->isValid();
+		try{
+			$this->entity->fill($this->prepareData($this->data));
+			$this->entity->save();
+			return true;
+		}
+		catch(\Exception $ex)
+		{
+			return false;
+		}
 	}
 
 }

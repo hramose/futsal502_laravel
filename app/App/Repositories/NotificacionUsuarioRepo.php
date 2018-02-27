@@ -11,9 +11,9 @@ class NotificacionUsuarioRepo extends BaseRepo{
 		return new NotificacionUsuario;
 	}
 
-	public function getByUser($user)
+	public function getByUsuario($user)
 	{
-		return NotificacionUsuario::where('user','=',$user)->first();
+		return NotificacionUsuario::where('usuario',$user)->first();
 	}
 
 }

@@ -197,6 +197,10 @@ Route::group(['prefix' => 'usuarios'], function () {
 	Route::put('cambiar-password/{user}','UsuarioController@cambiarPassword')->name('cambiar_password');
 });
 
+/* NOTIFICACIONES USUARIO */
+Route::group(['prefix' => 'notificaciones-usuarios'], function () {
+	Route::get('listado','NotificacionUsuarioController@listado')->name('notificaciones_usuarios');
+});
 
 });
 
@@ -251,4 +255,7 @@ Route::group(['prefix' => 'api'], function () {
 	Route::get('posiciones/{liga}/{campeonato}','APIController@posiciones')->name('api.posiciones');
 	Route::get('calendario/{liga}/{campeonato}','APIController@calendario')->name('api.calendario');
 	Route::get('domos','APIController@domos')->name('api.domos');
+
+	Route::get('activar-notificaciones/{usuario}','NotificacionUsuarioController@activar')->name('activar_notificacion_usuario');
+	Route::get('inactivar-notificaciones/{usuario}','NotificacionUsuarioController@inactivar')->name('inactivar_notificacion_usuario');
 });
