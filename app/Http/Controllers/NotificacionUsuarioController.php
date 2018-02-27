@@ -77,6 +77,7 @@ class NotificacionUsuarioController extends BaseController {
 				$response = ['result' => false, 'message' => 'No se pudo inactivar las notificaciones.'];
 			}
 		}
+		return json_encode($response);
 	}
 
 	public function crear($usuarioId)
@@ -95,8 +96,9 @@ class NotificacionUsuarioController extends BaseController {
 			}
 		}
 		else{
-			return json_encode(['result'=>true,'message'=>'Existe el usuario.','usuario'=>$usuario]);
-		}		
+			$response = ['result'=>true,'message'=>'Existe el usuario.','usuario'=>$usuario];
+		}
+		return json_encode($response);
 	}
 
 	public function usuario($usuarioId)
