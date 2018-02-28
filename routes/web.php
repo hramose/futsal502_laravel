@@ -200,6 +200,7 @@ Route::group(['prefix' => 'usuarios'], function () {
 /* NOTIFICACIONES USUARIO */
 Route::group(['prefix' => 'notificaciones-usuarios'], function () {
 	Route::get('listado','NotificacionUsuarioController@listado')->name('notificaciones_usuarios');
+	Route::get('enviar-todos','NotificacionUsuarioController@enviarATodos')->name('enviar_notificaciones_a_todos');
 });
 
 });

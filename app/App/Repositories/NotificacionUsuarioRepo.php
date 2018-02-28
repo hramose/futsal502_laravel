@@ -16,4 +16,9 @@ class NotificacionUsuarioRepo extends BaseRepo{
 		return NotificacionUsuario::where('usuario',$user)->first();
 	}
 
+	public function getAllForSendByState($estados)
+	{
+		return NotificacionUsuario::whereIn('estado',$estados)->pluck('usuario')->toArray();
+	}
+
 }

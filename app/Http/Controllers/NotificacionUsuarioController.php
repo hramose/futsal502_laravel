@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\App\Repositories\NotificacionUsuarioRepo;
 use App\App\Managers\NotificacionUsuarioManager;
 use App\App\Entities\NotificacionUsuario;
-use Controller, Redirect, Input, View, Session, Variable;
+use Controller, Redirect, Input, View, Session, Variable, OneSignal;
 
 class NotificacionUsuarioController extends BaseController {
 
@@ -111,6 +111,59 @@ class NotificacionUsuarioController extends BaseController {
 		else{
 			return json_encode(['result'=>true,'message'=>'Existe el usuario.','usuario'=>$usuario]);
 		}
+	}
+
+	public function enviarATodos()
+	{
+		$tipo = 'tabla_posiciones';
+		$usuarios = $this->notificacionUsuarioRepo->getAllForSendByState(['A']);
+		if($tipo == 'articulo'){
+			$url = 'http://futsal502.com/2018/02/26/usac-y-lar-toman-ventaja/';
+			OneSignal::sendNotificationCustom(
+					array(
+						'include_player_ids' => $usuarios,
+						'large_icon' => 'http://futsal502.puzzlesoft.com.gt/assets/imagenes/logos/logo_sm.png',
+						'contents' => array('en' => 'Inicia el partido entre Legendarios y Glucosoral.'),
+						'data' => [
+							'tipo' => 'articulo',
+							'link' => 'http://futsal502.com/2018/02/26/usac-y-lar-toman-ventaja/'
+						],
+					)
+			);
+		}
+		elseif($tipo == 'tabla_posiciones')
+		{
+			OneSignal::sendNotificationCustom(
+					array(
+						'include_player_ids' => $usuarios,
+						'large_icon' => 'http://futsal502.puzzlesoft.com.gt/assets/imagenes/logos/logo_sm.png',
+						'contents' => array('en' => 'Liga Mayor: Consulta la tabla de posiciones'),
+						'data' => [
+							'tipo' => 'tabla_posiciones',
+							'liga' => ['id' => 1,'descripcion'=>'Liga Mayor']
+						],
+					)
+			);
+		}
+		elseif($tipo == 'calendario')
+		{
+			OneSignal::sendNotificationCustom(
+					array(
+						'include_player_ids' => $usuarios,
+						'large_icon' => 'http://futsal502.puzzlesoft.com.gt/assets/imagenes/logos/logo_sm.png',
+						'contents' => array('en' => 'Liga Mayor: Consulta los resultados de la jornada 15'),
+						'data' => [
+							'tipo' => 'calendario',
+							'liga' => ['id' => 1,'descripcion'=>'Liga Mayor']
+						],
+					)
+			);
+		}
+	}
+
+	public function enviar()
+	{
+
 	}
 
 

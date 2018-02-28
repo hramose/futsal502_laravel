@@ -171,6 +171,7 @@ return [
         App\App\Components\FieldServiceProvider::class,
         App\App\Components\VariableServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Berkayk\OneSignal\OneSignalServiceProvider::class,
         //Thujohn\Twitter\TwitterServiceProvider::class,
 
         /*
@@ -238,6 +239,7 @@ return [
         'Field'     => App\App\Components\Field::class,
         'Variable'  => App\App\Components\Variable::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class,
 
         //'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
     ],
