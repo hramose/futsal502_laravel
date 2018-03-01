@@ -6,7 +6,7 @@ use Variable;
 class Persona extends \Eloquent {
 
 	use UserStamps;
-	
+
 	protected $fillable = ['primer_nombre','segundo_nombre','primer_apellido','segundo_apellido','rol','pais_id','fecha_nacimiento','posicion','genero','fotografia','estado'];
 
 	protected $table = 'persona';
@@ -38,27 +38,27 @@ class Persona extends \Eloquent {
 
 	public function getNombreCompletoAttribute()
 	{
-		$portero = $this->posicion == 'PO' ? ' (P)' : '';
+		//$portero = $this->posicion == 'PO' ? ' (P)' : '';
 		$nombre = $this->primer_nombre;
 		if(!is_null($this->segundo_nombre))
 			$nombre .= ' ' . $this->segundo_nombre;
 		$nombre .= ' ' . $this->primer_apellido;
 		if(!is_null($this->segundo_nombre))
 			$nombre .= ' ' . $this->segundo_apellido;
-		$nombre .= ' ' . $portero;
+		//$nombre .= ' ' . $portero;
 		return $nombre;
 	}
 
 	public function getNombreCompletoApellidosAttribute()
 	{
-		$portero = $this->posicion == 'PO' ? ' (P)' : '';
+		//$portero = $this->posicion == 'PO' ? ' (P)' : '';
 		$nombre = $this->primer_apellido;
 		if(!is_null($this->segundo_nombre))
 			$nombre .= ' ' . $this->segundo_apellido;
 		$nombre = $this->primer_nombre;
 		if(!is_null($this->segundo_nombre))
 			$nombre .= ' ' . $this->segundo_nombre;
-		$nombre .= ' ' . $portero;
+		//$nombre .= ' ' . $portero;
 		return $nombre;
 	}
 

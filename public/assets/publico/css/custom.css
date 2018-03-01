@@ -13,6 +13,6 @@ table.watermark {
     position: relative;
     background-size: contain;
 }
-table.watermark tr:hover{
-	background: initial !important;
+table.watermark tr.bg-primary:hover{
+	background: #063e71 !important
 }

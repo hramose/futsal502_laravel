@@ -116,68 +116,71 @@ class APIController extends BaseController {
 		return json_encode($data);
 	}
 
-	public function plantilla($ligaId, $campeonatoId, $equipoId)
+	public function equipos($ligaId, $campeonatoId)
 	{
-		//$campeonatos = $this->campeonatoRepo->getCampeonatos($ligaId);
+		$campeonatos = $this->campeonatoRepo->getByLiga($ligaId)->pluck('descripcion','id')->toArray();
 		if($campeonatoId == 0)
 		{
 			$campeonato = $this->campeonatoRepo->getActual($ligaId);
 		}
 		else
 		{
-			$campeonato = $this->campeonatoRepo->getCampeonato($campeonatoId);
+			$campeonato = $this->campeonatoRepo->find($campeonatoId);
 		}
-		$equipo = null;
-		if($equipoId != 0){
-			$equipo = $this->equipoRepo->find($equipoId);
-		}
-		//$equipos = $this->campeonatoEquipoRepo->getEquipos($campeonato->id);
-		$personas = $this->campeonatoEquipoPersonaRepo->getPersonasByRol($campeonato->id, $equipoId, 1);
-		$plantilla = [];
-		foreach($personas as $persona)
+		$equiposDB = $this->campeonatoEquipoRepo->getEquiposByCampeonato($campeonato->id);
+		$equipos = [];
+		foreach($equiposDB as $equipo)
 		{
-			$j['id'] = $persona->persona->id;
-			$j['jugador'] = $persona->persona->nombreCompleto;
-			$j['goles'] = 0;
-			$j['amarillas'] = 0;
-			$j['dobles_amarillas'] = 0;
-			$j['rojas'] = 0;
-			$plantilla[$persona->persona->id] = $j;
+			$e['id'] = $equipo->equipo->id;
+			$e['logo'] = $equipo->equipo->logo;
+			$e['descripcion'] = $equipo->equipo->descripcion;
+			$equipos[] = $e;
 		}
-
-		$eventos = $this->eventoPartidoRepo->getByCampeonatoByEquipo($campeonato->id, $equipoId, array(9,10,11));
-
-		foreach($eventos as $evento)
-		{
-			if($evento->evento_id == 9)
-			{
-				$plantilla[$evento->jugador_id]['goles'] = $plantilla[$evento->jugador_id]['goles'] + 1;
-			}
-			if($evento->evento_id == 10)
-			{
-				$plantilla[$evento->jugador_id]['amarillas'] = $plantilla[$evento->jugador_id]['amarillas'] + 1;
-			}
-			if($evento->evento_id == 11)
-			{
-				if($evento->doble_amarilla == 1){
-					$plantilla[$evento->jugador_id]['dobles_amarillas'] = $plantilla[$evento->jugador_id]['dobles_amarillas'] + 1;
-					$plantilla[$evento->jugador_id]['amarillas'] = $plantilla[$evento->jugador_id]['amarillas'] - 1;
-				}
-				else{
-					$plantilla[$evento->jugador_id]['rojas'] = $plantilla[$evento->jugador_id]['rojas'] + 1;
-				}
-
-			}
-		}
-
-		usort($plantilla, function($a, $b){
-			return strcmp($a['jugador'], $b['jugador']);
+		usort($equipos,function($a,$b){
+			return strcmp($a['descripcion'],$b['descripcion']);
 		});
+		return json_encode($equipos);
+	}
 
-		$data['plantilla'] = $plantilla;
-		$data['campeonato'] = $campeonato;
+	public function plantilla($ligaId, $campeonatoId, $equipoId)
+	{
+		$campeonatos = $this->campeonatoRepo->getByLiga($ligaId)->pluck('descripcion','id')->toArray();
+		if($campeonatoId == 0)
+		{
+			$campeonato = $this->campeonatoRepo->getActual($ligaId);
+		}
+		else
+		{
+			$campeonato = $this->campeonatoRepo->find($campeonatoId);
+		}
+
+		$equipo = $this->equipoRepo->find($equipoId);
+		$jugadoresDB = $this->plantillaRepo->getByCampeonatoByEquipoByRol($campeonatoId, $equipoId, ['J']);
+		$cuerpoTecnicoDB = $this->plantillaRepo->getByCampeonatoByEquipoByRol($campeonatoId, $equipoId, ['DT']);
+
+		$cuerpoTecnico = [];
+		$jugadores = [];
+		foreach($cuerpoTecnicoDB as $ct)
+		{
+			$p['dorsal'] = '';
+			$p['nombre_completo'] = $ct->persona->nombre_completo;
+			$p['posicion'] = $ct->persona->descripcion_posicion;
+			$cuerpoTecnico[] = $p;
+		}
+		foreach($jugadoresDB as $j)
+		{
+			$p['dorsal'] = $j->dorsal;
+			$p['nombre_completo'] = $j->persona->nombre_completo;
+			$p['posicion'] = $j->persona->descripcion_posicion;
+			$jugadores[] = $p;
+		}
+
 		$data['equipo'] = $equipo;
+		$data['cuerpo_tecnico'] = $cuerpoTecnico;
+		$data['jugadores'] = $jugadores;
+
 		return json_encode($data);
+
 	}
 
 	public function calendario($ligaId, $campeonatoId)
@@ -331,7 +334,7 @@ class APIController extends BaseController {
 		return json_encode($data);
 	}
 
-	public function equipos($ligaId, $campeonatoId)
+	public function equipos2($ligaId, $campeonatoId)
 	{
 		if($campeonatoId == 0)
 		{

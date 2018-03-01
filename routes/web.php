@@ -265,6 +265,8 @@ Route::group(['prefix' => 'api'], function () {
 	Route::get('ligas','APIController@ligas')->name('api.ligas');
 	Route::get('posiciones/{liga}/{campeonato}','APIController@posiciones')->name('api.posiciones');
 	Route::get('calendario/{liga}/{campeonato}','APIController@calendario')->name('api.calendario');
+	Route::get('equipos/{liga}/{campeonato}','APIController@equipos')->name('api.equipos');
+	Route::get('plantilla/{liga}/{campeonato}/{equipo}','APIController@plantilla')->name('api.plantilla');
 	Route::get('domos','APIController@domos')->name('api.domos');
 
 	Route::get('crear-usuario-notificacion/{usuario}','NotificacionUsuarioController@crear')->name('crear_notificacion_usuario');
