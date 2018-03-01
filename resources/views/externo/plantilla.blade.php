@@ -40,7 +40,7 @@
 									<tr>
 										<td></td>
 										<td>
-											<img src="{{$ct->persona->fotografia}}" alt="">
+											<img src="{{$ct->persona->fotografia}}" class="jugador" alt="{{$ct->persona->nombre_completo}}">
 											{{$ct->persona->nombre_completo}}
 										</td>
 										<td>{{$ct->descripcion_posicion}}</td>
@@ -50,7 +50,7 @@
 									<tr>
 										<td>{{$j->dorsal}}</td>
 										<td>
-											<img src="{{$j->persona->fotografia}}" alt="">
+											<img src="{{$j->persona->fotografia}}" class="jugador" alt="{{$j->persona->nombre_completo}}">
 											{{$j->persona->nombre_completo}}
 										</td>
 										<td>{{$j->descripcion_posicion}}</td>
