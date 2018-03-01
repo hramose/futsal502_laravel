@@ -163,7 +163,7 @@ class APIController extends BaseController {
 			$p['dorsal'] = '';
 			$p['nombre_completo'] = $ct->persona->nombre_completo;
 			$p['posicion'] = $ct->persona->descripcion_posicion;
-			$p['imagen'] = $ct->persona->imagen;
+			$p['fotografia'] = $ct->persona->fotografia;
 			$cuerpoTecnico[] = $p;
 		}
 		foreach($jugadoresDB as $j)
@@ -171,7 +171,7 @@ class APIController extends BaseController {
 			$p['dorsal'] = $j->dorsal;
 			$p['nombre_completo'] = $j->persona->nombre_completo;
 			$p['posicion'] = $j->persona->descripcion_posicion;
-			$p['imagen'] = $j->persona->imagen;
+			$p['fotografia'] = $j->persona->fotografia;
 			$jugadores[] = $p;
 		}
 
