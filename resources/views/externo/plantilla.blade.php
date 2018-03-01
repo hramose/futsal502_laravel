@@ -2,6 +2,13 @@
 @section('title') Plantillas - {{$campeonato->descripcion}} - @if($equipo) {{$equipo->descripcion}} @endif
 @endsection
 @section('css')
+	<style media="screen">
+		img.jugador{
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+		}
+	</style>
 @endsection
 @section('content')
 <div class="theme-padding20 white-bg">
