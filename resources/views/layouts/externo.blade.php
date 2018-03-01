@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{ asset('assets/publico/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/publico/css/color.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/publico/css/responsive.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/publico/css/custom.css') }}">
 <!-- FontsOnline -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800|Open+Sans:400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 <script src="{{ asset('assets/publico/js/vendor/modernizr.js')}}"></script>

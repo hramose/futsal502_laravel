@@ -21,23 +21,22 @@ abstract class BaseManager
 		$rules = $this->getRules();
 		$validation = \Validator::make($this->data, $rules);
 		if ($validation->fails())
-        {
-        	dd($validation->messages());
-            throw new ValidationException('Validation failed', $validation->messages());
-        }
+    {
+        throw new ValidationException('Validation failed', $validation->messages());
+    }
 	}
 
 	public function save()
 	{
 		$this->isValid();
 		try{
-			$this->entity->fill($this->prepareData($this->data));		
+			$this->entity->fill($this->prepareData($this->data));
 			$this->entity->save();
 			return $this->entity;
 		}
 		catch(\Exception $ex)
 		{
-			dd($ex);
+			throw new SaveDataException("Error: ", $ex);
 		}
 	}
 

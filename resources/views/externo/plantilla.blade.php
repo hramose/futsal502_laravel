@@ -1,24 +1,13 @@
-@extends('layouts.publico')
+@extends('layouts.externo')
 @section('title') Plantillas - {{$campeonato->descripcion}} - @if($equipo) {{$equipo->descripcion}} @endif
 @endsection
 @section('css')
 @endsection
-@section('header')
-<div class="page-heading-breadcrumbs">
-	<div class="container">
-		<h2>Plantillas</h2>
-		<ul class="breadcrumbs">
-			<li><a href="{{route('inicio')}}">Inicio</a></li>
-			<li>Plantillas</li>
-		</ul>
-	</div>
-</div>
-@endsection
-@section('content')	
+@section('content')
 <div class="theme-padding20 white-bg">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-9 col-sm-8">
+			<div class="col-lg-12">
 				<div class="macth-fixture">
 					<h5>{{$campeonato->descripcion}}</h5>
 					<div class="row">
@@ -89,27 +78,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 col-sm-4">
-				<div class="aside-widget">
-					<img src="{{asset('assets/imagenes/anuncios/epss.gif')}}" alt="">
-				</div>
-				<div class="aside-widget">
-					<h3><span>Populares</span></h3>
-					<div class="Popular-news">
-						<ul>
-							@foreach($articulosPopulares as $ap)
-							<li>
-								<img src="{{$ap->imagen_portada}}" width="56px" height="56px">
-								<h5><a href="{{route('ver_articulo',[$ap->id, str_slug($ap->titulo)])}}">{{$ap->titulo}}</a></h5>
-								<span class="red-color"><i class="fa fa-clock-o"></i>
-									{{date('d-m-Y', strtotime($ap->fecha_publicacion))}}
-								</span>
-							</li>
-							@endforeach
-						</ul>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
@@ -126,7 +94,7 @@
 			var equipo = $('#equipo').val();
 			if(equipo == '') equipo = 0;
 
-          	var url = '{{route("inicio")}}/plantilla/{{$ligaId}}/' + campeonato + '/' + equipo;
+          	var url = '{{route("inicio")}}/externo-plantilla/{{$ligaId}}/' + campeonato + '/' + equipo;
           	if (url) { // require a URL
             	window.location = url; // redirect
           	}
@@ -139,7 +107,7 @@
     	if(segundos > 0){
     		segundos = segundos - 1;
     		$('#txtActualizar').text(segundos);
-    		setTimeout("actualizar()",1000) 
+    		setTimeout("actualizar()",1000)
         }
         else{
         	window.location.reload();

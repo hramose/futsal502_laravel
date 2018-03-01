@@ -21,7 +21,7 @@
 								<label>{{$jornada['jornada']['descripcion']}}</label>
 								<div class="toggle-content">
 									<div class="table-responsive" style="border: none;">
-								<table class="table table-responsive unbordered">
+								<table class="table table-responsive unbordered watermark">
 									@foreach($jornada['partidos'] as $partido)
 									<tr>
 										<td class="text-right" width="40%">

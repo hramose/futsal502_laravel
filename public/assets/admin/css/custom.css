@@ -32,12 +32,12 @@ tfoot.search {
 
 .table-striped tbody tr:nth-child(even) {background: #3c8dbc !important; color: white !important; }
 .table-striped tbody tr:nth-child(odd) {background: #FFF !important}
-.table-striped thead tr { 
+.table-striped thead tr {
 	background-color: #222d32 !important;
 	color: white !important;
 }
 .table-bordered thead tr th {
-	text-align: center !important; 
+	text-align: center !important;
     background-color: #3c8dbc;
     color: #fff;
 }
@@ -59,7 +59,7 @@ tfoot.search {
 
 /* OTROS */
 .square{
-	padding: 4px !important;	
+	padding: 4px !important;
 }
 
 .has-error{
@@ -83,9 +83,12 @@ tfoot.search {
 }
 
 @media (min-width: 768px){
-    
+
     .navbar-nav>li {
         font-size: 18px;
     }
 }
 
+.navbar-toggle{
+  margin: 0px 17px 0 0 !important;
+}

@@ -70,6 +70,12 @@ class StaticVariables {
 		'S' => 'Suspendido'
 	];
 
+	protected $tiposNotificacion = [
+		'tabla_posiciones' => 'Tabla de Posiciones',
+		'calendario'  => 'Calendario',
+		'articulo' => 'Articulo',
+	];
+
 	public function getEstadosGenerales(){ return $this->estadosGenerales; }
 	public function getEstadoGeneral($key){ return $this->estadosGenerales[$key]; }
 
@@ -90,6 +96,9 @@ class StaticVariables {
 
 	public function getEstadosPartidos(){ return $this->estadosPartidos; }
 	public function getEstadoPartido($key){ return $this->estadosPartidos[$key]; }
+
+	public function getTiposNotificacion(){ return $this->tiposNotificacion; }
+	public function getTipoNotificacion($key){ return $this->tiposNotificacion[$key]; }
 
 	public function getMesCorto($mes)
 	{

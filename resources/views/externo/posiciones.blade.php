@@ -43,7 +43,7 @@
 					<div class="last-matches styel-3">
 						<div class="table-responsive">
 							@if(!$campeonato->grupos)
-							<table class="table table-bordered table-hover">
+							<table class="table table-bordered table-hover watermark">
 							    <thead>
 							    	<tr class="bg-primary">
 						        <th class="text-center" width="30px">POS</th>

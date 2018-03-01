@@ -135,8 +135,7 @@ class ExternoController extends BaseController {
 		}
 
 		$equipos = $this->campeonatoEquipoRepo->getEquiposByCampeonato($campeonato->id)->pluck('equipo.descripcion','equipo_id')->toArray();
-		$articulosPopulares = $this->articuloRepo->getPopulares(5);
-		return View::make('publico/plantilla', compact('jugadores','cuerpoTecnico','campeonato','campeonatos','equipos','equipo','equipoId','articulosPopulares','ligaId'));
+		return View::make('externo/plantilla', compact('jugadores','cuerpoTecnico','campeonato','campeonatos','equipos','equipo','equipoId','ligaId'));
 	}
 
 	public function calendario($ligaId, $campeonatoId)

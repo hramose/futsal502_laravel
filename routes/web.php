@@ -15,6 +15,16 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('dashboard','AuthController@mostrarDashboard')->name('dashboard');
 
+/* NOTIFICACIONES */
+Route::group(['prefix' => 'notificaciones'], function () {
+	Route::get('listado','NotificacionController@listado')->name('notificaciones');
+	Route::get('agregar-articulo','NotificacionController@mostrarAgregarArticulo')->name('agregar_notificacion_articulo');
+	Route::post('agregar-articulo','NotificacionController@agregarArticulo')->name('agregar_notificacion_articulo');
+	Route::get('agregar-tabla-posiciones/{liga}','NotificacionController@mostrarAgregarTablaPosiciones')->name('agregar_notificacion_tabla_posiciones');
+	Route::post('agregar-tabla-posiciones/{liga}','NotificacionController@agregarTablaPosiciones')->name('agregar_notificacion_tabla_posiciones');
+	Route::get('agregar-calendario/{liga}','NotificacionController@mostrarAgregarCalendario')->name('agregar_notificacion_calendario');
+	Route::post('agregar-calendario/{liga}','NotificacionController@agregarCalendario')->name('agregar_notificacion_calendario');
+});
 
 /* CATEGORIAS */
 Route::group(['prefix' => 'categorias'], function () {
