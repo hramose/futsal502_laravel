@@ -118,7 +118,6 @@ class APIController extends BaseController {
 
 	public function equipos($ligaId, $campeonatoId)
 	{
-		$campeonatos = $this->campeonatoRepo->getByLiga($ligaId)->pluck('descripcion','id')->toArray();
 		if($campeonatoId == 0)
 		{
 			$campeonato = $this->campeonatoRepo->getActual($ligaId);
@@ -127,6 +126,7 @@ class APIController extends BaseController {
 		{
 			$campeonato = $this->campeonatoRepo->find($campeonatoId);
 		}
+		
 		$equiposDB = $this->campeonatoEquipoRepo->getEquiposByCampeonato($campeonato->id);
 		$equipos = [];
 		foreach($equiposDB as $equipo)
@@ -144,7 +144,6 @@ class APIController extends BaseController {
 
 	public function plantilla($ligaId, $campeonatoId, $equipoId)
 	{
-		$campeonatos = $this->campeonatoRepo->getByLiga($ligaId)->pluck('descripcion','id')->toArray();
 		if($campeonatoId == 0)
 		{
 			$campeonato = $this->campeonatoRepo->getActual($ligaId);
@@ -153,10 +152,9 @@ class APIController extends BaseController {
 		{
 			$campeonato = $this->campeonatoRepo->find($campeonatoId);
 		}
-
 		$equipo = $this->equipoRepo->find($equipoId);
-		$jugadoresDB = $this->plantillaRepo->getByCampeonatoByEquipoByRol($campeonatoId, $equipoId, ['J']);
-		$cuerpoTecnicoDB = $this->plantillaRepo->getByCampeonatoByEquipoByRol($campeonatoId, $equipoId, ['DT']);
+		$jugadoresDB = $this->plantillaRepo->getByCampeonatoByEquipoByRol($campeonato->id, $equipoId, ['J']);
+		$cuerpoTecnicoDB = $this->plantillaRepo->getByCampeonatoByEquipoByRol($campeonato->id, $equipoId, ['DT']);
 
 		$cuerpoTecnico = [];
 		$jugadores = [];
